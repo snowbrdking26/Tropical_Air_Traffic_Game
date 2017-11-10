@@ -53,6 +53,10 @@ function movePlane() {
 //moving plane1 div left right up and down;
 //https://stackoverflow.com/questions/7298507/move-element-with-keypress-multiple
 
+//getBoundingClientRect()
+//https://jsfiddle.net/4e7eby9x/
+
+//MDN info on getBoundingClientRect() https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
 
 // https://codepen.io/anon/pen/qVRMbQ
 // if ((game.player.x + game.player.w > x
