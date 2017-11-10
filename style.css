@@ -1,0 +1,54 @@
+body {
+  /*background-image: url(img/149817.jpg);*/
+  background-image: url(img/029-hog_cay_broshuretaxi_to_runway1.jpg);
+  background-size: cover;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  max-width: 500px;
+  width: auto;
+  height: 500px;
+  font-family: arial;
+}
+
+.gameframe {
+  margin-top: 100px;
+}
+
+.title {
+color: white;
+}
+
+h2 {
+  font-size: 30px;
+  -webkit-text-stroke: 1px #0E1322;
+}
+#board {
+  width: 400px;
+  height: 400px;
+  background-color: white;
+  margin: 0 0;
+}
+
+#planeSlow {
+  width: auto;
+  height: 35px;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+#planeFast {
+  width: auto;
+  height: 40px;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+#plane1 {
+  width: 50px;
+  height: auto;
+  position: relative;
+  top:40%;
+  left:40%;
+}
