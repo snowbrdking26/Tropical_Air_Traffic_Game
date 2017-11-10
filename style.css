@@ -46,9 +46,14 @@ h2 {
 }
 
 #plane1 {
+
   width: 50px;
   height: auto;
   position: relative;
+  /*top:0px
+  left:0px;*/
   top:40%;
   left:40%;
+
+
 }
