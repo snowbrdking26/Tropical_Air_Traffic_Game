@@ -23,14 +23,16 @@ h2 {
   -webkit-text-stroke: 1px #0E1322;
 }
 #board {
-  width: 400px;
-  height: 400px;
+  /*width: 400px;
+  height: 400px;*/
+  width: 350px;
+  height: 350px;
   background-color: white;
   margin: 0 0;
 }
 
 #planeSlow {
-  width: auto;
+  width: 46px;
   height: 35px;
   position: relative;
   top: 0;
@@ -38,7 +40,7 @@ h2 {
 }
 
 #planeFast {
-  width: auto;
+  width: 30px;
   height: 40px;
   position: relative;
   top: 0;
@@ -46,14 +48,12 @@ h2 {
 }
 
 #plane1 {
-
   width: 50px;
-  height: auto;
+  height: 46px;
   position: relative;
-  /*top:0px
-  left:0px;*/
   top:40%;
   left:40%;
+  /*left:-90px;*/
 
 
 }

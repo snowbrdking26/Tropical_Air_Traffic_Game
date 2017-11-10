@@ -37,6 +37,7 @@ function movePlane() {
             $("#plane1").css({Transform: 'rotate(180deg)'}, 0);
         }
     }
+    stayInGameBoard();
 }
 
 
@@ -51,47 +52,49 @@ function movePlane() {
 // 2. define player coordinates
 
 
-let plane1 = $('#plane1')[0];
-let deltaX = 0;
-let deltaY = 0;
-// plane1.style.position = "relative";
+let $plane1 = $('#plane1')[0];
+let $plane1Width = $plane1.width;
+let $plane1Height = $plane1.height;
+
+let $gameBoardRect = $('#board')[0].getBoundingClientRect();
+    //gameboard coordiantes boundaries
+    // console.log($gameBoardRect);
+
+
+let $plane1Rect = $('#plane1')[0];
+    //plane1 coordiantes boundaries
+    // console.log($plane1Rect);
+console.log('plane rectangle left ' + $plane1Rect.left);
+console.log('plane width ' + $plane1Width);
+console.log($gameBoardRect);
+// console.log($plane1Rect);
 
 const stayInGameBoard = () => {
 
-let gameBoardRect = $('#board')[0].getBoundingClientRect();
-console.log(gameBoardRect);
+console.log($plane1Rect.getBoundingClientRect().left);
+// console.log($plane1Width);
+// console.log($gameBoardRect.left);
 
-let plane1Rect = $('#plane1')[0].getBoundingClientRect();
-console.log(plane1Rect);
+  if(($plane1Rect.getBoundingClientRect().left <= $gameBoardRect.left))  {
+    console.log('inside log statement');
+    // $plane1Rect.getBoundingClientRect().left = $plane1Rect.getBoundingClientRect().css('left','226px');
+// $plane1Rect.getBoundingClientRect().left = 200;
 
-deltaX = Math.floor(Math.random() * 10);
-console.log(deltaX);
-deltaY = Math.floor(Math.random() * 10);
-console.log(deltaY);
+$("#plane1").animate({left: "+=5"}, 0);
+$("#plane1").css({Transform: 'rotate(90deg)'}, 0);
 
+  //   console.log('plane rectangle left(x): ' + $plane1Rect.left);
+  //   console.log('plane rectangle left(x): ' + $plane1Rect.left);
 
-if((plane1Rect.left+deltaX) >= gameBoardRect.left)  {
-    if((plane1Rect.top+deltaY) >= gameBoardRect.top){
-        if((plane1Rect.right+deltaX) <= gameBoardRect.right){
-            if((plane1Rect.bottom+deltaY) <= gameBoardRect.bottom){
-                //Coords always inside parent div
-                    plane1.style.top = '' + (parseInt(plane1.style.top, 10) + deltaY) + 'px';
-                    plane1.style.left = '' + (parseInt(plane1.style.left, 10) + deltaX) + 'px';
+                            ///TESTING
+                            // console.log(plane1Rect.top);
+                            // console.log(plane1Rect.top);
+                            // console.log(plane1Rect);
+                            // console.log(plane1Width);
+                            // console.log(plane1Height);
 
-
-
-            }
-        }
-    }
-}
-
-
-}
-
-stayInGameBoard();
-
-
-
+  }  //end of 1st in statement
+}    // end of stayInGameBoard()
 
 
 
@@ -100,10 +103,36 @@ stayInGameBoard();
 
 
 
+}); // End of the game
+
+
+// possibly useful---------------------------------------------------
+// if((plane1Rect.top+plane1Height) >= gameBoardRect.top){
+//   console.log("true2");
+//     if((plane1Rect.right+plane1Width) <= gameBoardRect.right){
+//       console.log("true3");
+//         if((plane1Rect.bottom+plane1Height) <= gameBoardRect.bottom){
+//           console.log("true4");
+//             Coords always inside parent div
+//
+//            plane1.top = 0px;
+//            plane1.left = -35px;
+//
+//            plane1.top = '' + (parseInt(plane1.top, 10) + plane1Height) + 'px';
+//                 console.log(plane1.top);
+//
+//            plane1.left = '' + (parseInt(plane1.left, 10) + plane1Width) + 'px';
+//               console.log(parseInt(plane1.left, 10));
+//
+//         }
+//     }
+// }
+// end of possibly useful---------------------------------------------------
 
 
 
-});
+
+
 ////////////////////////////////////////////////////////////////
 //------------------------references---------------------------
 //rotating div
