@@ -4,4 +4,4 @@ work in progress
 
 Here is the game board of my airplane themed dodger game.
 
-<img src="img/day_1_screenshot.png">
+![Alt text](img/day_1_screenshot.png?raw=true "day_1_screenshot")
