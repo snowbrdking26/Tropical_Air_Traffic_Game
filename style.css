@@ -61,20 +61,20 @@ h2 {
 }
 
 @keyframes box-step {
-  0% {background: white; left:0%; top:0%;}
-  2% {background: white; transform: rotate(90deg)}
+  0% {background: none; left:0%; top:0%;}
+  2% {background: none; transform: rotate(90deg)}
   /*10% {background: green; left:0%; top: 0%; border-radius: 100%;transform: rotate(90deg)}*/
-  25% {background: white; left: 60%; top:0px;transform: rotate(90deg)}
-  27% {background: white; transform: rotate(180deg) }
+  25% {background: none; left: 60%; top:0px;transform: rotate(90deg)}
+  27% {background: none; transform: rotate(180deg) }
 
 
-  50% {background: white; left: 60%; top: 80%; border-radius: 100%;transform: rotate(180deg)}
-  52% {background: white; transform: rotate(270deg) }
+  50% {background: none; left: 60%; top: 80%; border-radius: 100%;transform: rotate(180deg)}
+  52% {background: none; transform: rotate(270deg) }
 
-  75% {background: white; left:0%; top:80%;transform: rotate(270deg);}
-  77% {background: white; transform: rotate(360deg)}
+  75% {background: none; left:0%; top:80%;transform: rotate(270deg);}
+  77% {background: none; transform: rotate(360deg)}
 
-  100% {background: white; left:0px; top:0px;transform: rotate(360deg) }
+  100% {background: none; left:0px; top:0px;transform: rotate(360deg) }
 }
 
 #plane1 {

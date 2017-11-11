@@ -43,6 +43,7 @@ function movePlane() {
 // rockMove();
 // createRock();
 
+
 }
 
 
@@ -109,15 +110,19 @@ const stayInGameBoard = () => {
 
 }    // end of function stayInGameBoard()
 
+///////////////////////////////////////////////////////////////
+// creates 20 planes
+///////////////////////////////////////////////////////////////
+const createAlotOfPlanes = (num) => {
+    for (let i = 0; i < num; i++) {
 
-// basic Animation of fast and slow plane bottom to top
+    $rock = $('<alotofPlanes>').empty().append('<img src="img/fastplaneemptybackground.png" height="30px" width="40px"/>').attr('id','planeFast')
 
-// const move = () => {
-//
+    $('#board').append($rock);
 
-//
-// });
-
+    }
+}
+createAlotOfPlanes(20);
 
 ///////////////////////////////////////////////////////////////
 //Collision with other objects, border, and collision to earn points
@@ -126,9 +131,8 @@ const stayInGameBoard = () => {
 
 
 
-
+///////////////////////////////////////////////////////////////
 // EXAMPLE 1 - Just an example I will delete this
-
 ///////////////////////////////////////////////////////////////
 // Random Fast and Slow plane movements chaotic movements
 
@@ -197,110 +201,113 @@ const stayInGameBoard = () => {
 //   $fastPlane.animate({y: -60} 2000);
 // };
 
+// ////////////////////////////
+// creates two planes each 3 seconds
 
 
+// rockInterval =
+//     setInterval(function() {
+//       for (var i = 0; i < 2; i++) {
+//       rockArray.push(createAlotOfPlanes(i))
+//       }
+//     }, 2000)
+//
 
-
-
-
-
-// EXAMPLE 2 - Just an example I will delete this
 
 // ////////////////////////////
-// Rock Prototype
-function createRock(id){
-  leftRight = [];
-  topBottom = [];
-  positionArray = [];
-  //have rocks spawn between these numbers
-  randRight = Math.floor(Math.random() * (600 - 580) + 580)
-  randBot = Math.floor(Math.random() * (600 - 580) + 580)
-  randTop = Math.floor(Math.random() * (30 - 20) + 20)
-  randLeft = Math.floor(Math.random() * (30 - 20) + 20)
-
-  leftPos = Math.floor(Math.random() * (400 - 15) + 15)
-  topPos = Math.floor(Math.random() * (400 - 15) + 15)
-
-  pos = Math.floor(Math.random() * (3) + 1)
-  neg = Math.floor(Math.random() * (-3) - 1)
-
-  leftRight.push(randRight, randLeft)
-  topBottom.push(randTop, randBot)
-
-  function rand01() {
-    return Math.round(Math.random())
-  }
-
-	positionArray.push(leftRight[rand01()],topBottom[rand01()])
-  clone = positionArray[rand01()]
-
-	if (clone === positionArray[0]) {
-    positionArray.splice(1, 1)
-    positionArray.push(topPos)
-  }
-
-	if (clone === positionArray[1]) {
-    positionArray.splice(0, 1)
-    positionArray.unshift(leftPos)
-  }
-
-  // Rock quadrant for directions
-  if (positionArray[0] <= (-20)) {
-    if (positionArray[1] <= 302) {
-      console.log(this);
-      this.newPos = [pos, pos];
-    }
-    if (positionArray[1] >= 303) {
-      this.newPos = [pos, neg];
-    }
-  }
-
-  if (positionArray[1] <= (-20)) {
-    if (positionArray[0] <= 502) {
-      this.newPos = [pos, pos];
-    }
-    if (positionArray[0] >= 503) {
-      this.newPos = [neg, pos];
-    }
-  }
-
-  if (positionArray[0] >= 1020) {
-    if (positionArray[1] <= 302) {
-      this.newPos = [neg, pos];
-    }
-    if (positionArray[1] >= 303) {
-      this.newPos = [neg, neg];
-    }
-  }
-
-  if (positionArray[1] >= 620) {
-    if (positionArray[0] <= 502) {
-      this.newPos = [pos, neg];
-    }
-    if (positionArray[0] >= 503) {
-      this.newPos = [neg, neg];
-    }
-  }
-
-	this.speed = 3;
-	this.width = 25;
-	this.height = 25;
-	this.left = positionArray[0];
-	this.top = positionArray[1];
-	this.id = id;
-
-	$rock = $("<div class=rock/>")
-		.css({"border":"4px solid red","height":this.height,"width":this.width,"left":this.left+"px","top":this.top+"px","position":"absolute"})
-  $('#board').append($rock);
-}
 
 
-rockInterval =
-    setInterval(function() {
-      for (var i = 0; i < 2; i++) {
-      rockArray.push(new createRock(i))
-      }
-    }, 2000)
+///////////////////////////////////////////////////////////////
+// EXAMPLE 2 - Just an example I will delete this
+///////////////////////////////////////////////////////////////
+// // Rock Prototype
+// function createRock(id){
+//   leftRight = [];
+//   topBottom = [];
+//   positionArray = [];
+//   //have rocks spawn between these numbers
+//   randRight = Math.floor(Math.random() * (600 - 580) + 580)
+//   randBot = Math.floor(Math.random() * (600 - 580) + 580)
+//   randTop = Math.floor(Math.random() * (50 - 40) + 40)
+//   randLeft = Math.floor(Math.random() * (50 - 40) + 40)
+//
+//   leftPos = Math.floor(Math.random() * (600 - 50) + 50)
+//   topPos = Math.floor(Math.random() * (600 - 50) + 50)
+//
+//   pos = Math.floor(Math.random() * (3) + 1)
+//   neg = Math.floor(Math.random() * (-3) - 1)
+//
+//   leftRight.push(randRight, randLeft)
+//   topBottom.push(randTop, randBot)
+//
+//   function rand01() {
+//     return Math.round(Math.random())
+//   }
+//
+// 	positionArray.push(leftRight[rand01()],topBottom[rand01()])
+//   clone = positionArray[rand01()]
+//
+// 	if (clone === positionArray[0]) {
+//     positionArray.splice(1, 1)
+//     positionArray.push(topPos)
+//   }
+//
+// 	if (clone === positionArray[1]) {
+//     positionArray.splice(0, 1)
+//     positionArray.unshift(leftPos)
+//   }
+//
+//   // Rock quadrant for directions
+//   if (positionArray[0] <= (-20)) {
+//     if (positionArray[1] <= 302) {
+//       console.log(this);
+//       this.newPos = [pos, pos];
+//     }
+//     if (positionArray[1] >= 303) {
+//       this.newPos = [pos, neg];
+//     }
+//   }
+//
+//   if (positionArray[1] <= (-20)) {
+//     if (positionArray[0] <= 502) {
+//       this.newPos = [pos, pos];
+//     }
+//     if (positionArray[0] >= 503) {
+//       this.newPos = [neg, pos];
+//     }
+//   }
+//
+//   if (positionArray[0] >= 1020) {
+//     if (positionArray[1] <= 302) {
+//       this.newPos = [neg, pos];
+//     }
+//     if (positionArray[1] >= 303) {
+//       this.newPos = [neg, neg];
+//     }
+//   }
+//
+//   if (positionArray[1] >= 620) {
+//     if (positionArray[0] <= 502) {
+//       this.newPos = [pos, neg];
+//     }
+//     if (positionArray[0] >= 503) {
+//       this.newPos = [neg, neg];
+//     }
+//   }
+//
+// 	this.speed = 3;
+// 	this.width = 25;
+// 	this.height = 25;
+// 	this.left = positionArray[0];
+// 	this.top = positionArray[1];
+// 	this.id = id;
+//
+// 	$rock = $("<div class=rock/>")
+// 		.css({"border":"4px solid red","height":this.height,"width":this.width,"left":this.left+"px","top":this.top+"px","position":"absolute"})
+//   $('#board').append($rock);
+// }
+
+
 
 
     // function rockMove() {
