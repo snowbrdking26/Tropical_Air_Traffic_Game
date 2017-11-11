@@ -114,15 +114,22 @@ const stayInGameBoard = () => {
 // creates 20 planes
 ///////////////////////////////////////////////////////////////
 const createAlotOfPlanes = (num) => {
+    let planes = [];
     for (let i = 0; i < num; i++) {
+          // planes[i] = [];
+        //   for(j=0; j< planes; j++) {
+        //       planes[i][j] = { x: 0, y: 0 };
+        // }
 
-    $rock = $('<alotofPlanes>').empty().append('<img src="img/fastplaneemptybackground.png" height="30px" width="40px"/>').attr('id','planeFast')
+    $alotOfPlanes = $('<alotofPlanes>').empty().append('<img src="img/fastplaneemptybackground.png" height="40px" width="30px"/>').attr('id','planeFast')
 
-    $('#board').append($rock);
+    $('#board').append($alotOfPlanes);
 
     }
 }
-createAlotOfPlanes(20);
+createAlotOfPlanes(10);
+
+
 
 ///////////////////////////////////////////////////////////////
 //Collision with other objects, border, and collision to earn points
