@@ -87,3 +87,9 @@ h2 {
   /*left:-90px;*/
 
 }
+
+#clouds {
+  max-width: 15px;
+  height: auto;
+  position: relative;
+}
