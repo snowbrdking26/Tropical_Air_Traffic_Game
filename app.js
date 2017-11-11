@@ -2,11 +2,39 @@
 
 $(() => {
 
-var rockArray = [];
+//global variables-----------------//
+  var clouds = [];
+  var cloudCount = 10;
+  var arrowKeys = {};
+
+  //gameboard coordiantes
+  let $gameBoardRect = $('#board')[0].getBoundingClientRect();
+  let $gameBoardRectRight = $gameBoardRect.left + $gameBoardRect.width-5;
+  let $gameBoardRectBottom =($gameBoardRect.top) + ($gameBoardRect.height-5);
+
+  //plane coordinates
+  let $plane1 = $('#plane1')[0];
+  let $planeBorder = $plane1.getBoundingClientRect(); //plane coordinates
+  let $plane1Width = $plane1.width;
+  let $plane1Height = $plane1.height;
+  let $planeBorderRight = $planeBorder.left + $planeBorder.width;
+  let $planeBorderBottom = $planeBorder.top + $planeBorder.height;
+
+   //cloud coordinates
+  let $cloudsBorder = $('#clouds')[0].getBoundingClientRect();
+
+
+  // let $planeBorder = $plane1.getBoundingClientRect();
+  // let $gameBoardBorder = $gameBoardRect.getBoundingClientRect();
+  // let $planeBorderRight = $planeBorder.left + $planeBorder.width;
+  // let $planeBorderBottom = $planeBorder.top + $planeBorder.height;
+
+//end global variables-------------//
+
 
 //Movement: moving plane1 img left right up and down;
 setInterval(movePlane, 20);
-var arrowKeys = {};
+
 
 $(document).keydown(function(event) {
     arrowKeys[event.keyCode] = true;
@@ -21,84 +49,168 @@ function movePlane() {
   for (let direction in arrowKeys) {
     if (!arrowKeys.hasOwnProperty(direction)) continue;
     //moves left
-    if (direction == 37) {
-      $("#plane1").animate({
-        left: "-=5"
-      }, 0);
-      $("#plane1").css({
-        Transform: 'rotate(-90deg)'
-      }, 0);
+    if (direction == 37) {$("#plane1").animate({left: "-=5"}, 0);
+    $("#plane1").css({Transform: 'rotate(-90deg)'}, 0);
     }
     //moves up
-    if (direction == 38) {
-      $("#plane1").animate({
-        top: "-=5"
-      }, 0);
-      $("#plane1").css({
-        Transform: 'rotate(0deg)'
-      }, 0);
+    if (direction == 38) {$("#plane1").animate({top: "-=5"}, 0);
+      $("#plane1").css({Transform: 'rotate(0deg)'}, 0);
     }
     //moves right
-    if (direction == 39) {
-      $("#plane1").animate({
-        left: "+=5"
-      }, 0);
-      $("#plane1").css({
-        Transform: 'rotate(90deg)'
-      }, 0);
+    if (direction == 39) {$("#plane1").animate({left: "+=5"}, 0);
+      $("#plane1").css({Transform: 'rotate(90deg)'}, 0);
     }
     // moves down
-    if (direction == 40) {
-      $("#plane1").animate({
-        top: "+=5"
-      }, 0);
-      $("#plane1").css({
-        Transform: 'rotate(180deg)'
-      }, 0);
+    if (direction == 40) {$("#plane1").animate({top: "+=5"}, 0);
+      $("#plane1").css({Transform: 'rotate(180deg)'}, 0);
     }
   }
   stayInGameBoard();
-  // move();
+  collisionDetection();
 
 // move();
 // animateDiv();
 // rockMove();
 // createRock();
 
+} //end of movePlane() function
+
+
+////////////////////////////////////////////////////////////////////
+//Collision with other objects, border, and collision to earn points
+////////////////////////////////////////////////////////////////////
+
+
+const collisionDetection = () => {
+
+    // console.log($cloudsBorder);
+  // let $cloudsRectRight = $cloudsBorder.left + $cloudsBorder .width;
+  // let $cloudsRectBottom =($cloudsBorder.top) + ($cloudsBorder .height);
+
+
+    // console.log($cloudsRectRight);
+    // console.log($cloudsRectBottom);
+
+//////////////////
+            // for(i=0; i<cloudCount; i++) {
+            //         var c = clouds[c];
+
+          // }
+//////////////////
+          //   function check_collision(x, y, array)
+          // {
+          //   //This function will check if the provided x/y coordinates exist
+          //   //in an array of cells or not
+          //   for(var i = 0; i < array.length; i++)
+          //   {
+          //     if(array[i].x == x && array[i].y == y)
+          //      return true;
+          //   }
+          //   return false;
+          // }
+
+////////////////
+          // if(nx == food.x && ny == food.y)
+          // {
+          //   var tail = {x: nx, y: ny};
+          //   score++;
+          //   //Create new food
+          //   create_food();
+          // }
+          // else
+          // {
+          //   var tail = snake_array.pop(); //pops out the last cell
+          //   tail.x = nx; tail.y = ny;
+          // }
+///////////////
+
+         //  if($cloudsBorder.x == $planeBorder.x && $cloudsBorder.y == $planeBorder.y) {
+         //   console.log(true);
+         // }
+
+         //plane coordinates
+         let $plane1 = $('#plane1')[0];
+         let $planeBorder = $plane1.getBoundingClientRect(); //plane coordinates
+         let $plane1Width = $plane1.width;
+         let $plane1Height = $plane1.height;
+         let $planeBorderRight = $planeBorder.left + $planeBorder.width;
+         let $planeBorderBottom = $planeBorder.top + $planeBorder.height;
+
+          //cloud coordinates
+         let $cloudsBorder = $('#clouds')[0].getBoundingClientRect();
+
+
+         console.log('this is clouds x: ' + $cloudsBorder.x);
+         console.log('this is planes x: ' + $plane1.x);
+         console.log('this is planes y: ' + $plane1.y);
+
+
+          // if($planeBorder.top === $cloudsBorder.bottom)  {
+          //       console.log('=========inside log statement bottom');
+          // }
+          if($planeBorder.top < $cloudsBorder.bottom && $planeBorder.top > $cloudsBorder.top)  {
+            console.log('inside log statement bottom');
+            // $("#plane1").animate({left: "+=5"}, 0);
+            // $("#plane1").css({Transform: 'rotate(90deg)'}, 0);
+
+          if($planeBorder.right > $cloudsBorder.left && $planeBorder.right < $cloudsBorder.right)  {
+            console.log('inside log statement left');
+            // $("#plane1").animate({left: "+=5"}, 0);
+            // $("#plane1").css({Transform: 'rotate(90deg)'}, 0);
+
+
+          if($planeBorder.left < $cloudsBorder.right && $planeBorder.left > $cloudsBorder.left)  {
+                console.log('inside log statement right');
+
+
+
+          if($planeBorder.bottom > $cloudsBorder.top && $planeBorder.bottom < $cloudsBorder.bottom)  {
+                console.log('inside log statement top');
+          }
+        }
+      }
+    }
+
 
 }
 
 
 
+
+
+
 ///////////////////////////////////////////////////////////////
 ////----------- Staying in the boards frame----------/////////
-
+///////////////////////////////////////////////////////////////
 // 1. define border coordinates
 // 2. define player coordinates
 
 
-let $plane1 = $('#plane1')[0];
-let $plane1Width = $plane1.width;
-let $plane1Height = $plane1.height;
 
 
-let $gameBoardRect = $('#board')[0].getBoundingClientRect();
-    //gameboard coordiantes boundaries
-let $plane1Rect = $('#plane1')[0];
-    //plane1 coordiantes boundaries
 
 ///////////////////////////////////////////////////////////////
 //////-------stay in game boundaries-----------///////
+///////////////////////////////////////////////////////////////
 const stayInGameBoard = () => {
-      let $planeBorder = $plane1Rect.getBoundingClientRect();
-      // let $gameBoardBorder = $gameBoardRect.getBoundingClientRect();
-      let $planeBorderRight = $planeBorder.left + $planeBorder.width;
-      let $planeBorderBottom = $planeBorder.top + $planeBorder.height;
-      let $gameBoardRectRight = $gameBoardRect.left + $gameBoardRect.width-5;
-      let $gameBoardRectBottom =($gameBoardRect.top) + ($gameBoardRect.height-5);
 
-          console.log($planeBorderBottom);
-          console.log($planeBorderRight);
+
+
+          //gameboard coordiantes
+          let $gameBoardRect = $('#board')[0].getBoundingClientRect();
+          let $gameBoardRectRight = $gameBoardRect.left + $gameBoardRect.width-5;
+          let $gameBoardRectBottom =($gameBoardRect.top) + ($gameBoardRect.height-5);
+
+          //plane coordinates
+          let $plane1 = $('#plane1')[0];
+          let $planeBorder = $plane1.getBoundingClientRect(); //plane coordinates
+          let $plane1Width = $plane1.width;
+          let $plane1Height = $plane1.height;
+          let $planeBorderRight = $planeBorder.left + $planeBorder.width;
+          let $planeBorderBottom = $planeBorder.top + $planeBorder.height;
+
+          // console.log($planeBorderBottom);
+          // console.log($planeBorderRight);
 
 
     if($planeBorder.left < $gameBoardRect.left)  {
@@ -115,14 +227,14 @@ const stayInGameBoard = () => {
           $("#plane1").css({Transform: 'rotate(180deg)'}, 0);
     }
 
-    if($planeBorderRight > $gameBoardRectRight)  {
+    if($planeBorder.right > $gameBoardRect.right)  {
           console.log('inside log statement');
 
           $("#plane1").animate({left: "-=5"}, 0);
           $("#plane1").css({Transform: 'rotate(-90deg)'}, 0);
     }
 
-    if($planeBorderBottom > $gameBoardRectBottom)  {
+    if($planeBorder.bottom > $gameBoardRect.bottom)  {
           console.log('inside log statement');
 
           $("#plane1").animate({top: "-=5"}, 0);
@@ -153,11 +265,12 @@ const stayInGameBoard = () => {
 //
 
 
+
+
+
 ///////////////////////////////////////////////////////////////
-//Collision with other objects, border, and collision to earn points
-
 //create clouds//
-
+///////////////////////////////////////////////////////////////
 function getRandomInt (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -170,7 +283,7 @@ $.fn.randomOrder = function(animate) {
     // var vpHeight = $(window).height();
     // var vpWidth = $(window).width();
     var vpHeight = 400;
-    var vpWidth = 200;
+    var vpWidth = 150;
 
     // Image Position
     var xPos = getRandomInt(0, vpWidth - image.width());
@@ -181,7 +294,7 @@ $.fn.randomOrder = function(animate) {
     if(animate) var dur = 500;
     else var dur = 0;
 
-    image.animate({left: xPos, top: yPos, 'z-index': zIndex}, dur);
+    image.animate({left: xPos, top: yPos}, dur);
   });
 };
 
@@ -424,7 +537,7 @@ $('img').randomOrder(false);
 ////////////////////////////////////////////////////////////////
 //------------------------references---------------------------
 
-// radom position in box
+// For //create clouds// this reference for radomly positioning multiple pictures in box
 //https://codepen.io/anon/pen/bYqQjP
 
 // random movement in box
