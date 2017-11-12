@@ -90,16 +90,6 @@ function movePlane() {
 
 const collisionDetection = () => {
 
-    // console.log($cloudsRectRight);
-    // console.log($cloudsRectBottom);
-
-//////////////////
-            // for(i=0; i<cloudCount; i++) {
-            //         var c = clouds[c];
-
-          // }
-//////////////////
-
 
          //plane coordinates
          let $plane1 = $('#plane1')[0];
@@ -111,12 +101,18 @@ const collisionDetection = () => {
 
           //cloud coordinates
          let $cloudsBorder = $('#clouds')[0].getBoundingClientRect();
+         //planeFast coordinates
+         let $planeFastBorder = $('#planeFast')[0].getBoundingClientRect();
+         //planeSlow coordinates
+         let $planeSlowBorder = $('#planeSlow')[0].getBoundingClientRect();
 
 
-         console.log('this is clouds x: ' + $cloudsBorder.x);
-         console.log('this is clouds x: ' + $cloudsBorder.y);
-         console.log('this is planes x: ' + $plane1.x);
-         console.log('this is planes x: ' + $plane1.y);
+         // console.log('this is clouds x: ' + $cloudsBorder.x);
+         // console.log('this is clouds x: ' + $cloudsBorder.y);
+         // console.log('this is planes x: ' + $plane1.x);
+         // console.log('this is planes x: ' + $plane1.y);
+         // console.log($planeFastBorder.x);
+         // console.log($planeSlowBorder.y);
 
          //plane1 and cloud collisionDetection
          if ($planeBorder.x < $cloudsBorder.x + $cloudsBorder.width &&
@@ -125,14 +121,10 @@ const collisionDetection = () => {
             $planeBorder.height + $planeBorder.y > $cloudsBorder.y) {
           console.log('cloud collision detected!');
           score++;
-          console.log(score);
           $points.text('Collect Clouds: Points: ' +score);
-          // score++;
+          // console.log($plane1);
           // $('#clouds').attr('id','cloudDisappear');
-
          }
-
-
 
          //plane1 and planeSlow collisionDetection
          if ($planeBorder.x < $planeSlowBorder.x + $planeSlowBorder.width &&
@@ -151,25 +143,23 @@ const collisionDetection = () => {
          }
 
 
-          // if($planeBorder.top < $cloudsBorder.bottom && $planeBorder.top > $cloudsBorder.top)
-          //
-          //
-          // $planeBorder.right > $cloudsBorder.left && $planeBorder.right < $cloudsBorder.right)
-          //
-          // $planeBorder.left < $cloudsBorder.right && $planeBorder.left > $cloudsBorder.left
-          //
-          //
-          // $planeBorder.bottom > $cloudsBorder.top && $planeBorder.bottom < $cloudsBorder.bottom)
-
-
-////////////////////////////////////////////////////////////////////////
 
 } //end of collisionDetection() function
+
+
 ///////////////////////////////////////////////////////////////
 ////----------- Recording Points----------/////////
 ///////////////////////////////////////////////////////////////
-const $points = $('<div>').attr('id','pointsBoard').css({ color:'white','background-color': '#44AFCD',border: '1px solid white',margin: '5px 0px',padding: '5px 5px',width: '200px'});
+const $points = $('<div>').attr('id','pointsBoard')
+.css({ color:'white',
+  'background-color': '#44AFCD',
+  border: '1px solid white',
+  margin: '5px 0px',
+  padding: '5px 5px',
+  width: '200px'});
 $('#row').append($points.text('Collect Clouds: Points: ' +score));
+
+
 
 
 ///////////////////////////////////////////////////////////////
@@ -178,13 +168,6 @@ $('#row').append($points.text('Collect Clouds: Points: ' +score));
 // 1. define border coordinates
 // 2. define player coordinates
 
-
-
-
-
-///////////////////////////////////////////////////////////////
-//////-------stay in game boundaries-----------///////
-///////////////////////////////////////////////////////////////
 const stayInGameBoard = () => {
 
 
@@ -207,29 +190,21 @@ const stayInGameBoard = () => {
 
 
     if($planeBorder.left < $gameBoardRect.left)  {
-          console.log('inside log statement');
-
           $("#plane1").animate({left: "+=5"}, 0);
           $("#plane1").css({Transform: 'rotate(90deg)'}, 0);
     }
 
     if($planeBorder.top < $gameBoardRect.top)  {
-          console.log('inside log statement');
-
           $("#plane1").animate({top: "+=5"}, 0);
           $("#plane1").css({Transform: 'rotate(180deg)'}, 0);
     }
 
     if($planeBorder.right > $gameBoardRect.right)  {
-          console.log('inside log statement');
-
           $("#plane1").animate({left: "-=5"}, 0);
           $("#plane1").css({Transform: 'rotate(-90deg)'}, 0);
     }
 
     if($planeBorder.bottom > $gameBoardRect.bottom)  {
-          console.log('inside log statement');
-
           $("#plane1").animate({top: "-=5"}, 0);
           $("#plane1").css({Transform: 'rotate(0deg)'}, 0);
     }
@@ -282,10 +257,10 @@ $.fn.randomOrder = function(animate) {
     var zIndex = getRandomInt(0,0);
 
     // Animation Duration
-    if(animate) var dur = 500;
-    else var dur = 0;
+    // if(animate) var dur = 500;
+    // else var dur = 0;
 
-    image.animate({left: xPos, top: yPos}, dur);
+    image.animate({left: xPos, top: yPos});
   });
 };
 
@@ -293,18 +268,30 @@ $.fn.randomOrder = function(animate) {
 $('img').randomOrder(true);
 
 
-// Change after 10 Seconds
-// window.setInterval(function(){
-//   $('img').randomOrder(true);
-// }, 1000);
 
-//Setup
-// $('#clouds').randomOrder(false);
+///////////////////////////////////////////////////////////////
+//ALL cloud coordinates//
+///////////////////////////////////////////////////////////////
 
-// Change after 10 Seconds
-// window.setInterval(function(){
-//   $('#clouds').randomOrder(true);
-// }, 1000);
+
+console.log('this is cloud x coordinate: ' +$cloudsBorder.x);
+// console.log($cloudsRectBottom);
+
+
+        // for(i=0; i<cloudCount; i++) {
+        //         var c = clouds[c];
+
+      // }
+
+
+
+
+
+}); // End of the game
+
+
+
+
 
 ///////////////////////////////////////////////////////////////
 // EXAMPLE 1 - Just an example I will delete this
@@ -519,7 +506,7 @@ $('img').randomOrder(true);
 
 
 
-}); // End of the game
+
 
 
 

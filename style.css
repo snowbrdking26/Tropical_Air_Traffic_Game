@@ -33,15 +33,6 @@ h2 {
   width: 500px;
 }
 
-/*#pointsBoard {
-  color:white;
-  background-color: #44AFCD;
-  border: 1px solid white;
-  margin: 5px 0;
-  padding: 5px 5px;
-  width: 160px;
-}*/
-
 #startGame {
   color:white;
   background-color: #44AFCD;
@@ -116,9 +107,7 @@ h2 {
   position: relative;
   top:40%;
   left:20%;
-  /*left:-90px;*/
   z-index: 0;
-  /*border: 2px solid green;*/
 }
 
 #clouds {
@@ -128,6 +117,21 @@ h2 {
   z-index: 0;
 }
 
-#cloudDisappear {
+/*.cloudDisappear {
   visibility:hidden;
+}*/
+/*//-------------doesnt work------*/
+/*.scoredGreen {
+  animation-name: greenbox;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  transition-timing-function: linear;
 }
+
+@@keyframes greenbox {
+  52% {background: none; transform: rotate(270deg) }
+0% {border: 2px solid green;}
+90% {border: 2px solid green;}
+100% {border: none;}
+}*/
+/*--------end of doesnt work-----------*/
