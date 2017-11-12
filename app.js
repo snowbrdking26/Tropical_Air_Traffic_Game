@@ -20,6 +20,9 @@ $(() => {
   let $planeBorderRight = $planeBorder.left + $planeBorder.width;
   let $planeBorderBottom = $planeBorder.top + $planeBorder.height;
 
+  //planeFast
+  let $planeBorder = $('#plane1')[0].getBoundingClientRect(); //plane coordinates
+
    //cloud coordinates
   let $cloudsBorder = $('#clouds')[0].getBoundingClientRect();
 
@@ -531,7 +534,7 @@ $('img').randomOrder(false);
 ////////////////////////////////////////////////////////////////
 //------------------------references---------------------------
 
-// Collision detection from MDN with IF statement works perfect!
+// Collision detection 2D from MDN with IF statement works perfect!
 // https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
 
 // For //create clouds// this reference for radomly positioning multiple pictures in box
