@@ -21,7 +21,10 @@ $(() => {
   let $planeBorderBottom = $planeBorder.top + $planeBorder.height;
 
   //planeFast
-  let $planeBorder = $('#plane1')[0].getBoundingClientRect(); //plane coordinates
+  let $planeFastBorder = $('#planeFast')[0].getBoundingClientRect(); //plane coordinates
+
+  //planeSlow
+  let $planeSlowBorder = $('#planeSlow')[0].getBoundingClientRect(); //plane coordinates
 
    //cloud coordinates
   let $cloudsBorder = $('#clouds')[0].getBoundingClientRect();
@@ -148,14 +151,29 @@ const collisionDetection = () => {
          console.log('this is planes x: ' + $plane1.x);
          console.log('this is planes x: ' + $plane1.y);
 
+         //plane1 and cloud collisionDetection
          if ($planeBorder.x < $cloudsBorder.x + $cloudsBorder.width &&
             $planeBorder.x + $planeBorder.width > $cloudsBorder.x &&
             $planeBorder.y < $cloudsBorder.y + $cloudsBorder.height &&
             $planeBorder.height + $planeBorder.y > $cloudsBorder.y) {
-          console.log('collision detected!');
+          console.log('cloud collision detected!');
          }
 
+         //plane1 and planeSlow collisionDetection
+         if ($planeBorder.x < $planeSlowBorder.x + $planeSlowBorder.width &&
+            $planeBorder.x + $planeBorder.width > $planeSlowBorder.x &&
+            $planeBorder.y < $planeSlowBorder.y + $planeSlowBorder.height &&
+            $planeBorder.height + $planeBorder.y > $planeSlowBorder.y) {
+          console.log('planeSlow collision detected!');
+         }
 
+         //plane1 and planeSlow collisionDetection
+         if ($planeBorder.x < $planeFastBorder.x + $planeFastBorder.width &&
+            $planeBorder.x + $planeBorder.width > $planeFastBorder.x &&
+            $planeBorder.y < $planeFastBorder.y + $planeFastBorder.height &&
+            $planeBorder.height + $planeBorder.y > $planeFastBorder.y) {
+          console.log('planeFast collision detected!');
+         }
 
           // if($planeBorder.top < $cloudsBorder.bottom && $planeBorder.top > $cloudsBorder.top)
           //
