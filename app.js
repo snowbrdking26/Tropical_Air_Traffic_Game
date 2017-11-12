@@ -3,9 +3,10 @@
 $(() => {
 
 //global variables-----------------//
-  var clouds = [];
-  var cloudCount = 10;
-  var arrowKeys = {};
+  let clouds = [];
+  let cloudCount = 10;
+  let arrowKeys = {};
+  let score = 0;
 
   //gameboard coordiantes
   let $gameBoardRect = $('#board')[0].getBoundingClientRect();
@@ -89,11 +90,6 @@ function movePlane() {
 
 const collisionDetection = () => {
 
-    // console.log($cloudsBorder);
-  // let $cloudsRectRight = $cloudsBorder.left + $cloudsBorder .width;
-  // let $cloudsRectBottom =($cloudsBorder.top) + ($cloudsBorder .height);
-
-
     // console.log($cloudsRectRight);
     // console.log($cloudsRectBottom);
 
@@ -103,36 +99,7 @@ const collisionDetection = () => {
 
           // }
 //////////////////
-          //   function check_collision(x, y, array)
-          // {
-          //   //This function will check if the provided x/y coordinates exist
-          //   //in an array of cells or not
-          //   for(var i = 0; i < array.length; i++)
-          //   {
-          //     if(array[i].x == x && array[i].y == y)
-          //      return true;
-          //   }
-          //   return false;
-          // }
 
-////////////////
-          // if(nx == food.x && ny == food.y)
-          // {
-          //   var tail = {x: nx, y: ny};
-          //   score++;
-          //   //Create new food
-          //   create_food();
-          // }
-          // else
-          // {
-          //   var tail = snake_array.pop(); //pops out the last cell
-          //   tail.x = nx; tail.y = ny;
-          // }
-///////////////
-
-         //  if($cloudsBorder.x == $planeBorder.x && $cloudsBorder.y == $planeBorder.y) {
-         //   console.log(true);
-         // }
 
          //plane coordinates
          let $plane1 = $('#plane1')[0];
@@ -157,7 +124,15 @@ const collisionDetection = () => {
             $planeBorder.y < $cloudsBorder.y + $cloudsBorder.height &&
             $planeBorder.height + $planeBorder.y > $cloudsBorder.y) {
           console.log('cloud collision detected!');
+          score++;
+          console.log(score);
+          $points.text('Collect Clouds: Points: ' +score);
+          // score++;
+          // $('#clouds').attr('id','cloudDisappear');
+
          }
+
+
 
          //plane1 and planeSlow collisionDetection
          if ($planeBorder.x < $planeSlowBorder.x + $planeSlowBorder.width &&
@@ -190,9 +165,11 @@ const collisionDetection = () => {
 ////////////////////////////////////////////////////////////////////////
 
 } //end of collisionDetection() function
-
-
-
+///////////////////////////////////////////////////////////////
+////----------- Recording Points----------/////////
+///////////////////////////////////////////////////////////////
+const $points = $('<div>').attr('id','pointsBoard').css({ color:'white','background-color': '#44AFCD',border: '1px solid white',margin: '5px 0px',padding: '5px 5px',width: '200px'});
+$('#row').append($points.text('Collect Clouds: Points: ' +score));
 
 
 ///////////////////////////////////////////////////////////////
@@ -296,15 +273,13 @@ $.fn.randomOrder = function(animate) {
     var image = $(this);
 
     // Viewport Dimensions
-    // var vpHeight = $(window).height();
-    // var vpWidth = $(window).width();
     var vpHeight = 400;
-    var vpWidth = 150;
+    var vpWidth = 210;
 
     // Image Position
-    var xPos = getRandomInt(0, vpWidth - image.width());
+    var xPos = getRandomInt(0, vpWidth - image.width()-90);
     var yPos = getRandomInt(0, vpHeight - image.height());
-    var zIndex = getRandomInt(0,13);
+    var zIndex = getRandomInt(0,0);
 
     // Animation Duration
     if(animate) var dur = 500;
@@ -315,7 +290,7 @@ $.fn.randomOrder = function(animate) {
 };
 
 //Setup
-$('img').randomOrder(false);
+$('img').randomOrder(true);
 
 
 // Change after 10 Seconds
@@ -553,13 +528,15 @@ $('img').randomOrder(false);
 ////////////////////////////////////////////////////////////////
 //------------------------references---------------------------
 
-// Collision detection 2D from MDN with IF statement works perfect!
+// //Collision detection// 2D from MDN with IF statement works perfect!
 // https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
 
-// For //create clouds// this reference for radomly positioning multiple pictures in box
+///Create Clouds// this reference for radomly positioning multiple pictures in box
 //https://codepen.io/anon/pen/bYqQjP
 
-// random movement in box
+// For point tallies https://jsfiddle.net/end3r/9temh0ta/?utm_source=website&utm_medium=embed&utm_campaign=9temh0ta
+
+// Random movement in box
 //https://stackoverflow.com/questions/10385950/how-to-get-a-div-to-randomly-move-around-a-page-using-jquery-or-css
 
 //for obstacle movement I used the following webpage answer move retangle back and forth
