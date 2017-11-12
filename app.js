@@ -175,6 +175,7 @@ const collisionDetection = () => {
           console.log('planeFast collision detected!');
          }
 
+
           // if($planeBorder.top < $cloudsBorder.bottom && $planeBorder.top > $cloudsBorder.top)
           //
           //
