@@ -141,39 +141,33 @@ const collisionDetection = () => {
 
 
          console.log('this is clouds x: ' + $cloudsBorder.x);
+         console.log('this is clouds x: ' + $cloudsBorder.y);
          console.log('this is planes x: ' + $plane1.x);
-         console.log('this is planes y: ' + $plane1.y);
+         console.log('this is planes x: ' + $plane1.y);
 
-
-          // if($planeBorder.top === $cloudsBorder.bottom)  {
-          //       console.log('=========inside log statement bottom');
-          // }
-          if($planeBorder.top < $cloudsBorder.bottom && $planeBorder.top > $cloudsBorder.top)  {
-            console.log('inside log statement bottom');
-            // $("#plane1").animate({left: "+=5"}, 0);
-            // $("#plane1").css({Transform: 'rotate(90deg)'}, 0);
-
-          if($planeBorder.right > $cloudsBorder.left && $planeBorder.right < $cloudsBorder.right)  {
-            console.log('inside log statement left');
-            // $("#plane1").animate({left: "+=5"}, 0);
-            // $("#plane1").css({Transform: 'rotate(90deg)'}, 0);
-
-
-          if($planeBorder.left < $cloudsBorder.right && $planeBorder.left > $cloudsBorder.left)  {
-                console.log('inside log statement right');
+         if ($planeBorder.x < $cloudsBorder.x + $cloudsBorder.width &&
+            $planeBorder.x + $planeBorder.width > $cloudsBorder.x &&
+            $planeBorder.y < $cloudsBorder.y + $cloudsBorder.height &&
+            $planeBorder.height + $planeBorder.y > $cloudsBorder.y) {
+          console.log('collision detected!');
+         }
 
 
 
-          if($planeBorder.bottom > $cloudsBorder.top && $planeBorder.bottom < $cloudsBorder.bottom)  {
-                console.log('inside log statement top');
-          }
-        }
-      }
-    }
+          // if($planeBorder.top < $cloudsBorder.bottom && $planeBorder.top > $cloudsBorder.top)
+          //
+          //
+          // $planeBorder.right > $cloudsBorder.left && $planeBorder.right < $cloudsBorder.right)
+          //
+          // $planeBorder.left < $cloudsBorder.right && $planeBorder.left > $cloudsBorder.left
+          //
+          //
+          // $planeBorder.bottom > $cloudsBorder.top && $planeBorder.bottom < $cloudsBorder.bottom)
 
 
-}
+////////////////////////////////////////////////////////////////////////
 
+} //end of collisionDetection() function
 
 
 
@@ -536,6 +530,9 @@ $('img').randomOrder(false);
 
 ////////////////////////////////////////////////////////////////
 //------------------------references---------------------------
+
+// Collision detection from MDN with IF statement works perfect!
+// https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
 
 // For //create clouds// this reference for radomly positioning multiple pictures in box
 //https://codepen.io/anon/pen/bYqQjP
