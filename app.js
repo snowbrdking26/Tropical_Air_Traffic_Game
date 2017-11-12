@@ -125,9 +125,9 @@ const collisionDetection = () => {
     // console.log($plane1);
     // $('#clouds').attr('id','cloudDisappear');
     $('#clouds').addClass('scoredGreen');
-    setTimeout(function() {
-              $('#clouds').removeClass("scoredGreen");
-          }, 1000);
+    // setTimeout(function() {
+    //           $('#clouds').removeClass("scoredGreen");
+    //       }, 10000);
    }
 
    //plane1 and planeSlow collisionDetection
