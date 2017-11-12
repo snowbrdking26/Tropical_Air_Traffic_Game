@@ -121,17 +121,16 @@ h2 {
   visibility:hidden;
 }*/
 /*//-------------doesnt work------*/
-/*.scoredGreen {
+.scoredGreen {
+  border: 2px solid green;
   animation-name: greenbox;
   animation-duration: 3s;
-  animation-iteration-count: infinite;
   transition-timing-function: linear;
 }
 
-@@keyframes greenbox {
-  52% {background: none; transform: rotate(270deg) }
+@keyframes greenbox {
 0% {border: 2px solid green;}
 90% {border: 2px solid green;}
 100% {border: none;}
-}*/
+}
 /*--------end of doesnt work-----------*/

@@ -91,56 +91,60 @@ function movePlane() {
 const collisionDetection = () => {
 
 
-         //plane coordinates
-         let $plane1 = $('#plane1')[0];
-         let $planeBorder = $plane1.getBoundingClientRect(); //plane coordinates
-         let $plane1Width = $plane1.width;
-         let $plane1Height = $plane1.height;
-         let $planeBorderRight = $planeBorder.left + $planeBorder.width;
-         let $planeBorderBottom = $planeBorder.top + $planeBorder.height;
+   //plane coordinates
+   let $plane1 = $('#plane1')[0];
+   let $planeBorder = $plane1.getBoundingClientRect(); //plane coordinates
+   let $plane1Width = $plane1.width;
+   let $plane1Height = $plane1.height;
+   let $planeBorderRight = $planeBorder.left + $planeBorder.width;
+   let $planeBorderBottom = $planeBorder.top + $planeBorder.height;
 
-          //cloud coordinates
-         let $cloudsBorder = $('#clouds')[0].getBoundingClientRect();
-         //planeFast coordinates
-         let $planeFastBorder = $('#planeFast')[0].getBoundingClientRect();
-         //planeSlow coordinates
-         let $planeSlowBorder = $('#planeSlow')[0].getBoundingClientRect();
+    //cloud coordinates
+   let $cloudsBorder = $('#clouds')[0].getBoundingClientRect();
+   //planeFast coordinates
+   let $planeFastBorder = $('#planeFast')[0].getBoundingClientRect();
+   //planeSlow coordinates
+   let $planeSlowBorder = $('#planeSlow')[0].getBoundingClientRect();
 
 
-         // console.log('this is clouds x: ' + $cloudsBorder.x);
-         // console.log('this is clouds x: ' + $cloudsBorder.y);
-         // console.log('this is planes x: ' + $plane1.x);
-         // console.log('this is planes x: ' + $plane1.y);
-         // console.log($planeFastBorder.x);
-         // console.log($planeSlowBorder.y);
+   // console.log('this is clouds x: ' + $cloudsBorder.x);
+   // console.log('this is clouds y: ' + $cloudsBorder.y);
+   // console.log('this is planes x: ' + $plane1.x);
+   // console.log('this is planes x: ' + $plane1.y);
+   // console.log($planeFastBorder.x);
+   // console.log($planeSlowBorder.y);
 
-         //plane1 and cloud collisionDetection
-         if ($planeBorder.x < $cloudsBorder.x + $cloudsBorder.width &&
-            $planeBorder.x + $planeBorder.width > $cloudsBorder.x &&
-            $planeBorder.y < $cloudsBorder.y + $cloudsBorder.height &&
-            $planeBorder.height + $planeBorder.y > $cloudsBorder.y) {
-          console.log('cloud collision detected!');
-          score++;
-          $points.text('Collect Clouds: Points: ' +score);
-          // console.log($plane1);
-          // $('#clouds').attr('id','cloudDisappear');
-         }
+   //plane1 and cloud collisionDetection
+   if ($planeBorder.x < $cloudsBorder.x + $cloudsBorder.width &&
+      $planeBorder.x + $planeBorder.width > $cloudsBorder.x &&
+      $planeBorder.y < $cloudsBorder.y + $cloudsBorder.height &&
+      $planeBorder.height + $planeBorder.y > $cloudsBorder.y) {
+    console.log('cloud collision detected!');
+    score++;
+    $points.text('Collect Clouds: Points: ' +score);
+    // console.log($plane1);
+    // $('#clouds').attr('id','cloudDisappear');
+    $('#clouds').addClass('scoredGreen');
+    setTimeout(function() {
+              $('#clouds').removeClass("scoredGreen");
+          }, 1000);
+   }
 
-         //plane1 and planeSlow collisionDetection
-         if ($planeBorder.x < $planeSlowBorder.x + $planeSlowBorder.width &&
-            $planeBorder.x + $planeBorder.width > $planeSlowBorder.x &&
-            $planeBorder.y < $planeSlowBorder.y + $planeSlowBorder.height &&
-            $planeBorder.height + $planeBorder.y > $planeSlowBorder.y) {
-          console.log('planeSlow collision detected!');
-         }
+   //plane1 and planeSlow collisionDetection
+   if ($planeBorder.x < $planeSlowBorder.x + $planeSlowBorder.width &&
+      $planeBorder.x + $planeBorder.width > $planeSlowBorder.x &&
+      $planeBorder.y < $planeSlowBorder.y + $planeSlowBorder.height &&
+      $planeBorder.height + $planeBorder.y > $planeSlowBorder.y) {
+    console.log('planeSlow collision detected!');
+   }
 
-         //plane1 and planeSlow collisionDetection
-         if ($planeBorder.x < $planeFastBorder.x + $planeFastBorder.width &&
-            $planeBorder.x + $planeBorder.width > $planeFastBorder.x &&
-            $planeBorder.y < $planeFastBorder.y + $planeFastBorder.height &&
-            $planeBorder.height + $planeBorder.y > $planeFastBorder.y) {
-          console.log('planeFast collision detected!');
-         }
+   //plane1 and planeSlow collisionDetection
+   if ($planeBorder.x < $planeFastBorder.x + $planeFastBorder.width &&
+      $planeBorder.x + $planeBorder.width > $planeFastBorder.x &&
+      $planeBorder.y < $planeFastBorder.y + $planeFastBorder.height &&
+      $planeBorder.height + $planeBorder.y > $planeFastBorder.y) {
+    console.log('planeFast collision detected!');
+   }
 
 
 
@@ -212,25 +216,9 @@ const stayInGameBoard = () => {
 
 }    // end of function stayInGameBoard()
 
-///////////////////////////////////////////////////////////////
-// creates 20 planes
-///////////////////////////////////////////////////////////////
-// const createAlotOfPlanes = (num) => {
-//     let planes = [];
-//     for (let i = 0; i < num; i++) {
-//           // planes[i] = [];
-//         //   for(j=0; j< planes; j++) {
-//         //       planes[i][j] = { x: 0, y: 0 };
-//         // }
-//
-//     $alotOfPlanes = $('<alotofPlanes>').empty().append('<img src="img/fastplaneemptybackground.png" height="40px" width="30px"/>').attr('id','planeFast');
-//
-//     $('#board').append($alotOfPlanes);
-//
-//     }
-// }
-// createAlotOfPlanes(10);
-//
+
+
+
 
 
 
@@ -256,10 +244,6 @@ $.fn.randomOrder = function(animate) {
     var yPos = getRandomInt(0, vpHeight - image.height());
     var zIndex = getRandomInt(0,0);
 
-    // Animation Duration
-    // if(animate) var dur = 500;
-    // else var dur = 0;
-
     image.animate({left: xPos, top: yPos});
   });
 };
@@ -274,20 +258,76 @@ $('img').randomOrder(true);
 ///////////////////////////////////////////////////////////////
 
 
-console.log('this is cloud x coordinate: ' +$cloudsBorder.x);
-// console.log($cloudsRectBottom);
+// console.log('this is cloud x coordinate: ' +$cloudsBorder.x);
+// console.log($cloudsBorder); // all x, y, bottom, right coordinates
 
-
-        // for(i=0; i<cloudCount; i++) {
-        //         var c = clouds[c];
-
+      // var cloudArr = [];
+      // for(c=0; c<cloudCount; c++) {
+      //     cloudArr[c] = [];
+      //     for(r=0; r<cloudRowCount; r++) {
+      //         cloudArr[c][r] = { x: 0, y: 0, status: 1 };
+      //     }
       // }
 
 
 
 
 
+
+  ///////////////////////////////////////////////////////////////
+  // creates 20 planes
+  ///////////////////////////////////////////////////////////////
+  // const createAlotOfPlanes = (num) => {
+  //     let planes = [];
+  //     for (let i = 0; i < num; i++) {
+  //           // planes[i] = [];
+  //         //   for(j=0; j< planes; j++) {
+  //         //       planes[i][j] = { x: 0, y: 0 };
+  //         // }
+  //
+  //     $alotOfPlanes = $('<alotofPlanes>').empty().append('<img src="img/fastplaneemptybackground.png" height="40px" width="30px"/>').attr('id','planeFast');
+  //
+  //     $('#board').append($alotOfPlanes);
+  //
+  //     }
+  // }
+  // createAlotOfPlanes(10);
+
+  // //randomize the planes
+  // function getRandomInt (min, max) {
+  //     return Math.floor(Math.random() * (max - min + 1)) + min;
+  // }
+  //
+  // $.fn.randomOrder = function(animate) {
+  //   this.each(function() {
+  //     var $planeFast = $('#planeFast');
+  //
+  //     // Viewport Dimensions
+  //     var vpHeight = 400;
+  //     var vpWidth = 210;
+  //
+  //     // Image Position
+  //     var xPos = getRandomInt(0, vpWidth - $planeFast.width()-90);
+  //     var yPos = getRandomInt(0, vpHeight - $planeFast.height());
+  //     var zIndex = getRandomInt(0,0);
+  //
+  //     $planeFast.animate({left: xPos, top: yPos});
+  //   });
+  // };
+  //
+  // //Setup
+  // $('#planeFast').randomOrder(true);
+
+
+
+
+
+
 }); // End of the game
+
+
+
+
 
 
 
@@ -517,6 +557,8 @@ console.log('this is cloud x coordinate: ' +$cloudsBorder.x);
 
 // //Collision detection// 2D from MDN with IF statement works perfect!
 // https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+
+// Game dev Tutorial //https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Finishing_up
 
 ///Create Clouds// this reference for radomly positioning multiple pictures in box
 //https://codepen.io/anon/pen/bYqQjP
