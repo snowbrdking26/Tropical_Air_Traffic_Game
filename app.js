@@ -3,7 +3,7 @@
 $(() => {
 
 //global variables-----------------//
-  let clouds = [];
+  let arrayClouds = [];
   let cloudCount = 10;
   let arrowKeys = {};
   let score = 0;
@@ -21,6 +21,7 @@ $(() => {
   let $planeBorderRight = $planeBorder.left + $planeBorder.width;
   let $planeBorderBottom = $planeBorder.top + $planeBorder.height;
 
+
   //planeFast
   let $planeFastBorder = $('#planeFast')[0].getBoundingClientRect(); //plane coordinates
 
@@ -28,18 +29,16 @@ $(() => {
   let $planeSlowBorder = $('#planeSlow')[0].getBoundingClientRect(); //plane coordinates
 
    //cloud coordinates
-  let $cloudsBorder = $('#clouds')[0].getBoundingClientRect();
+  // let $cloudsBorder = $('#cloud1')[0].getBoundingClientRect();
+  // console.log($cloudsBorder);
 
 
-  // let $planeBorder = $plane1.getBoundingClientRect();
-  // let $gameBoardBorder = $gameBoardRect.getBoundingClientRect();
-  // let $planeBorderRight = $planeBorder.left + $planeBorder.width;
-  // let $planeBorderBottom = $planeBorder.top + $planeBorder.height;
+
 
 //end global variables-------------//
+console.log($planeBorder);
 
-
-//Movement: moving plane1 img left right up and down;
+//Moving plane1 img left right up and down;
 setInterval(movePlane, 20);
 
 
@@ -74,22 +73,26 @@ function movePlane() {
   }
   stayInGameBoard();
   collisionDetection();
-
+// restartGame();
 // move();
-// animateDiv();
-// rockMove();
-// createRock();
 
 } //end of movePlane() function
-
+//-----------------------------------------------------------this doesnt work
+// Removes the cloud once collected
+//   function remove(id) {
+//       const $elem = cloudArray[id];
+//       // $elem.empty();
+//       $elem.eq( 4 ).remove();
+//   }
+//     // return someArray.splice(0,[id]])
+// console.log($('#board').children());
+//-----------------------------------------------------------this doesnt work
 
 ////////////////////////////////////////////////////////////////////
 //Collision with other objects, border, and collision to earn points
 ////////////////////////////////////////////////////////////////////
 
-
 const collisionDetection = () => {
-
 
    //plane coordinates
    let $plane1 = $('#plane1')[0];
@@ -100,7 +103,7 @@ const collisionDetection = () => {
    let $planeBorderBottom = $planeBorder.top + $planeBorder.height;
 
     //cloud coordinates
-   let $cloudsBorder = $('#clouds')[0].getBoundingClientRect();
+   // let $cloudsBorder = $('.clouds')[0].getBoundingClientRect();
    //planeFast coordinates
    let $planeFastBorder = $('#planeFast')[0].getBoundingClientRect();
    //planeSlow coordinates
@@ -108,27 +111,33 @@ const collisionDetection = () => {
 
 
    // console.log('this is clouds x: ' + $cloudsBorder.x);
-   // console.log('this is clouds y: ' + $cloudsBorder.y);
-   // console.log('this is planes x: ' + $plane1.x);
-   // console.log('this is planes x: ' + $plane1.y);
-   // console.log($planeFastBorder.x);
-   // console.log($planeSlowBorder.y);
 
    //plane1 and cloud collisionDetection
-   if ($planeBorder.x < $cloudsBorder.x + $cloudsBorder.width &&
-      $planeBorder.x + $planeBorder.width > $cloudsBorder.x &&
-      $planeBorder.y < $cloudsBorder.y + $cloudsBorder.height &&
-      $planeBorder.height + $planeBorder.y > $cloudsBorder.y) {
-    console.log('cloud collision detected!');
-    score++;
-    $points.text('Collect Clouds: Points: ' +score);
-    // console.log($plane1);
-    // $('#clouds').attr('id','cloudDisappear');
-    $('#clouds').addClass('scoredGreen');
-    // setTimeout(function() {
-    //           $('#clouds').removeClass("scoredGreen");
-    //       }, 10000);
-   }
+   for(let i = 0; i < cloudArray.length; i++){
+      // var left2 = cloudArray[i].left-8;
+      // var right2 = cloudArray[i].left+cloudArray[i].width;
+      // var top2 = parseInt(cloudArray[i].top)-6;
+      // var bottom2 = cloudArray[i].top+cloudArray[i].height+3;
+      // console.log(cloudArray[2].top);
+      // console.log(cloudArray.length);
+
+      if ($planeBorder.left < cloudArray[i].left + cloudArray[i].width &&
+         $planeBorder.left + $planeBorder.width > cloudArray[i].left &&
+         $planeBorder.top < cloudArray[i].top + cloudArray[i].height &&
+         $planeBorder.height + $planeBorder.top > cloudArray[i].top) {
+
+        score += 1
+        $cloudPointsTotal.text('Collect Clouds: Points: ' +score);
+          console.log('cloud collision detected!');
+          $('#plane1').addClass('scoredGreen');
+          // console.log($plane1);
+          // $('.clouds').attr('id','cloudDisappear');
+          // $('.clouds').addClass('scoredGreen');
+          // setTimeout(function() {
+          //           $('.clouds').removeClass("scoredGreen");
+          //       }, 1000);
+         }
+       }
 
    //plane1 and planeSlow collisionDetection
    if ($planeBorder.x < $planeSlowBorder.x + $planeSlowBorder.width &&
@@ -136,6 +145,10 @@ const collisionDetection = () => {
       $planeBorder.y < $planeSlowBorder.y + $planeSlowBorder.height &&
       $planeBorder.height + $planeBorder.y > $planeSlowBorder.y) {
     console.log('planeSlow collision detected!');
+    $('#planeSlow').addClass('scoredRed');
+    setTimeout(function() {
+              $('#planeSlow').removeClass("scoredRed");
+          }, 1000);
    }
 
    //plane1 and planeSlow collisionDetection
@@ -144,25 +157,31 @@ const collisionDetection = () => {
       $planeBorder.y < $planeFastBorder.y + $planeFastBorder.height &&
       $planeBorder.height + $planeBorder.y > $planeFastBorder.y) {
     console.log('planeFast collision detected!');
+    $('#planeFast').addClass('scoredRed');
+    setTimeout(function() {
+              $('#planeFast').removeClass("scoredRed");
+          }, 1000);
    }
-
-
-
 } //end of collisionDetection() function
+
 
 
 ///////////////////////////////////////////////////////////////
 ////----------- Recording Points----------/////////
 ///////////////////////////////////////////////////////////////
-const $points = $('<div>').attr('id','pointsBoard')
+
+const $restartGameBtn = $('<div>').attr('id','startGame')
+$('#row').append($restartGameBtn.text('Start/Restart'));
+
+
+const $cloudPointsTotal = $('<div>').attr('class','pointsBoard')
 .css({ color:'white',
   'background-color': '#44AFCD',
   border: '1px solid white',
   margin: '5px 0px',
   padding: '5px 5px',
   width: '200px'});
-$('#row').append($points.text('Collect Clouds: Points: ' +score));
-
+$('#row').append($cloudPointsTotal.text('Collect Clouds: Points: ' +score));
 
 
 
@@ -173,8 +192,6 @@ $('#row').append($points.text('Collect Clouds: Points: ' +score));
 // 2. define player coordinates
 
 const stayInGameBoard = () => {
-
-
 
           //gameboard coordiantes
           let $gameBoardRect = $('#board')[0].getBoundingClientRect();
@@ -219,47 +236,149 @@ const stayInGameBoard = () => {
 
 
 
-
-
-
-
-
 ///////////////////////////////////////////////////////////////
-//create clouds//
+//Create clouds//
 ///////////////////////////////////////////////////////////////
 function getRandomInt (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-$.fn.randomOrder = function(animate) {
-  this.each(function() {
-    var image = $(this);
+const restartGame = () => {
 
-    // Viewport Dimensions
-    var vpHeight = 400;
-    var vpWidth = 210;
+  cloudArray = [];
 
-    // Image Position
-    var xPos = getRandomInt(0, vpWidth - image.width()-90);
-    var yPos = getRandomInt(0, vpHeight - image.height());
-    var zIndex = getRandomInt(0,0);
+  for(var i = 0;i<10;i++){
+		cloudArray.push(new point(i));
+	}
 
-    image.animate({left: xPos, top: yPos});
-  });
-};
+  pointInterval =
+      setInterval(function() {
 
-//Setup
-$('img').randomOrder(true);
+        if (cloudArray.length <= 40) {
+        cloudArray.push(new point(i));
+        }
+      }, 1000)
 
+console.log(cloudArray.length);
+
+
+
+function point(id){
+      this.left = getRandomInt(50, $gameBoardRect.width);
+      this.top = getRandomInt(100, $gameBoardRect.height- 30);
+      // this.left = parseInt(Math.random()*(400) + 10);
+    	// this.top = parseInt(Math.random()*400 + 10);
+      this.height = 20;
+      this.width =20;
+      this.id = id;
+      const $cloudPoints = $("<div>").addClass('cloudy').append('<img src="img/cloud.png" width = "20px">')
+        .css({"height":this.height,"width":this.width,"left":this.left,"top":this.top,"position":"absolute"})
+      $('#board').append($cloudPoints);
+}
+
+
+
+} //end restartGame()
+
+restartGame();
+
+console.log(cloudArray);
+
+// function clearOut() {
+//   rockArray = [];
+//   clearInterval(pointInterval);
+//   clearInterval(rockInterval);
+// }
+
+// example 2
+/////////----------------------------------
+// $.fn.randomOrder = function(animate) {
+//   // console.log(this);
+//   this.each(function(foo) {
+//     var image = $(this);
+// // console.log(image);
+// // console.log(this);
+//
+//     // Viewport Dimensions
+//     var vpHeight = 400;
+//     var vpWidth = 210;
+//
+//     // Image Position
+//     var xPos = getRandomInt(0, vpWidth - image.width()-90);
+//     var yPos = getRandomInt(0, vpHeight - image.height());
+//     var zIndex = getRandomInt(0,0);
+//
+//     image.animate({left: xPos, top: yPos});
+//     cloudsArr.push(image);
+//   });
+//   console.log(cloudsArr);
+// };
+//
+// //Setup
+// $('.clouds').randomOrder(true);
+//
+
+
+// example 3
+/////////----------------------------------
+
+// // global declarations
+// var positions = [];
+//
+
+// function generatePositionsArray(maxX, maxY, safeRadius, irregularity) {
+//     // declarations
+//     var positionsArray = [];
+//     console.log(positionsArray);
+//     var r, c;
+//     var rows;
+//     var columns;
+//     // count the amount of rows and columns
+//     rows = Math.floor(maxY / safeRadius);
+//     columns = Math.floor(maxX / safeRadius);
+//     // loop through rows
+//     for (r = 1; r <= rows; r += 1) {
+//         // loop through columns
+//         for (c = 1; c <= columns; c += 1) {
+//             // populate array with point object
+//             positionsArray.push({
+//                 x: Math.round(maxX * c / columns) + getRandomInt(irregularity * 1, irregularity),
+//                 y: Math.round(maxY * r / rows) + getRandomInt(irregularity * 1.5, irregularity)
+//             });
+//         }
+//     }
+//     // return array
+//     return positionsArray;
+// }
+// positions = generatePositionsArray(10, 1, 1, 10);
+//
+// // get random position from positions array
+// function getRandomPosition(array, removeTaken) {
+//     // declarations
+//     var randomIndex;
+//     var coordinates;
+//     // get random index
+//     randomIndex = getRandomInt(0, array.length - 1);
+//     // get random item from array
+//     coordinates = array[randomIndex];
+//     // check if remove taken
+//     if (removeTaken) {
+//         // remove element from array
+//         array.splice(randomIndex, 1);
+//     }
+//     // return position
+//     return coordinates;
+// }
+//
+// getRandomPosition(positions, true);
 
 
 ///////////////////////////////////////////////////////////////
 //ALL cloud coordinates//
 ///////////////////////////////////////////////////////////////
 
-
-// console.log('this is cloud x coordinate: ' +$cloudsBorder.x);
-// console.log($cloudsBorder); // all x, y, bottom, right coordinates
+      // console.log('this is cloud x coordinate: ' +$cloudsBorder.x);
+      // console.log($cloudsBorder); // all x, y, bottom, right coordinates
 
       // var cloudArr = [];
       // for(c=0; c<cloudCount; c++) {
@@ -333,224 +452,6 @@ $('img').randomOrder(true);
 
 
 
-///////////////////////////////////////////////////////////////
-// EXAMPLE 1 - Just an example I will delete this
-///////////////////////////////////////////////////////////////
-// Random Fast and Slow plane movements chaotic movements
-
-// $(document).ready(function(){
-//
-//
-// });
-
-// function makeNewPosition(){
-//
-//     // Get viewport dimensions (remove the dimension of the div)
-//     var h = $('#board').height();
-//     var w = $('#board').width();
-//
-//     var nh = Math.floor(Math.random() * h);
-//     var nw = Math.floor(Math.random() * w);
-//
-//     return [nh,nw];
-//
-// };
-// function makeNewPosition2(){
-//
-//     // Get viewport dimensions (remove the dimension of the div)
-//     var h = $('#board').height();
-//     var w = $('#board').width();
-//
-//     var nh2 = Math.floor(Math.random() * h);
-//     var nw2 = Math.floor(Math.random() * w);
-//
-//     return [nh2,nw2];
-//
-// };
-//
-// function animateDiv(){
-//     var newq = makeNewPosition();
-//     var newz = makeNewPosition2();
-//     var oldq = $('#planeFast').offset();
-//     var oldz = $('#planeSlow').offset();
-//     var speed = calcSpeed([oldq.top, oldq.left], newq);
-//     var speed = calcSpeed([oldq.top, oldq.left], newz);
-//
-//     $('#planeFast').animate({ top: newq[0], left: newq[1] }, speed, function(){
-//       animateDiv();
-//     });
-//     $('#planeSlow').animate({ top: newz[0], left: newq[1] }, speed, function(){
-//       animateDiv();
-//     });
-//
-// };
-//
-// function calcSpeed(prev, next) {
-//
-//     var x = Math.abs(prev[1] - next[1]);
-//     var y = Math.abs(prev[0] - next[0]);
-//
-//     var greatest = x > y ? x : y;
-//     var speedModifier = 0.1;
-//     var speed = Math.ceil(greatest/speedModifier);
-//     return speed;
-//
-// };
-
-// const move = () => {
-//
-//   const $fastPlane = $('#planeFast');
-//   $fastPlane.animate({y: -60} 2000);
-// };
-
-// ////////////////////////////
-// creates two planes each 3 seconds
-
-
-// rockInterval =
-//     setInterval(function() {
-//       for (var i = 0; i < 2; i++) {
-//       rockArray.push(createAlotOfPlanes(i))
-//       }
-//     }, 2000)
-//
-
-
-// ////////////////////////////
-
-
-///////////////////////////////////////////////////////////////
-// EXAMPLE 2 - Just an example I will delete this
-///////////////////////////////////////////////////////////////
-// // Rock Prototype
-// function createRock(id){
-//   leftRight = [];
-//   topBottom = [];
-//   positionArray = [];
-//   //have rocks spawn between these numbers
-//   randRight = Math.floor(Math.random() * (600 - 580) + 580)
-//   randBot = Math.floor(Math.random() * (600 - 580) + 580)
-//   randTop = Math.floor(Math.random() * (50 - 40) + 40)
-//   randLeft = Math.floor(Math.random() * (50 - 40) + 40)
-//
-//   leftPos = Math.floor(Math.random() * (600 - 50) + 50)
-//   topPos = Math.floor(Math.random() * (600 - 50) + 50)
-//
-//   pos = Math.floor(Math.random() * (3) + 1)
-//   neg = Math.floor(Math.random() * (-3) - 1)
-//
-//   leftRight.push(randRight, randLeft)
-//   topBottom.push(randTop, randBot)
-//
-//   function rand01() {
-//     return Math.round(Math.random())
-//   }
-//
-// 	positionArray.push(leftRight[rand01()],topBottom[rand01()])
-//   clone = positionArray[rand01()]
-//
-// 	if (clone === positionArray[0]) {
-//     positionArray.splice(1, 1)
-//     positionArray.push(topPos)
-//   }
-//
-// 	if (clone === positionArray[1]) {
-//     positionArray.splice(0, 1)
-//     positionArray.unshift(leftPos)
-//   }
-//
-//   // Rock quadrant for directions
-//   if (positionArray[0] <= (-20)) {
-//     if (positionArray[1] <= 302) {
-//       console.log(this);
-//       this.newPos = [pos, pos];
-//     }
-//     if (positionArray[1] >= 303) {
-//       this.newPos = [pos, neg];
-//     }
-//   }
-//
-//   if (positionArray[1] <= (-20)) {
-//     if (positionArray[0] <= 502) {
-//       this.newPos = [pos, pos];
-//     }
-//     if (positionArray[0] >= 503) {
-//       this.newPos = [neg, pos];
-//     }
-//   }
-//
-//   if (positionArray[0] >= 1020) {
-//     if (positionArray[1] <= 302) {
-//       this.newPos = [neg, pos];
-//     }
-//     if (positionArray[1] >= 303) {
-//       this.newPos = [neg, neg];
-//     }
-//   }
-//
-//   if (positionArray[1] >= 620) {
-//     if (positionArray[0] <= 502) {
-//       this.newPos = [pos, neg];
-//     }
-//     if (positionArray[0] >= 503) {
-//       this.newPos = [neg, neg];
-//     }
-//   }
-//
-// 	this.speed = 3;
-// 	this.width = 25;
-// 	this.height = 25;
-// 	this.left = positionArray[0];
-// 	this.top = positionArray[1];
-// 	this.id = id;
-//
-// 	$rock = $("<div class=rock/>")
-// 		.css({"border":"4px solid red","height":this.height,"width":this.width,"left":this.left+"px","top":this.top+"px","position":"absolute"})
-//   $('#board').append($rock);
-// }
-
-
-
-
-    // function rockMove() {
-    //   $rocks = $('.rock');
-    //
-    //   for (i = 0; i < $rocks.length; i++) {
-    //     rockTop = parseInt($rocks[i].style.top);
-    //     rockLeft = parseInt($rocks[i].style.left);
-    //
-    //     leftR = rockArray[i].newPos[0];
-    //     topR = rockArray[i].newPos[1];
-    //
-    //     newTop = rockTop + topR;
-    //     this.$rocks[i].style.top = newTop + "px"
-    //     newLeft = rockLeft + leftR;
-    //     this.$rocks[i].style.left = newLeft + "px"
-    //
-    //   }
-    //
-    // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ////////////////////////////////////////////////////////////////
 //------------------------references---------------------------
@@ -559,6 +460,9 @@ $('img').randomOrder(true);
 // https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
 
 // Game dev Tutorial //https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Finishing_up
+
+// Game example dodger
+//http://kyleliu.info/Dodger-2-Player-Game/
 
 ///Create Clouds// this reference for radomly positioning multiple pictures in box
 //https://codepen.io/anon/pen/bYqQjP
