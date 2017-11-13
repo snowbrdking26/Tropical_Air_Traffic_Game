@@ -4,9 +4,15 @@ $(() => {
 
 //global variables-----------------//
   let arrayClouds = [];
-  let cloudCount = 10;
+  let arrayFastSlowObstacles = [];
+  let planeSlowArray = [];
+  let planeFastArray = [];
+
+  let cloudCount = 2;
   let arrowKeys = {};
   let score = 0;
+  let scoreArray =[];
+
 
   //gameboard coordiantes
   let $gameBoardRect = $('#board')[0].getBoundingClientRect();
@@ -20,7 +26,6 @@ $(() => {
   let $plane1Height = $plane1.height;
   let $planeBorderRight = $planeBorder.left + $planeBorder.width;
   let $planeBorderBottom = $planeBorder.top + $planeBorder.height;
-
 
   //planeFast
   let $planeFastBorder = $('#planeFast')[0].getBoundingClientRect(); //plane coordinates
@@ -36,10 +41,10 @@ $(() => {
 
 
 //end global variables-------------//
-console.log($planeBorder);
+// console.log($planeBorder);
 
 //Moving plane1 img left right up and down;
-setInterval(movePlane, 20);
+setInterval(movePlane, 25);
 
 
 $(document).keydown(function(event) {
@@ -114,12 +119,7 @@ const collisionDetection = () => {
 
    //plane1 and cloud collisionDetection
    for(let i = 0; i < cloudArray.length; i++){
-      // var left2 = cloudArray[i].left-8;
-      // var right2 = cloudArray[i].left+cloudArray[i].width;
-      // var top2 = parseInt(cloudArray[i].top)-6;
-      // var bottom2 = cloudArray[i].top+cloudArray[i].height+3;
-      // console.log(cloudArray[2].top);
-      // console.log(cloudArray.length);
+
 
       if ($planeBorder.left < cloudArray[i].left + cloudArray[i].width &&
          $planeBorder.left + $planeBorder.width > cloudArray[i].left &&
@@ -127,18 +127,45 @@ const collisionDetection = () => {
          $planeBorder.height + $planeBorder.top > cloudArray[i].top) {
 
         score += 1
-        $cloudPointsTotal.text('Collect Clouds: Points: ' +score);
-          console.log('cloud collision detected!');
+        $cloudPointsTotal.text('Collect Cloud Points: ' +score);
+          // console.log('cloud collision detected!');
           $('#plane1').addClass('scoredGreen');
-          // console.log($plane1);
-          // $('.clouds').attr('id','cloudDisappear');
-          // $('.clouds').addClass('scoredGreen');
-          // setTimeout(function() {
-          //           $('.clouds').removeClass("scoredGreen");
-          //       }, 1000);
+
+          $('#' + i).remove()
+
+        // cloudArray.splice(i, 1);
+        // console.log(scoreArray.length);
+          // scoreArray.push($('#' + i));
+          // console.log(scoreArray.length);
+          // console.log(cloudArray.length);
+
+          scoreArray.push.apply(scoreArray, cloudArray.splice(i, 1));
+
          }
+         setTimeout(function() {
+                   $('.clouds').removeClass("scoredGreen");
+               }, 1000);
+
        }
 
+//-----------------------------------------------testing below
+for(let i = 0; i < arrayFastSlowObstacles.length; i++){
+  if ($planeBorder.x < arrayFastSlowObstacles[i].x + arrayFastSlowObstacles[i].width &&
+     $planeBorder.x + $planeBorder.width > arrayFastSlowObstacles[i].x &&
+     $planeBorder.y < arrayFastSlowObstacles[i].y + arrayFastSlowObstacles[i].height &&
+     $planeBorder.height + $planeBorder.y > arrayFastSlowObstacles[i].y) {
+   console.log('OBSTACLE collision detected!');
+   $('#planeSlow').addClass('scoredRed');
+   setTimeout(function() {
+             $('#planeSlow').removeClass("scoredRed");
+         }, 1000);
+  }
+}
+//-----------------------------------------------testing above
+
+
+///this below works//
+ for(let i = 0; i < arrayFastSlowObstacles.length; i++){
    //plane1 and planeSlow collisionDetection
    if ($planeBorder.x < $planeSlowBorder.x + $planeSlowBorder.width &&
       $planeBorder.x + $planeBorder.width > $planeSlowBorder.x &&
@@ -150,7 +177,9 @@ const collisionDetection = () => {
               $('#planeSlow').removeClass("scoredRed");
           }, 1000);
    }
+ }
 
+for(let i = 0; i < arrayFastSlowObstacles.length; i++){
    //plane1 and planeSlow collisionDetection
    if ($planeBorder.x < $planeFastBorder.x + $planeFastBorder.width &&
       $planeBorder.x + $planeBorder.width > $planeFastBorder.x &&
@@ -162,6 +191,7 @@ const collisionDetection = () => {
               $('#planeFast').removeClass("scoredRed");
           }, 1000);
    }
+ }
 } //end of collisionDetection() function
 
 
@@ -228,44 +258,99 @@ const createClouds = () => {
 
   cloudArray = [];
 
-  for(var i = 0;i<10;i++){
+  for(var i = 0;i<=5;i++){
 		cloudArray.push(new point(i));
 	}
 
-  pointInterval =
-      setInterval(function() {
+  // pointInterval =
+  //     setInterval(function() {
+  //       console.log(cloudArray.length);
+  //       if (cloudArray.length <= 5) {
+  //       cloudArray.push(new point(i));
+  //       }
+  //     }, 1000)
 
-        if (cloudArray.length <= 40) {
-        cloudArray.push(new point(i));
-        }
-      }, 1000)
-
-console.log(cloudArray.length);
+// console.log(cloudArray.length);
 
 
 
 function point(id){
       this.left = getRandomInt(50, $gameBoardRect.width);
-      this.top = getRandomInt(100, $gameBoardRect.height- 30);
+      this.top = getRandomInt(100, $gameBoardRect.height - 30);
       // this.left = parseInt(Math.random()*(400) + 10);
     	// this.top = parseInt(Math.random()*400 + 10);
       this.height = 20;
       this.width =20;
       this.id = id;
-      const $cloudPoints = $("<div>").addClass('cloudy').append('<img src="img/cloud.png" width = "20px">')
-        .css({"height":this.height,"width":this.width,"left":this.left,"top":this.top,"position":"absolute"})
+      const $cloudPoints = $("<div>").addClass('cloudy').attr('id',this.id).append('<img src="img/cloud.png" width = "20px">')
+        .css({"height":this.height,"width":this.width,"left":this.left,"top":this.top,"position":"absolute", "margin": '0 0'})
       $('#board').append($cloudPoints);
 }
-
-
 
 } //end createClouds()
 
 createClouds();
-
 console.log(cloudArray);
 
+///////////////////////////////////////////////////////////////
+//create obstacales
+///////////////////////////////////////////////////////////////
+// function getRandomInt (min, max) {
+//     return Math.floor(Math.random() * (max - min + 1)) + min;
+// }
+//
+// const createObstacles = () => {
 
+  // for(let i = 0;i<1;i++){
+	// 	arrayFastSlowObstacles.push(new point(i));
+	// }
+  //
+  // pointInterval =
+  //     setInterval(function() {
+  //
+  //       if (arrayFastSlowObstacles.length < 1) {
+  //       arrayFastSlowObstacles.push(new point(i));
+  //       }
+  //     }, 1000)
+
+// console.log(arrayFastSlowObstacles.length);
+
+                        // const arrObstacles = [
+                        // 'img/fastplaneemptybackground.png',
+                        // 'img/slowplaneemptybackground.png'
+                        // ];
+                        // // console.log(arrObstacles);
+                        //
+                        // const randomNumberInArray = () => {
+                        //   let number = Math.floor(Math.random()*1);
+                        //   return arrObstacles[number];
+                        //   // console.log(arrObstacles[number]);
+                        // }
+                        // const addImg = () => {
+                        //   let $obstabcleImage = randomNumberInArray();
+                        //   let $newObstacleImg = $('<img>').attr('src',$obstabcleImage).addClass('ALOTofplanes')
+                        //   return $newObstacleImg;
+                        // }
+
+//     function point(id){
+//           this.left = getRandomInt(50, $gameBoardRect.width);
+//           this.top = getRandomInt(100, $gameBoardRect.height - 60);
+//           this.height = 20;
+//           this.width =20;
+//           this.id = id;
+//           // let $addImg = addImg();
+//           // let $newObstacleImg = $('<img>').attr('src',$addImg).addClass('ALOTofplanes')
+//           let $newObstacleImg = $('<img>').attr('src','img/fastplaneemptybackground.png').addClass('ALOTofplanes')
+//           .css({"height":this.height,"width":this.width,"left":this.left,"top":this.top,"position":"absolute", "margin": '0 0',
+//            'z-index':'1'});
+//           $('#board').append($newObstacleImg);
+//         }
+//
+//
+// // addObstacleImg();
+//
+// }//end of createObstacles()
+// createObstacles();
 
 
 ///////////////////////////////////////////////////////////////
@@ -275,8 +360,9 @@ console.log(cloudArray);
 // const $btnReset = $('<div>').attr('id','startGame')
 // $('#row').append($restartGameBtn.text('Start/Restart'));
 
-const $btnReset = $('<div>').text('START/RESET').attr('class','pointsBoard')
-.css({ color:'white',
+const $btnReset = $('<div>').text('START / RESET').attr('class','pointsBoard')
+.css({ color:'orange',
+  '-webkit-text-stroke': '.01em white',
   'background-color': '#44AFCD',
   border: '1px solid white',
   margin: '5px 5px 5px 0',
@@ -286,12 +372,13 @@ $('#row').append($btnReset);
 
 
 const reset = () => {
-  cloudCount = 10;
-  arrayClouds = 0;
-  let score = 0;
-  // createClouds();
-  console.log("button pressed");
 
+  createClouds();
+  cloudArray = [];
+  let score = 0;
+  $cloudPointsTotal.text('Collect Cloud Points: ' + score);
+  console.log("reset button pressed");
+  $('.cloudy').remove();
 };
 
 //event listeners
@@ -310,7 +397,7 @@ const $cloudPointsTotal = $('<div>').attr('class','pointsBoard')
   border: '1px solid white',
   margin: '5px 0px',
   padding: '5px 5px',
-  width: '200px'});
+  width: '280px'});
 $('#row').append($cloudPointsTotal.text('Collect Clouds: Points: ' + score));
 
 
@@ -318,94 +405,6 @@ $('#row').append($cloudPointsTotal.text('Collect Clouds: Points: ' + score));
 
 
 }); // End of the game
-
-// function clearOut() {
-//   rockArray = [];
-//   clearInterval(pointInterval);
-//   clearInterval(rockInterval);
-// }
-
-// example 2
-/////////----------------------------------
-// $.fn.randomOrder = function(animate) {
-//   // console.log(this);
-//   this.each(function(foo) {
-//     var image = $(this);
-// // console.log(image);
-// // console.log(this);
-//
-//     // Viewport Dimensions
-//     var vpHeight = 400;
-//     var vpWidth = 210;
-//
-//     // Image Position
-//     var xPos = getRandomInt(0, vpWidth - image.width()-90);
-//     var yPos = getRandomInt(0, vpHeight - image.height());
-//     var zIndex = getRandomInt(0,0);
-//
-//     image.animate({left: xPos, top: yPos});
-//     cloudsArr.push(image);
-//   });
-//   console.log(cloudsArr);
-// };
-//
-// //Setup
-// $('.clouds').randomOrder(true);
-//
-
-
-// example 3
-/////////----------------------------------
-
-// // global declarations
-// var positions = [];
-//
-
-// function generatePositionsArray(maxX, maxY, safeRadius, irregularity) {
-//     // declarations
-//     var positionsArray = [];
-//     console.log(positionsArray);
-//     var r, c;
-//     var rows;
-//     var columns;
-//     // count the amount of rows and columns
-//     rows = Math.floor(maxY / safeRadius);
-//     columns = Math.floor(maxX / safeRadius);
-//     // loop through rows
-//     for (r = 1; r <= rows; r += 1) {
-//         // loop through columns
-//         for (c = 1; c <= columns; c += 1) {
-//             // populate array with point object
-//             positionsArray.push({
-//                 x: Math.round(maxX * c / columns) + getRandomInt(irregularity * 1, irregularity),
-//                 y: Math.round(maxY * r / rows) + getRandomInt(irregularity * 1.5, irregularity)
-//             });
-//         }
-//     }
-//     // return array
-//     return positionsArray;
-// }
-// positions = generatePositionsArray(10, 1, 1, 10);
-//
-// // get random position from positions array
-// function getRandomPosition(array, removeTaken) {
-//     // declarations
-//     var randomIndex;
-//     var coordinates;
-//     // get random index
-//     randomIndex = getRandomInt(0, array.length - 1);
-//     // get random item from array
-//     coordinates = array[randomIndex];
-//     // check if remove taken
-//     if (removeTaken) {
-//         // remove element from array
-//         array.splice(randomIndex, 1);
-//     }
-//     // return position
-//     return coordinates;
-// }
-//
-// getRandomPosition(positions, true);
 
 
 ///////////////////////////////////////////////////////////////
@@ -422,10 +421,6 @@ $('#row').append($cloudPointsTotal.text('Collect Clouds: Points: ' + score));
       //         cloudArr[c][r] = { x: 0, y: 0, status: 1 };
       //     }
       // }
-
-
-
-
 
 
   ///////////////////////////////////////////////////////////////
@@ -452,38 +447,6 @@ $('#row').append($cloudPointsTotal.text('Collect Clouds: Points: ' + score));
   //     return Math.floor(Math.random() * (max - min + 1)) + min;
   // }
   //
-  // $.fn.randomOrder = function(animate) {
-  //   this.each(function() {
-  //     var $planeFast = $('#planeFast');
-  //
-  //     // Viewport Dimensions
-  //     var vpHeight = 400;
-  //     var vpWidth = 210;
-  //
-  //     // Image Position
-  //     var xPos = getRandomInt(0, vpWidth - $planeFast.width()-90);
-  //     var yPos = getRandomInt(0, vpHeight - $planeFast.height());
-  //     var zIndex = getRandomInt(0,0);
-  //
-  //     $planeFast.animate({left: xPos, top: yPos});
-  //   });
-  // };
-  //
-  // //Setup
-  // $('#planeFast').randomOrder(true);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -493,6 +456,9 @@ $('#row').append($cloudPointsTotal.text('Collect Clouds: Points: ' + score));
 
 // //Collision detection// 2D from MDN with IF statement works perfect!
 // https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+
+//calculating score with splice and .push.apply
+//https://stackoverflow.com/questions/42970768/removing-item-from-array-and-add-it-to-another-array
 
 // Game dev Tutorial //https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Finishing_up
 
