@@ -3,12 +3,11 @@
 $(() => {
 
 //global variables-----------------//
-  // let arrayClouds = [];
-  // let arrayFastSlowObstacles = [];
+
   let planeSlowArray = [];
   let planeFastArray = [];
   let cloudArray = [];
-  // let cloudCount = 2;
+
   let arrowKeys = {};
   let score = 0;
   let scoreArray =[];
@@ -97,7 +96,7 @@ const createClouds = () => {
 
   // cloudArray = [];
 
-  for(var i = 0;i<=5;i++){
+  for(var i = 0;i<=10;i++){
 		cloudArray.push(new point(i));
 	}
 
@@ -146,29 +145,65 @@ const collisionDetection = () => {
 
    // console.log('this is clouds x: ' + $cloudsBorder.x);
 
-   //plane1 and cloud collisionDetection
-   for(let i = 0; i < cloudArray.length; i++){
+   // collision for points
+   for(var i = 0; i < cloudArray.length; i++){
+     if ($planeBorder.left < cloudArray[i].left + cloudArray[i].width &&
+        $planeBorder.left + $planeBorder.width > cloudArray[i].left &&
+        $planeBorder.top < cloudArray[i].top + cloudArray[i].height &&
+        $planeBorder.height + $planeBorder.top > cloudArray[i].top) {
+         $('#' + i).remove();
+       score += 1;
+       $cloudPointsTotal.text('Collect Cloud Points: ' + score);
+       scoreArray.splice(i, 1);
+     }
+   }
 
 
-      if ($planeBorder.left < cloudArray[i].left + cloudArray[i].width &&
-         $planeBorder.left + $planeBorder.width > cloudArray[i].left &&
-         $planeBorder.top < cloudArray[i].top + cloudArray[i].height &&
-         $planeBorder.height + $planeBorder.top > cloudArray[i].top) {
+
+
+
+   //PART 1 plane1 and cloud collisionDetection------------------------------******
+   // for(let i = 0; i < cloudArray.length; i++){
+   //
+      // if ($planeBorder.left < cloudArray[i].left + cloudArray[i].width &&
+      //    $planeBorder.left + $planeBorder.width > cloudArray[i].left &&
+      //    $planeBorder.top < cloudArray[i].top + cloudArray[i].height &&
+      //    $planeBorder.height + $planeBorder.top > cloudArray[i].top) {
 
 
         // $('#board').splice($('#' + i))
+        // $('#' + i).remove();
+        // for (let i = 0; i < array.length; i++) {
+        //   array[i]
+        // }
+                    // remove(i);                   //doesnt work
+                    // score += 1                   //doesnt work
+                    // pointArray.splice(i, 1);     //doesnt work
 
-        $('#' + i).remove();
-        score += 1;
-        $cloudPointsTotal.text('Collect Cloud Points: ' +score);
+        // $('#' + i).remove();                     //this works-------------------------------------**
+        // const $thing = $('#' + i).detach();      //this works-------------------------------------**
+
+        // score ++;                                                    //this works-------------------*
+        // $cloudPointsTotal.text('Collect Cloud Points: ' + score);    //this works-------------------*
+
+
+          // $cloudPointsTotal.text('Collect Cloud Points: ' + score); // this prints to console -----**
           // console.log('cloud collision detected!');
           // $('#plane1').addClass('scoredGreen');
-          // scoreArray.push.apply(scoreArray, cloudArray.splice(i, 1));
 
-          scoreArray.push.apply(scoreArray, cloudArray.splice(i,1));
-          console.log('this is scoreArray length: ' + scoreArray.length);
-         }
-       }
+          // scoreArray.push.apply(scoreArray, cloudArray.splice(i, 1)); //this works best-------------**
+          // console.log('this is scoreArray length: ' + scoreArray.length); //this will tally score---**
+
+          // [].push.apply(scoreArray, cloudArray.splice(i,1));
+          // const $possibleScore = scoreArray.push(cloudArray.splice(i,1));
+          // console.log($possibleScore);
+          // if (score > 1) {
+          //   scoreArray.splice(i, 1);
+          //   score += 1;
+          // }
+
+ //   }
+ // } //end Part 1
 
 //-----------------------------------------------testing below
 // for(let i = 0; i < arrayFastSlowObstacles.length; i++){
@@ -219,7 +254,7 @@ const collisionDetection = () => {
 
 
 ///////////////////////////////////////////////////////////////
-////----------- Staying in the boards frame----------/////////
+////----------- Staying on the board----------/////////
 ///////////////////////////////////////////////////////////////
 // 1. define border coordinates
 // 2. define player coordinates
@@ -269,6 +304,61 @@ const stayInGameBoard = () => {
 
 
 
+
+
+
+
+///////////////////////////////////////////////////////////////
+//btnReset//
+///////////////////////////////////////////////////////////////
+
+const $btnReset = $('<div>').text('START / RESET').attr('class','pointsBoard')
+.css({ color:'orange',
+  '-webkit-text-stroke': '.01em white',
+  'background-color': '#44AFCD',
+  border: '1px solid white',
+  margin: '5px 5px 5px 0',
+  padding: '5px 5px',
+  width: '200px'});
+$('#row').append($btnReset);
+
+$('board').append($('plane1').css({ //come back to this-----------------------------*****
+  position: 'relative',
+  top:'80%',
+  left:'42%'}));
+
+const reset = () => {
+
+  scoreArray =[];
+  cloudArray = [];
+  score = 0;
+  $cloudPointsTotal.text('Collect Cloud Points: ' + score);
+  console.log("reset button pressed");
+  $('.cloudy').remove();
+  createClouds();
+};
+// $planeBorder.left
+
+
+//event listeners
+$btnReset.on('click', reset);
+
+
+///////////////////////////////////////////////////////////////
+////----------- Recording Points----------/////////
+///////////////////////////////////////////////////////////////
+
+const $cloudPointsTotal = $('<div>').attr('class','pointsBoard')
+.css({ color:'white',
+  'background-color': '#44AFCD',
+  border: '1px solid white',
+  margin: '5px 0px',
+  padding: '5px 5px',
+  width: '280px'});
+$('#row').append($cloudPointsTotal.text('Collect Cloud Points: ' + score));
+
+
+}); // End of the game
 
 ///////////////////////////////////////////////////////////////
 //create obstacales
@@ -329,59 +419,6 @@ const stayInGameBoard = () => {
 //
 // }//end of createObstacles()
 // createObstacles();
-
-
-///////////////////////////////////////////////////////////////
-//btnReset//
-///////////////////////////////////////////////////////////////
-
-const $btnReset = $('<div>').text('START / RESET').attr('class','pointsBoard')
-.css({ color:'orange',
-  '-webkit-text-stroke': '.01em white',
-  'background-color': '#44AFCD',
-  border: '1px solid white',
-  margin: '5px 5px 5px 0',
-  padding: '5px 5px',
-  width: '200px'});
-$('#row').append($btnReset);
-
-
-const reset = () => {
-
-  scoreArray =[];
-  cloudArray = [];
-  score = 0;
-  $cloudPointsTotal.text('Collect Cloud Points: ' + score);
-  console.log("reset button pressed");
-  $('.cloudy').remove();
-  createClouds();
-};
-
-//event listeners
-$btnReset.on('click', reset);
-
-
-///////////////////////////////////////////////////////////////
-////----------- Recording Points----------/////////
-///////////////////////////////////////////////////////////////
-
-
-
-const $cloudPointsTotal = $('<div>').attr('class','pointsBoard')
-.css({ color:'white',
-  'background-color': '#44AFCD',
-  border: '1px solid white',
-  margin: '5px 0px',
-  padding: '5px 5px',
-  width: '280px'});
-$('#row').append($cloudPointsTotal.text('Collect Cloud Points: ' + score));
-
-
-
-
-
-}); // End of the game
-
 
 ///////////////////////////////////////////////////////////////
 //ALL cloud coordinates//
