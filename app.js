@@ -162,48 +162,6 @@ const collisionDetection = () => {
 
 
 
-   //PART 1 plane1 and cloud collisionDetection------------------------------******
-   // for(let i = 0; i < cloudArray.length; i++){
-   //
-      // if ($planeBorder.left < cloudArray[i].left + cloudArray[i].width &&
-      //    $planeBorder.left + $planeBorder.width > cloudArray[i].left &&
-      //    $planeBorder.top < cloudArray[i].top + cloudArray[i].height &&
-      //    $planeBorder.height + $planeBorder.top > cloudArray[i].top) {
-
-
-        // $('#board').splice($('#' + i))
-        // $('#' + i).remove();
-        // for (let i = 0; i < array.length; i++) {
-        //   array[i]
-        // }
-                    // remove(i);                   //doesnt work
-                    // score += 1                   //doesnt work
-                    // pointArray.splice(i, 1);     //doesnt work
-
-        // $('#' + i).remove();                     //this works-------------------------------------**
-        // const $thing = $('#' + i).detach();      //this works-------------------------------------**
-
-        // score ++;                                                    //this works-------------------*
-        // $cloudPointsTotal.text('Collect Cloud Points: ' + score);    //this works-------------------*
-
-
-          // $cloudPointsTotal.text('Collect Cloud Points: ' + score); // this prints to console -----**
-          // console.log('cloud collision detected!');
-          // $('#plane1').addClass('scoredGreen');
-
-          // scoreArray.push.apply(scoreArray, cloudArray.splice(i, 1)); //this works best-------------**
-          // console.log('this is scoreArray length: ' + scoreArray.length); //this will tally score---**
-
-          // [].push.apply(scoreArray, cloudArray.splice(i,1));
-          // const $possibleScore = scoreArray.push(cloudArray.splice(i,1));
-          // console.log($possibleScore);
-          // if (score > 1) {
-          //   scoreArray.splice(i, 1);
-          //   score += 1;
-          // }
-
- //   }
- // } //end Part 1
 
 
 ///this below works//
@@ -289,9 +247,6 @@ const stayInGameBoard = () => {
 
 
 
-
-
-
 ///////////////////////////////////////////////////////////////
 //btnReset//
 ///////////////////////////////////////////////////////////////
@@ -347,103 +302,71 @@ $('#row').append($cloudPointsTotal.text('Collect Cloud Points: ' + score));
 ///////////////////////////////////////////////////////////////
 //create obstacales
 ///////////////////////////////////////////////////////////////
-// function getRandomInt (min, max) {
-//     return Math.floor(Math.random() * (max - min + 1)) + min;
-// }
-//
-// const createObstacles = () => {
+            // function getRandomInt (min, max) {
+            //     return Math.floor(Math.random() * (max - min + 1)) + min;
+            // }
+            //
+            // const createObstacles = () => {
 
-  // for(let i = 0;i<1;i++){
-	// 	arrayFastSlowObstacles.push(new point(i));
-	// }
-  //
-  // pointInterval =
-  //     setInterval(function() {
-  //
-  //       if (arrayFastSlowObstacles.length < 1) {
-  //       arrayFastSlowObstacles.push(new point(i));
-  //       }
-  //     }, 1000)
+              // for(let i = 0;i<1;i++){
+            	// 	arrayFastSlowObstacles.push(new point(i));
+            	// }
+              //
+              // pointInterval =
+              //     setInterval(function() {
+              //
+              //       if (arrayFastSlowObstacles.length < 1) {
+              //       arrayFastSlowObstacles.push(new point(i));
+              //       }
+              //     }, 1000)
 
-// console.log(arrayFastSlowObstacles.length);
+            // console.log(arrayFastSlowObstacles.length);
 
-                        // const arrObstacles = [
-                        // 'img/fastplaneemptybackground.png',
-                        // 'img/slowplaneemptybackground.png'
-                        // ];
-                        // // console.log(arrObstacles);
-                        //
-                        // const randomNumberInArray = () => {
-                        //   let number = Math.floor(Math.random()*1);
-                        //   return arrObstacles[number];
-                        //   // console.log(arrObstacles[number]);
-                        // }
-                        // const addImg = () => {
-                        //   let $obstabcleImage = randomNumberInArray();
-                        //   let $newObstacleImg = $('<img>').attr('src',$obstabcleImage).addClass('ALOTofplanes')
-                        //   return $newObstacleImg;
-                        // }
+              // const arrObstacles = [
+              // 'img/fastplaneemptybackground.png',
+              // 'img/slowplaneemptybackground.png'
+              // ];
+              // // console.log(arrObstacles);
+              //
+              // const randomNumberInArray = () => {
+              //   let number = Math.floor(Math.random()*1);
+              //   return arrObstacles[number];
+              //   // console.log(arrObstacles[number]);
+              // }
+              // const addImg = () => {
+              //   let $obstabcleImage = randomNumberInArray();
+              //   let $newObstacleImg = $('<img>').attr('src',$obstabcleImage).addClass('ALOTofplanes')
+              //   return $newObstacleImg;
+              // }
 
-//     function point(id){
-//           this.left = getRandomInt(50, $gameBoardRect.width);
-//           this.top = getRandomInt(100, $gameBoardRect.height - 60);
-//           this.height = 20;
-//           this.width =20;
-//           this.id = id;
-//           // let $addImg = addImg();
-//           // let $newObstacleImg = $('<img>').attr('src',$addImg).addClass('ALOTofplanes')
-//           let $newObstacleImg = $('<img>').attr('src','img/fastplaneemptybackground.png').addClass('ALOTofplanes')
-//           .css({"height":this.height,"width":this.width,"left":this.left,"top":this.top,"position":"absolute", "margin": '0 0',
-//            'z-index':'1'});
-//           $('#board').append($newObstacleImg);
-//         }
-//
-//
-// // addObstacleImg();
-//
-// }//end of createObstacles()
-// createObstacles();
 
-///////////////////////////////////////////////////////////////
-//ALL cloud coordinates//
-///////////////////////////////////////////////////////////////
-
-      // console.log('this is cloud x coordinate: ' +$cloudsBorder.x);
-      // console.log($cloudsBorder); // all x, y, bottom, right coordinates
-
-      // var cloudArr = [];
-      // for(c=0; c<cloudCount; c++) {
-      //     cloudArr[c] = [];
-      //     for(r=0; r<cloudRowCount; r++) {
-      //         cloudArr[c][r] = { x: 0, y: 0, status: 1 };
-      //     }
-      // }
-
+            // }//end of createObstacles()
+            // createObstacles();
 
   ///////////////////////////////////////////////////////////////
   // creates 20 planes
   ///////////////////////////////////////////////////////////////
-  // const createAlotOfPlanes = (num) => {
-  //     let planes = [];
-  //     for (let i = 0; i < num; i++) {
-  //           // planes[i] = [];
-  //         //   for(j=0; j< planes; j++) {
-  //         //       planes[i][j] = { x: 0, y: 0 };
-  //         // }
-  //
-  //     $alotOfPlanes = $('<alotofPlanes>').empty().append('<img src="img/fastplaneemptybackground.png" height="40px" width="30px"/>').attr('id','planeFast');
-  //
-  //     $('#board').append($alotOfPlanes);
-  //
-  //     }
-  // }
-  // createAlotOfPlanes(10);
+              // const createAlotOfPlanes = (num) => {
+              //     let planes = [];
+              //     for (let i = 0; i < num; i++) {
+              //           // planes[i] = [];
+              //         //   for(j=0; j< planes; j++) {
+              //         //       planes[i][j] = { x: 0, y: 0 };
+              //         // }
+              //
+              //     $alotOfPlanes = $('<alotofPlanes>').empty().append('<img src="img/fastplaneemptybackground.png" height="40px" width="30px"/>').attr('id','planeFast');
+              //
+              //     $('#board').append($alotOfPlanes);
+              //
+              //     }
+              // }
+              // createAlotOfPlanes(10);
 
-  // //randomize the planes
-  // function getRandomInt (min, max) {
-  //     return Math.floor(Math.random() * (max - min + 1)) + min;
-  // }
-  //
+              // //randomize the planes
+              // function getRandomInt (min, max) {
+              //     return Math.floor(Math.random() * (max - min + 1)) + min;
+              // }
+              //
 
 
 
