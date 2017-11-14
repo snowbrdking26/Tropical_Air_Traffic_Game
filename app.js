@@ -32,10 +32,6 @@ $(() => {
   //planeSlow
   let $planeSlowBorder = $('#planeSlow')[0].getBoundingClientRect(); //plane coordinates
 
-   //cloud coordinates
-  // let $cloudsBorder = $('#cloud1')[0].getBoundingClientRect();
-  // console.log($cloudsBorder);
-  // console.log($planeBorder);
 
 //end global variables-------------//
 
@@ -80,7 +76,7 @@ function movePlane() {
   stayInGameBoard();
   collisionDetection();
 // createClouds();
-// move();
+
 
 } //end of movePlane() function
 
@@ -97,10 +93,10 @@ const createClouds = () => {
   // cloudArray = [];
 
   for(var i = 0;i<=10;i++){
-		cloudArray.push(new point(i));
+		cloudArray.push(new cloud(i));
 	}
 
-function point(id){
+function cloud(id){
       this.left = getRandomInt(50, $gameBoardRect.width);
       this.top = getRandomInt(100, $gameBoardRect.height - 30);
       this.height = 20;
@@ -151,7 +147,8 @@ const collisionDetection = () => {
         $planeBorder.left + $planeBorder.width > cloudArray[i].left &&
         $planeBorder.top < cloudArray[i].top + cloudArray[i].height &&
         $planeBorder.height + $planeBorder.top > cloudArray[i].top) {
-         $('#' + i).remove();
+          makeIdCloudDisapear(i);
+         // $('#' + i).remove();
        score += 1;
        $cloudPointsTotal.text('Collect Cloud Points: ' + score);
        scoreArray.splice(i, 1);
@@ -251,6 +248,15 @@ const collisionDetection = () => {
  // }
 } //end of collisionDetection() function
 
+///////////////////////////////////////////////////////////////
+////----------- Clouds disappear individually----------/////////
+///////////////////////////////////////////////////////////////
+
+
+const makeIdCloudDisapear = (i) => {
+  let $findId = $('#' + i);
+  $findId.remove();
+}
 
 
 ///////////////////////////////////////////////////////////////
@@ -345,7 +351,7 @@ $btnReset.on('click', reset);
 
 
 ///////////////////////////////////////////////////////////////
-////----------- Recording Points----------/////////
+////----------- Recording Points in text box----------/////////
 ///////////////////////////////////////////////////////////////
 
 const $cloudPointsTotal = $('<div>').attr('class','pointsBoard')
