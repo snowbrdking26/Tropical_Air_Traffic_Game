@@ -26,11 +26,11 @@ $(() => {
   let $planeBorderRight = $planeBorder.left + $planeBorder.width;
   let $planeBorderBottom = $planeBorder.top + $planeBorder.height;
 
-  //planeFast
-  let $planeFastBorder = $('#planeFast')[0].getBoundingClientRect(); //plane coordinates
+  //planeFast coordinates
+  let $planeFastBorder = $('#planeFast')[0].getBoundingClientRect();
 
-  //planeSlow
-  let $planeSlowBorder = $('#planeSlow')[0].getBoundingClientRect(); //plane coordinates
+  //planeSlow coordinates
+  let $planeSlowBorder = $('#planeSlow')[0].getBoundingClientRect();
 
 
 //end global variables-------------//
@@ -90,7 +90,7 @@ function getRandomInt (min, max) {
 
 const createClouds = () => {
 
-  // cloudArray = [];
+  cloudArray = [];
 
   for(var i = 0;i<=10;i++){
 		cloudArray.push(new cloud(i));
@@ -111,7 +111,6 @@ function cloud(id){
 
 createClouds();
 console.log(cloudArray);
-
 
 
 
@@ -140,20 +139,24 @@ const collisionDetection = () => {
 
 
    // console.log('this is clouds x: ' + $cloudsBorder.x);
-
+   // console.log(cloudArray);
    // collision for points
    for(var i = 0; i < cloudArray.length; i++){
      if ($planeBorder.left < cloudArray[i].left + cloudArray[i].width &&
         $planeBorder.left + $planeBorder.width > cloudArray[i].left &&
         $planeBorder.top < cloudArray[i].top + cloudArray[i].height &&
         $planeBorder.height + $planeBorder.top > cloudArray[i].top) {
-          makeIdCloudDisapear(i);
-         // $('#' + i).remove();
-       score += 1;
-       $cloudPointsTotal.text('Collect Cloud Points: ' + score);
-       scoreArray.splice(i, 1);
+
+         $('#' + i).remove();
+
+       score += 1
+       $cloudPointsTotal.text('Collect Cloud Points: ' + score)
+       // cloudArray.splice(i, 1);
+        scoreArray.push.apply(scoreArray, cloudArray.splice(i, 1)); //this kind of works------------**
      }
    }
+
+
 
 
 
@@ -202,24 +205,9 @@ const collisionDetection = () => {
  //   }
  // } //end Part 1
 
-//-----------------------------------------------testing below
-// for(let i = 0; i < arrayFastSlowObstacles.length; i++){
-//   if ($planeBorder.x < arrayFastSlowObstacles[i].x + arrayFastSlowObstacles[i].width &&
-//      $planeBorder.x + $planeBorder.width > arrayFastSlowObstacles[i].x &&
-//      $planeBorder.y < arrayFastSlowObstacles[i].y + arrayFastSlowObstacles[i].height &&
-//      $planeBorder.height + $planeBorder.y > arrayFastSlowObstacles[i].y) {
-//    console.log('OBSTACLE collision detected!');
-//    $('#planeSlow').addClass('scoredRed');
-//    setTimeout(function() {
-//              $('#planeSlow').removeClass("scoredRed");
-//          }, 1000);
-//   }
-// }
-//-----------------------------------------------testing above
-
 
 ///this below works//
- // for(let i = 0; i < arrayFastSlowObstacles.length; i++){
+ // for(let i = 0; i < obstacles.length; i++){
    //plane1 and planeSlow collisionDetection
    if ($planeBorder.x < $planeSlowBorder.x + $planeSlowBorder.width &&
       $planeBorder.x + $planeBorder.width > $planeSlowBorder.x &&
@@ -233,7 +221,7 @@ const collisionDetection = () => {
    }
  // }
 
-// for(let i = 0; i < arrayFastSlowObstacles.length; i++){
+// for(let i = 0; i < obstacles.length; i++){
    //plane1 and planeSlow collisionDetection
    if ($planeBorder.x < $planeFastBorder.x + $planeFastBorder.width &&
       $planeBorder.x + $planeBorder.width > $planeFastBorder.x &&
@@ -247,16 +235,6 @@ const collisionDetection = () => {
    }
  // }
 } //end of collisionDetection() function
-
-///////////////////////////////////////////////////////////////
-////----------- Clouds disappear individually----------/////////
-///////////////////////////////////////////////////////////////
-
-
-const makeIdCloudDisapear = (i) => {
-  let $findId = $('#' + i);
-  $findId.remove();
-}
 
 
 ///////////////////////////////////////////////////////////////
@@ -335,9 +313,9 @@ $('board').append($('plane1').css({ //come back to this-------------------------
 
 const reset = () => {
 
-  scoreArray =[];
-  cloudArray = [];
-  score = 0;
+  let scoreArray = [];
+  let cloudArray = [];
+  let score = 0;
   $cloudPointsTotal.text('Collect Cloud Points: ' + score);
   console.log("reset button pressed");
   $('.cloudy').remove();
