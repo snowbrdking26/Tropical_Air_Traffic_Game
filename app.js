@@ -100,26 +100,6 @@ const createClouds = () => {
 		cloudArray.push(new point(i));
 	}
 
-  $cloudInterval =
-    setInterval(function() {
-      if ($('.point').length <= 2) {
-      pointArray.push(new point());
-      }
-    }, 1000)
-
-  // obstacleInterval =
-  //   setInterval(function() {
-  //     for (var i = 0; i < 2; i++) {
-  //     obstacleArray.push(new obstacle(i))
-  //     }
-  //   }, 2000)
-
-  //   function clearOut() {
-  //   obstacleArray = [];
-  //   clearInterval(cloudInterval);
-  //   clearInterval(obstacleInterval);
-  // }
-
 function point(id){
       this.left = getRandomInt(50, $gameBoardRect.width);
       this.top = getRandomInt(100, $gameBoardRect.height - 30);
@@ -383,20 +363,6 @@ $('#row').append($cloudPointsTotal.text('Collect Cloud Points: ' + score));
 ///////////////////////////////////////////////////////////////
 //create obstacales
 ///////////////////////////////////////////////////////////////
-
-while(true) {
-  let timer = 0;
-  const incrementTime = () => {
-    $timer++;
-  }
-  timer = setInterval(incrementTime, 1000);
-  console.log(timer);
-
-
-}
-
-
-
 // function getRandomInt (min, max) {
 //     return Math.floor(Math.random() * (max - min + 1)) + min;
 // }
@@ -414,11 +380,6 @@ while(true) {
   //       arrayFastSlowObstacles.push(new point(i));
   //       }
   //     }, 1000)
-
-
-
-
-
 
 // console.log(arrayFastSlowObstacles.length);
 
@@ -499,12 +460,6 @@ while(true) {
   //     return Math.floor(Math.random() * (max - min + 1)) + min;
   // }
   //
-
-
-
-
-
-
 
 
 
