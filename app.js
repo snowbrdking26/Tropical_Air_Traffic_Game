@@ -130,17 +130,15 @@ const collisionDetection = () => {
    let $planeBorderRight = $planeBorder.left + $planeBorder.width;
    let $planeBorderBottom = $planeBorder.top + $planeBorder.height;
 
-    //cloud coordinates
-   // let $cloudsBorder = $('.clouds')[0].getBoundingClientRect();
-   //planeFast coordinates
+             //cloud coordinates
+             // let $cloudsBorder = $('.clouds')[].getBoundingClientRect();
+             //planeFast coordinates
    let $planeFastBorder = $('#planeFast')[0].getBoundingClientRect();
-   //planeSlow coordinates
+             //planeSlow coordinates
    let $planeSlowBorder = $('#planeSlow')[0].getBoundingClientRect();
-
-
-   // console.log('this is clouds x: ' + $cloudsBorder.x);
-   // console.log(cloudArray);
-   // collision for points
+             // console.log('this is clouds x: ' + $cloudsBorder.x);
+             // console.log(cloudArray);
+             // collision for points
    for(var i = 0; i < cloudArray.length; i++){
      if ($planeBorder.left < cloudArray[i].left + cloudArray[i].width &&
         $planeBorder.left + $planeBorder.width > cloudArray[i].left &&
@@ -148,11 +146,14 @@ const collisionDetection = () => {
         $planeBorder.height + $planeBorder.top > cloudArray[i].top) {
 
          $('#' + i).remove();
-
        score += 1
        $cloudPointsTotal.text('Collect Cloud Points: ' + score)
-       // cloudArray.splice(i, 1);
-        // scoreArray.push.apply(scoreArray, cloudArray.splice(i, 1)); //this kind of works--NEEDS HELP------**
+              // // cloudArray.splice(i, 1);
+        // scoreArray.push.apply(scoreArray, cloudArray.splice(i, 1)); //this needs work *
+
+
+        console.log(cloudArray);
+
      }
    }
 
