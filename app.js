@@ -4,9 +4,9 @@ $(() => {
 
 //global variables-----------------//
 
+  let cloudArray = [];
   let planeSlowArray = [];
   let planeFastArray = [];
-  let cloudArray = [];
 
   let arrowKeys = {};
   let score = 0;
@@ -152,14 +152,9 @@ const collisionDetection = () => {
        score += 1
        $cloudPointsTotal.text('Collect Cloud Points: ' + score)
        // cloudArray.splice(i, 1);
-        scoreArray.push.apply(scoreArray, cloudArray.splice(i, 1)); //this kind of works------------**
+        // scoreArray.push.apply(scoreArray, cloudArray.splice(i, 1)); //this kind of works--NEEDS HELP------**
      }
    }
-
-
-
-
-
 
 
 
