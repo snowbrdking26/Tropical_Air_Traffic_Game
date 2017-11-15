@@ -104,7 +104,7 @@ function movePlane() {
 //   }
 // );
 
-$('#plane1').bind('touchmove', function(e) {
+$('#plane1').on.bind('touchmove', function(e) {
     e.preventDefault();
     curX = e.targetTouches[0].pageX - startX;
     curY = e.targetTouches[0].pageY - startY;
