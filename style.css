@@ -2,13 +2,14 @@ body {
   /*background-image: url(img/149817.jpg);*/
   background-image: url(img/029-hog_cay_broshuretaxi_to_runway1.jpg);
   /*background-size: cover;*/
-  background-size: auto 120%;
+  /*background-size: auto 120%;*/
+  background-size: 160% auto;
   /*background-size: auto 140%;*/
   /*margin: 0 auto;*/
   background-repeat: no-repeat;
-  max-width: 100%;
+  /*max-width: 100%;*/
   width: auto;
-  height: 650px;
+  /*height: 650px;*/
   font-family: arial;
 }
 
