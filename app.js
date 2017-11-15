@@ -7,10 +7,8 @@ $(() => {
   let cloudArray = [];
   let planeSlowArray = [];
   let planeFastArray = [];
-
-  let arrowKeys = {};
   let score = 0;
-  let scoreArray =[];
+  let arrowKeys = {};
 
 
   //gameboard coordiantes
@@ -88,31 +86,61 @@ function getRandomInt (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+let cloudId = 0;
+
 const createClouds = () => {
 
-  cloudArray = [];
 
-  for(var i = 0;i<=10;i++){
+  for(var i = 0;i<=9;i++){
 		cloudArray.push(new cloud(i));
 	}
+  cloudInterval =
+    setInterval(function() {
+      if (cloudArray.length <= 10) {
+      cloudArray.push(new cloud(i));
+      }
+    }, 1000)
 
 function cloud(id){
       this.left = getRandomInt(50, $gameBoardRect.width);
       this.top = getRandomInt(100, $gameBoardRect.height - 30);
       this.height = 20;
-      this.width =25;
-      this.id = id;
+      this.width = 25;
+      this.id = cloudId;
       const $cloudPoints = $("<div>").addClass('cloudy').attr('id',this.id).append('<img src="img/cloud.png" width = "20px">')
         .css({"height":this.height,"width":this.width,"left":this.left,"top":this.top,"position":"absolute", "margin": '0 0'})
       $('#board').append($cloudPoints);
+      cloudId ++
     }
 
 } //end createClouds()
+
+
+
+
+
 
 createClouds();
 console.log(cloudArray);
 
 
+const annouceWin = () => {
+  $('#winRow').append($("<div>").addClass('win').css({
+    display: 'flex',
+    'flex-direction': 'row',
+    color:'white',
+    'background-color': '#44AFCD',
+    border: '1px solid #39FF14',
+    "height":'20px',
+    'padding': '5px 5px',
+    "width":'100%',
+    "margin": '0 0 5px 0'})
+    .text('You have Won the game! Press Reset to Play again.'));
+
+    $('#board').addClass('winBoard').css({border: '1px solid #39FF14'})
+}
+
+// console.log('this is score : ' + score);
 
 
 
@@ -122,7 +150,7 @@ console.log(cloudArray);
 
 const collisionDetection = () => {
 
-   //plane coordinates
+      //plane coordinates
    let $plane1 = $('#plane1')[0];
    let $planeBorder = $plane1.getBoundingClientRect(); //plane coordinates
    let $plane1Width = $plane1.width;
@@ -130,32 +158,37 @@ const collisionDetection = () => {
    let $planeBorderRight = $planeBorder.left + $planeBorder.width;
    let $planeBorderBottom = $planeBorder.top + $planeBorder.height;
 
-             //cloud coordinates
-             // let $cloudsBorder = $('.clouds')[].getBoundingClientRect();
-             //planeFast coordinates
+
+   //planeFast coordinates
    let $planeFastBorder = $('#planeFast')[0].getBoundingClientRect();
-             //planeSlow coordinates
+   //planeSlow coordinates
    let $planeSlowBorder = $('#planeSlow')[0].getBoundingClientRect();
-             // console.log('this is clouds x: ' + $cloudsBorder.x);
-             // console.log(cloudArray);
-             // collision for points
+
+   // collision for points
    for(var i = 0; i < cloudArray.length; i++){
      if ($planeBorder.left < cloudArray[i].left + cloudArray[i].width &&
         $planeBorder.left + $planeBorder.width > cloudArray[i].left &&
         $planeBorder.top < cloudArray[i].top + cloudArray[i].height &&
         $planeBorder.height + $planeBorder.top > cloudArray[i].top) {
 
-         $('#' + i).remove();
-       score += 1
+          let id = cloudArray[i].id; // do not delete
+          // console.log(id);
+
+      $('#' + id).remove();// do not delete
+       score ++
        $cloudPointsTotal.text('Collect Cloud Points: ' + score)
-              // // cloudArray.splice(i, 1);
-        // scoreArray.push.apply(scoreArray, cloudArray.splice(i, 1)); //this needs work *
+              cloudArray.splice(i, 1);
 
-
-        console.log(cloudArray);
+      //winning state
+      // console.log('this is score: ' + score);
+      if (score === 10) {
+        // annouceWin();
+      }
 
      }
    }
+
+
 
 
 
@@ -248,32 +281,62 @@ const stayInGameBoard = () => {
 ///////////////////////////////////////////////////////////////
 
 const $btnReset = $('<div>').text('START / RESET').attr('class','pointsBoard')
-.css({ color:'orange',
-  '-webkit-text-stroke': '.01em white',
+.css({ color:'white',
+  // '-webkit-text-stroke': '.01em white',
   'background-color': '#44AFCD',
-  border: '1px solid white',
+  border: '1px solid #39FF14',
   margin: '5px 5px 5px 0',
   padding: '5px 5px',
   width: '200px'});
 $('#row').append($btnReset);
 
-$('board').append($('plane1').css({ //come back to this-----------------------------*****
-  position: 'relative',
-  top:'80%',
-  left:'42%'}));
+
 
 const reset = () => {
 
-  let scoreArray = [];
-  let cloudArray = [];
-  let score = 0;
+// reset score
+  cloudArray = [];
+  score = 0;
   $cloudPointsTotal.text('Collect Cloud Points: ' + score);
-  console.log("reset button pressed");
+          console.log("reset button pressed. Score is: " + score);
   $('.cloudy').remove();
   createClouds();
-};
-// $planeBorder.left
 
+  $('.win').remove();
+  $('.winBoard').css({"border":'1px solid white'});
+
+//reset plane location
+$('board').append($('#plane1').css({
+  position: 'relative',
+  top:'89%',
+  left:'42%',
+  Transform: 'rotate(0deg)'}));
+
+//these don't work
+$('board').append($('#planeFast').stop(true).css({
+    top: '0%',
+    left: '0%'}));
+//these don't work
+$('board').append($('#planeSlow').stop(true).css({
+    top: '0%',
+    left: '0%'}));
+
+// //interval for cloud regeneration
+//     for(var i = 0;i<=10;i++){
+//   		cloudArray.push(new cloud(i));
+//   	}
+//
+//     cloudInterval =
+//       setInterval(function() {
+//         if (cloudArray.length <= 2) {
+//         cloudArray.push(new cloud(i));
+//         }
+//       }, 500)
+
+
+
+
+}; //end of reset()
 
 //event listeners
 $btnReset.on('click', reset);
@@ -293,51 +356,6 @@ const $cloudPointsTotal = $('<div>').attr('class','pointsBoard')
 $('#row').append($cloudPointsTotal.text('Collect Cloud Points: ' + score));
 
 
-}); // End of the game
-
-///////////////////////////////////////////////////////////////
-//create obstacales
-///////////////////////////////////////////////////////////////
-            // function getRandomInt (min, max) {
-            //     return Math.floor(Math.random() * (max - min + 1)) + min;
-            // }
-            //
-            // const createObstacles = () => {
-
-              // for(let i = 0;i<1;i++){
-            	// 	arrayFastSlowObstacles.push(new point(i));
-            	// }
-              //
-              // pointInterval =
-              //     setInterval(function() {
-              //
-              //       if (arrayFastSlowObstacles.length < 1) {
-              //       arrayFastSlowObstacles.push(new point(i));
-              //       }
-              //     }, 1000)
-
-            // console.log(arrayFastSlowObstacles.length);
-
-              // const arrObstacles = [
-              // 'img/fastplaneemptybackground.png',
-              // 'img/slowplaneemptybackground.png'
-              // ];
-              // // console.log(arrObstacles);
-              //
-              // const randomNumberInArray = () => {
-              //   let number = Math.floor(Math.random()*1);
-              //   return arrObstacles[number];
-              //   // console.log(arrObstacles[number]);
-              // }
-              // const addImg = () => {
-              //   let $obstabcleImage = randomNumberInArray();
-              //   let $newObstacleImg = $('<img>').attr('src',$obstabcleImage).addClass('ALOTofplanes')
-              //   return $newObstacleImg;
-              // }
-
-
-            // }//end of createObstacles()
-            // createObstacles();
 
   ///////////////////////////////////////////////////////////////
   // creates 20 planes
@@ -356,6 +374,7 @@ $('#row').append($cloudPointsTotal.text('Collect Cloud Points: ' + score));
               //
               //     }
               // }
+              // //
               // createAlotOfPlanes(10);
 
               // //randomize the planes
@@ -364,7 +383,7 @@ $('#row').append($cloudPointsTotal.text('Collect Cloud Points: ' + score));
               // }
               //
 
-
+}); // End of the game
 
 
 ////////////////////////////////////////////////////////////////

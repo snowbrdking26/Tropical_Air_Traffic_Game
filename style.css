@@ -26,7 +26,7 @@ h2 {
   /*-webkit-text-stroke: 1px #0E1322;*/
 }
 
-#row {
+#row, #winRow {
   display: flex;
   flex-direction: row;
   width: 500px;
@@ -51,6 +51,14 @@ h2 {
   height: 500px;
   background-color: white;
   /*overflow: hidden;*/
+}
+
+#plane1 {
+  width: 50px;
+  height: 46px;
+  position: relative;
+  top:89%;
+  left:42%;
 }
 
 #planeSlow {
@@ -95,19 +103,11 @@ h2 {
   100% {background: none; left:0px; top:0px;transform: rotate(360deg) }
 }
 
-#plane1 {
-  width: 50px;
-  height: 46px;
-  position: relative;
-  top:80%;
-  left:42%;
-  /*z-index: 0;*/
-}
+
 
 .clouds {
-  /*background-image: url("img/cloud.png");*/
   background-repeat: no-repeat;
-  position: relative;
+  position: absolute;
   margin: 0 0;
 }
 
@@ -116,11 +116,9 @@ h2 {
   left:20%;
 }
 
-
 .scoredGreen {
   border: 3px solid green;
 }
-
 
 .scoredRed {
   border: 3px solid red;
