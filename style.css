@@ -1,7 +1,9 @@
 body {
   /*background-image: url(img/149817.jpg);*/
   background-image: url(img/029-hog_cay_broshuretaxi_to_runway1.jpg);
-  background-size: cover;
+  /*background-size: cover;*/
+  background-size: auto 120%;
+  /*background-size: auto 140%;*/
   /*margin: 0 auto;*/
   background-repeat: no-repeat;
   max-width: 600px;
@@ -59,6 +61,7 @@ h2 {
   position: relative;
   top:89%;
   left:42%;
+  -webkit-user-drag:element;
 }
 
 #planeSlow {

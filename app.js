@@ -79,9 +79,36 @@ function movePlane() {
 } //end of movePlane() function
 
 ///////////////////////////////////////////////////////////////
-//"mouse move" function - from jsfiddle link below in references
+//"iPhone draggable" function - from developper.apple.com
 ///////////////////////////////////////////////////////////////
 
+// $('#plane1').on('touchmove', function(e) {
+//     e.preventDefault();
+//     var touch = e.touches[0];
+//     alert(touch.pageX + " - " + touch.pageY);
+// }, false);
+
+
+
+
+// $('#plane1').on('touchstart mousedown', function(e){
+//   e.preventDefault();
+//   var touch = e.touches[0];
+//   if(touch){
+//   console.log('this works');
+//   }
+//   else {
+//     // Do some other stuff
+//   }
+// });
+
+
+
+
+///////////////////////////////////////////////////////////////
+//"mouse move" function - from jsfiddle link below in references
+///////////////////////////////////////////////////////////////
+//
 $('#plane1').on('mousedown', function (e) {
 
     $(this).addClass('active');
@@ -93,9 +120,10 @@ $('#plane1').on('mousedown', function (e) {
         $('.active').offset({
             top: e.pageY - oTop,
             left: e.pageX - oLeft
-        }).on('mouseup', function () {
-            $(this).removeClass('active');
-        });
+        })
+        // .on('mouseup', function () {
+        //     $(this).removeClass('active');
+        // });//add this back if it doesnt work-----------*****
     });
     return false;
 });
