@@ -82,38 +82,6 @@ function movePlane() {
 //"iPhone draggable" function - from developper.apple.com
 ///////////////////////////////////////////////////////////////
 
-// $('#plane1').on('touchmove', function(e) {
-//     e.preventDefault();
-//     var touch = e.touches[0];
-//     alert(touch.pageX + " - " + touch.pageY);
-// }, false);
-
-
-
-
-// $('#plane1').bind('touchstart mousedown', function(e){
-//   e.preventDefault();
-//   var touch = e.touches[0];
-//   if(touch == true){
-//         curX = e.targetTouches[0].pageX - startX;
-//         curY = e.targetTouches[0].pageY - startY;
-//         e.targetTouches[0].target.style.webkitTransform =
-//             'translate(' + curX + 'px, ' + curY + 'px)'
-//   } else {
-//     console.log('this works');
-//   }
-// );
-
-$('#plane1').on.bind('touchmove', function(e) {
-    e.preventDefault();
-    curX = e.targetTouches[0].pageX - startX;
-    curY = e.targetTouches[0].pageY - startY;
-    e.targetTouches[0].target.style.webkitTransform =
-        'translate(' + curX + 'px, ' + curY + 'px)';
-});
-
-// touchMove();
-
 
 
 
