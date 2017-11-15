@@ -269,7 +269,7 @@ const collisionDetection = () => {
     numberOfCollisionsForLoss ++
 
     setTimeout(function() {
-              $('#planeSlow').removeClass("scoredRed");
+              $('#planeFast').removeClass("scoredRed");
           }, 1000);
 
                   if (numberOfCollisionsForLoss === 1) {
@@ -352,13 +352,15 @@ const reset = () => {
 // reset score
   cloudArray = [];
   score = 0;
+  numberOfCollisionsForLoss = 0
   $cloudPointsTotal.text('Collect Cloud Points: ' + score);
           console.log("reset button pressed. Score is: " + score);
   $('.cloudy').remove();
   createClouds();
 
+
   $('.win').remove();
-  $('loss').remove();
+  $('.loss').remove();
   $('.winBoard').css({"border":'1px solid white'});
 
 //reset plane location
