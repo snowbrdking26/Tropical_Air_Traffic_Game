@@ -6,7 +6,7 @@ body {
   /*background-size: auto 140%;*/
   /*margin: 0 auto;*/
   background-repeat: no-repeat;
-  max-width: 600px;
+  max-width: 100%;
   width: auto;
   height: 650px;
   font-family: arial;
@@ -14,7 +14,7 @@ body {
 
 .gameframe {
   margin: 40px 40px 0px;
-  width: 500px;
+  width: 70%;
 }
 
 .title {
@@ -31,7 +31,7 @@ h2 {
 #row, #winRow {
   display: flex;
   flex-direction: row;
-  width: 500px;
+  width: 100%;
 }
 
 #startGame {
@@ -49,7 +49,7 @@ h2 {
 }
 
 #board {
-  width: 500px;
+  width: 100%;
   height: 500px;
   background-color: white;
   /*overflow: hidden;*/

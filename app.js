@@ -79,7 +79,7 @@ function movePlane() {
 } //end of movePlane() function
 
 ///////////////////////////////////////////////////////////////
-//"iPhone draggable" function - from developper.apple.com
+//"iPhone android draggable" function.. will revisit this later
 ///////////////////////////////////////////////////////////////
 
 
@@ -348,7 +348,7 @@ const $btnReset = $('<div>').text('START / RESET').attr('class','pointsBoard')
   border: '1px solid #39FF14',
   margin: '5px 5px 5px 0',
   padding: '5px 5px',
-  width: '200px'});
+  width: '50%'});
 $('#row').append($btnReset);
 
 
@@ -402,7 +402,7 @@ const $cloudPointsTotal = $('<div>').attr('class','pointsBoard')
   border: '1px solid white',
   margin: '5px 0px',
   padding: '5px 5px',
-  width: '280px'});
+  width: '50%'});
 $('#row').append($cloudPointsTotal.text('Collect Cloud Points: ' + score));
 
 
