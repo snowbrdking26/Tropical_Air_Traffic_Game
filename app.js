@@ -102,6 +102,16 @@ function movePlane() {
 //   }
 // });
 
+$('#plane1').on('touchmove', function(e) {
+    e.preventDefault();
+    curX = e.targetTouches[0].pageX - startX;
+    curY = e.targetTouches[0].pageY - startY;
+    e.targetTouches[0].target.style.webkitTransform =
+        'translate(' + curX + 'px, ' + curY + 'px)';
+});
+
+// touchMove();
+
 
 
 
@@ -120,10 +130,9 @@ $('#plane1').on('mousedown', function (e) {
         $('.active').offset({
             top: e.pageY - oTop,
             left: e.pageX - oLeft
-        })
-        // .on('mouseup', function () {
-        //     $(this).removeClass('active');
-        // });//add this back if it doesnt work-----------*****
+        }).on('mouseup', function () {
+            $(this).removeClass('active');
+        });
     });
     return false;
 });
