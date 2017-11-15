@@ -123,3 +123,16 @@ h2 {
 .scoredRed {
   border: 3px solid red;
 }
+
+@keyframes blinkingWin {
+  0% {background-color: #26A65B;}
+  50% {background-color: #26C281;}
+  100% {background-color: #26A65B;}
+}
+
+
+@keyframes blinkingLoss {
+  0% {background-color: #C3272B;}
+  50% {background-color: #F22613;}
+  100% {background-color: #C3272B;}
+}

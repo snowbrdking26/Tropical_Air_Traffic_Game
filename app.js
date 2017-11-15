@@ -78,6 +78,28 @@ function movePlane() {
 
 } //end of movePlane() function
 
+///////////////////////////////////////////////////////////////
+//"mouse move" function - from jsfiddle link below in references
+///////////////////////////////////////////////////////////////
+
+$('#plane1').on('mousedown', function (e) {
+
+    $(this).addClass('active');
+
+    var oTop = e.pageY - $('.active').offset().top;
+    var oLeft = e.pageX - $('.active').offset().left;
+
+    $(this).parents().on('mousemove', function (e) {
+        $('.active').offset({
+            top: e.pageY - oTop,
+            left: e.pageX - oLeft
+        }).on('mouseup', function () {
+            $(this).removeClass('active');
+        });
+    });
+    return false;
+});
+
 
 ///////////////////////////////////////////////////////////////
 //Create clouds//
@@ -89,8 +111,6 @@ function getRandomInt (min, max) {
 let cloudId = 0;
 
 const createClouds = () => {
-
-
   for(var i = 0;i<=9;i++){
 		cloudArray.push(new cloud(i));
 	}
@@ -124,29 +144,56 @@ createClouds();
 console.log(cloudArray);
 
 
-const annouceWin = () => {
+const announceWin = () => {
   $('#winRow').append($("<div>").addClass('win').css({
     display: 'flex',
     'flex-direction': 'row',
     color:'white',
     'background-color': '#44AFCD',
     border: '1px solid #39FF14',
+    'animation-name': 'blinkingWin',
+    'animation-duration': '1s',
+    'animation-iteration-count': 'infinite',
+    'transition-timing-function': 'linear',
     "height":'20px',
     'padding': '5px 5px',
     "width":'100%',
     "margin": '0 0 5px 0'})
     .text('You have Won the game! Press Reset to Play again.'));
 
-    $('#board').addClass('winBoard').css({border: '1px solid #39FF14'})
+  $('#board').addClass('winBoard').css({border: '1px solid #39FF14'})
+
 }
 
-// console.log('this is score : ' + score);
+const announceLoss = () => {
+  $('#winRow').append($("<div>").addClass('loss').css({
+    display: 'flex',
+    'flex-direction': 'row',
+    color:'white',
+    'background-color': '#F22613',
+    border: '1px solid #F22613',
+    'animation-name': 'blinkingLoss',
+    'animation-duration': '1s',
+    'animation-iteration-count': 'infinite',
+    'transition-timing-function': 'linear',
+    "height":'20px',
+    'padding': '5px 5px',
+    "width":'100%',
+    "margin": '0 0 5px 0'})
+    .text('Game Over! Please try again!'));
+
+  $('#board').addClass('winBoard').css({border: '1px solid #F22613'})
+
+}
+
 
 
 
 ////////////////////////////////////////////////////////////////////
 //Collision with other objects, border, and collision to earn points
 ////////////////////////////////////////////////////////////////////
+let numberOfCollisionsForLoss = 0;
+
 
 const collisionDetection = () => {
 
@@ -180,33 +227,35 @@ const collisionDetection = () => {
               cloudArray.splice(i, 1);
 
       //winning state
-      // console.log('this is score: ' + score);
       if (score === 10) {
-        // annouceWin();
+        announceWin();
       }
-
-     }
-   }
-
-
-
-
+    }
+  }
 
 
 ///this below works//
  // for(let i = 0; i < obstacles.length; i++){
    //plane1 and planeSlow collisionDetection
+
    if ($planeBorder.x < $planeSlowBorder.x + $planeSlowBorder.width &&
       $planeBorder.x + $planeBorder.width > $planeSlowBorder.x &&
       $planeBorder.y < $planeSlowBorder.y + $planeSlowBorder.height &&
       $planeBorder.height + $planeBorder.y > $planeSlowBorder.y) {
     console.log('planeSlow collision detected!');
     $('#planeSlow').addClass('scoredRed');
+
+    numberOfCollisionsForLoss ++
+
     setTimeout(function() {
               $('#planeSlow').removeClass("scoredRed");
           }, 1000);
+
+                  if (numberOfCollisionsForLoss === 1) {
+                  announceLoss();
+                  }
    }
- // }
+
 
 // for(let i = 0; i < obstacles.length; i++){
    //plane1 and planeSlow collisionDetection
@@ -216,11 +265,17 @@ const collisionDetection = () => {
       $planeBorder.height + $planeBorder.y > $planeFastBorder.y) {
     console.log('planeFast collision detected!');
     $('#planeFast').addClass('scoredRed');
+
+    numberOfCollisionsForLoss ++
+
     setTimeout(function() {
-              $('#planeFast').removeClass("scoredRed");
+              $('#planeSlow').removeClass("scoredRed");
           }, 1000);
+
+                  if (numberOfCollisionsForLoss === 1) {
+                  announceLoss();
+                  }
    }
- // }
 } //end of collisionDetection() function
 
 
@@ -303,6 +358,7 @@ const reset = () => {
   createClouds();
 
   $('.win').remove();
+  $('loss').remove();
   $('.winBoard').css({"border":'1px solid white'});
 
 //reset plane location
@@ -320,20 +376,6 @@ $('board').append($('#planeFast').stop(true).css({
 $('board').append($('#planeSlow').stop(true).css({
     top: '0%',
     left: '0%'}));
-
-// //interval for cloud regeneration
-//     for(var i = 0;i<=10;i++){
-//   		cloudArray.push(new cloud(i));
-//   	}
-//
-//     cloudInterval =
-//       setInterval(function() {
-//         if (cloudArray.length <= 2) {
-//         cloudArray.push(new cloud(i));
-//         }
-//       }, 500)
-
-
 
 
 }; //end of reset()
@@ -388,6 +430,8 @@ $('#row').append($cloudPointsTotal.text('Collect Cloud Points: ' + score));
 
 ////////////////////////////////////////////////////////////////
 //------------------------references---------------------------
+//"Mouse move" on line 85-101 for game to be mobile friendly
+// http://jsfiddle.net/pu2kK/
 
 // //Collision detection// 2D from MDN with IF statement works perfect!
 // https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
