@@ -129,10 +129,10 @@ const createClouds = () => {
 function cloud(id){
       this.left = getRandomInt(50, $gameBoardRect.width);
       this.top = getRandomInt(100, $gameBoardRect.height - 30);
-      this.height = 20;
-      this.width = 25;
+      this.height = 25;
+      this.width = 30;
       this.id = cloudId;
-      const $cloudPoints = $("<div>").addClass('cloudy').attr('id',this.id).append('<img src="img/cloud.png" width = "20px">')
+      const $cloudPoints = $("<div>").addClass('cloudy').attr('id',this.id).append('<img src="img/cloud.png" width = "30px">')
         .css({"height":this.height,"width":this.width,"left":this.left,"top":this.top,"position":"absolute", "margin": '0 0'})
       $('#board').append($cloudPoints);
       cloudId ++
@@ -474,6 +474,21 @@ const stayInGameBoard = () => {
 
 }    // end of function stayInGameBoard()
 
+///////////////////////////////////////////////////////////////
+////----------- Recording Points in text box----------/////////
+///////////////////////////////////////////////////////////////
+
+const $cloudPointsTotal = $('<div>').attr('class','pointsBoard')
+.css({ color:'white',
+  'background-color': '#44AFCD',
+  border: '1px solid white',
+  margin: '0px 5px 5px 0',
+  padding: '5px 5px 5px 5px',
+  'font-size': '20px',
+  width: '50%'});
+$('#row').append($cloudPointsTotal.text('Collect Cloud Points: ' + score));
+
+
 
 ///////////////////////////////////////////////////////////////
 //btnReset//
@@ -483,9 +498,10 @@ const $btnReset = $('<div>').text('START / RESET').attr('class','pointsBoard')
 .css({ color:'white',
   // '-webkit-text-stroke': '.01em white',
   'background-color': '#44AFCD',
-  border: '1px solid #39FF14',
-  margin: '5px 5px 5px 0',
-  padding: '5px 5px',
+  border: '1px solid white',
+  'font-size': '20px',
+  margin: '0px 0px 5px 0px',
+  padding: '5px 0px 5px 5px',
   width: '50%'});
 $('#row').append($btnReset);
 
@@ -530,18 +546,7 @@ $('board').append($('#planeSlow').css({
 $btnReset.on('click', reset);
 
 
-///////////////////////////////////////////////////////////////
-////----------- Recording Points in text box----------/////////
-///////////////////////////////////////////////////////////////
 
-const $cloudPointsTotal = $('<div>').attr('class','pointsBoard')
-.css({ color:'white',
-  'background-color': '#44AFCD',
-  border: '1px solid white',
-  margin: '5px 0px',
-  padding: '5px 5px',
-  width: '50%'});
-$('#row').append($cloudPointsTotal.text('Collect Cloud Points: ' + score));
 
 ////////////////////////////////////////////////////////////////
 //modal for win and lose scenario

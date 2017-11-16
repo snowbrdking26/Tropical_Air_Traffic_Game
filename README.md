@@ -1,9 +1,7 @@
 
 Play the game here: https://snowbrdking26.github.io/Tropical_Air_Traffic_Game/
 
-This game is an airplane themed dodger game.
-
-The game has HTML, CSS, JavaScript, and jQuery to create game logic, create game pieces, keep score, stay inside the game boundaries, along with a win and lose scenarios.
+This game is an airplane themed dodger game. It is built with HTML, CSS, JavaScript, and jQuery to create game logic, create game pieces, keep score, stay inside the game boundaries, defines a win and lose scenario.
 
 The approach was to increase difficulty as the game progresses starting with 2 obstacles and increasing to 8 computer controlled obstacles which the human player must avoid while collecting 50 cloud points to win the game.
 
