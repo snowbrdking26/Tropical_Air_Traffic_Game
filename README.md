@@ -9,4 +9,4 @@ Directions: Use arrow keys or mouse to collect 50 cloud points.
 
 Unsolved problems: Are the addition of mobile friendly arrow buttons to allow for touchscreen users to play the game.
 
-<img src="https://github.com/snowbrdking26/Tropical_Air_Traffic_Game/blob/master/img/Main_screenshot1.png" width="450">
+<img src="https://github.com/snowbrdking26/Tropical_Air_Traffic_Game/blob/master/img/mainscreenshot2.png" width="450">
