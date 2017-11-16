@@ -106,10 +106,9 @@ $('#plane1').on('mousedown', function (e) {
     });
     return false;
 });
-
-
+//
 // touch screen function
-$('#plane1').draggable();
+// $('#plane1').draggable();
 
 ///////////////////////////////////////////////////////////////
 //Create clouds//
