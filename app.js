@@ -487,7 +487,7 @@ const $cloudPointsTotal = $('<div>').attr('class','pointsBoard')
   padding: '5px 5px 5px 5px',
   'font-size': '20px',
   width: '50%'});
-$('#row').append($cloudPointsTotal.text('Collect Cloud Points: ' + score));
+$('#row').append($cloudPointsTotal.text('Cloud Points: ' + score));
 
 
 
@@ -514,7 +514,7 @@ const reset = () => {
   cloudArray = [];
   score = 0;
   numberOfCollisionsForLoss = 0
-  $cloudPointsTotal.text('Collect Cloud Points: ' + score);
+  $cloudPointsTotal.text('Cloud Points: ' + score);
           console.log("reset button pressed. Score is: " + score);
   $('.cloudy').remove();
   createClouds();
@@ -664,5 +664,9 @@ const startPlaneAnimations = () => {
 //   && (game.player.y + game.player.h > y
 //   && game.player.y < y + h)) {
 //       return true;
+
+//free open source pictogram airplane pictures
+//https://www.freepik.com/free-vector/silhouette-top-views-of-different-airplanes_1250479.htm#term=airplane&page=1&position=20
+
 //------------------------references---------------------------
 ////////////////////////////////////////////////////////////////
