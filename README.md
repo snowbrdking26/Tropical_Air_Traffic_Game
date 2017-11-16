@@ -7,7 +7,7 @@ The game has HTML, CSS, JavaScript, and jQuery to create game logic, create game
 
 The approach was to increase difficulty as the game progresses starting with 2 obstacles and increasing to 8 computer controlled obstacles which the human player must avoid while collecting 50 cloud points to win the game.
 
-Directions: Use arrow keys or mouse to control to collect 50 cloud points.
+Directions: Use arrow keys or mouse to collect 50 cloud points.
 
 Unsolved problems: Are the addition of mobile friendly arrow buttons to allow for touchscreen users to play the game.
 
