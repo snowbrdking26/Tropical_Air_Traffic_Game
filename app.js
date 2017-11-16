@@ -235,7 +235,7 @@ const collisionDetection = () => {
 
       $('#' + id).remove();// do not delete
        score ++
-       $cloudPointsTotal.text('Collect Cloud Points: ' + score)
+       $cloudPointsTotal.text('Cloud Points: ' + score)
               cloudArray.splice(i, 1);
 
       //winning state
