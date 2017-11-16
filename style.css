@@ -1,14 +1,14 @@
 body {
   /*background-image: url(img/149817.jpg);*/
   background-image: url(img/029-hog_cay_broshuretaxi_to_runway1.jpg);
-  /*background-size: cover;*/
-  /*background-size: auto 120%;*/
-  background-size: 160% auto;
+  background-size: cover;
+  background-size: auto 120%;
+  /*background-size: 160% auto;*/
   /*background-size: auto 140%;*/
   /*margin: 0 auto;*/
   background-repeat: no-repeat;
   /*max-width: 100%;*/
-  width: auto;
+  /*width: auto;*/
   /*height: 650px;*/
   font-family: arial;
 }
@@ -29,10 +29,41 @@ h2 {
   /*-webkit-text-stroke: 1px #0E1322;*/
 }
 
+.clouds {
+  background-repeat: no-repeat;
+  position: absolute;
+  margin: 0 0;
+}
+
+#cloud1 {
+  top:50%;
+  left:20%;
+}
+
 #row, #winRow {
   display: flex;
   flex-direction: row;
   width: 100%;
+}
+
+.scoredGreen {
+  border: 3px solid green;
+}
+
+.scoredRed {
+  border: 3px solid red;
+}
+
+@keyframes blinkingWin {
+  0% {background-color: #26A65B;}
+  50% {background-color: #98e698;}
+  100% {background-color: #26A65B;}
+}
+
+@keyframes blinkingLoss {
+  0% {background-color: #C3272B;}
+  50% {background-color: #ff8080;}
+  100% {background-color: #C3272B;}
 }
 
 #startGame {
@@ -43,6 +74,7 @@ h2 {
   padding: 5px 5px;
   width: 90px;
 }
+
 #btnReset:hover {
   color:orange;
   background-color: #44AFCD;
@@ -72,7 +104,7 @@ h2 {
   top: 0;
   left: 0;
   /*---------animation*/
-  animation-name: box-step;
+  animation-name: firstPlanePath;
   animation-duration: 20s;
   animation-iteration-count: infinite;
   transition-timing-function: linear;
@@ -85,58 +117,194 @@ h2 {
   top: 0;
   left: 0;
     /*---------animation*/
-  animation-name: box-step;
+  animation-name: firstPlanePath;
   animation-duration: 8s;
   animation-iteration-count: infinite;
   transition-timing-function: linear;
 }
 
-@keyframes box-step {
+@keyframes firstPlanePath {
   0% {background: none; left:0%; top:0%;}
   2% {background: none; transform: rotate(90deg)}
   /*turn1*/
-  25% {background: none; left: 60%; top:0px;transform: rotate(90deg)}
+  25% {background: none; left: 35%; top:0px;transform: rotate(90deg)}
   27% {background: none; transform: rotate(180deg) }
 /*//turn 2*/
-  50% {background: none; left: 60%; top: 80%;transform: rotate(180deg)}
+  50% {background: none; left: 35%; top: 80%;transform: rotate(180deg)}
   52% {background: none; transform: rotate(270deg) }
 /*turn 3*/
-  75% {background: none; left:0%; top:80%;transform: rotate(270deg);}
+  75% {background: none; left:-20%; top:80%;transform: rotate(270deg);}
   77% {background: none; transform: rotate(360deg)}
 /*starting turn 1*/
   100% {background: none; left:0px; top:0px;transform: rotate(360deg) }
 }
 
-
-
-.clouds {
-  background-repeat: no-repeat;
-  position: absolute;
-  margin: 0 0;
+#planeMedium1 {
+  width: 46px;
+  height: 35px;
+  position: relative;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  /*---------animation*/
+  animation-name: mediumPlanePath;
+  animation-timing-function: ease-in 4s;
+  animation-fill-mode: forwards;
+  animation-delay:10s;
+  animation-duration: 18s;
+  animation-iteration-count: infinite;
+  transition-timing-function: linear;
 }
 
-#cloud1 {
-  top:50%;
-  left:20%;
+#planeMedium2 {
+  width: 46px;
+  height: 35px;
+  position: relative;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  /*---------animation*/
+   /*@keyframes duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name */
+  animation-name: mediumPlanePath;
+  animation-timing-function: ease-in 4s;
+  animation-fill-mode: forwards;
+
+  animation-delay:14s;
+  animation-duration: 18s;
+  animation-iteration-count: infinite;
+  transition-timing-function: linear;
 }
 
-.scoredGreen {
-  border: 3px solid green;
+
+@keyframes mediumPlanePath {
+  0% {opacity: 1;background: none; left:0%; top:0%;}
+  2% { background: none; transform: rotate(90deg)}
+  /*turn1*/
+  25% {background: none; left: 40%; top:0px;transform: rotate(90deg)}
+  27% {background: none; transform: rotate(180deg) }
+/*//turn 2*/
+  50% {background: none; left: 50%; top: 80%;transform: rotate(180deg)}
+  52% {background: none; transform: rotate(270deg) }
+/*turn 3*/
+  75% {background: none; left:0%; top:80%;transform: rotate(270deg);}
+  77% {background: none; transform: rotate(360deg)}
+/*starting turn 1*/
+  100% {opacity: 1;background: none; left:0px; top:0px;transform: rotate(360deg) }
 }
 
-.scoredRed {
-  border: 3px solid red;
+
+#planeFigureEight1 {
+  width: 30px;
+  height: 40px;
+  position: relative;
+  top: 0;
+  left: 0;
+  opacity: 0;
+    /*---------animation*/
+  animation-name: figureEightPath1;
+  animation-timing-function: ease-in 4s;
+  animation-fill-mode: forwards;
+  animation-delay:17s;
+  animation-duration: 18s;
+  animation-iteration-count: infinite;
+  transition-timing-function: linear;
 }
 
-@keyframes blinkingWin {
-  0% {background-color: #26A65B;}
-  50% {background-color: #26C281;}
-  100% {background-color: #26A65B;}
+@keyframes figureEightPath1 {
+  0% {opacity: 1; background: none; left:0%; top:0%;}
+  2% { background: none; transform: rotate(90deg)}
+  /*turn1*/
+  25% { background: none; left: 40%; top:0px;transform: rotate(90deg)}
+  27% { background: none; transform: rotate(180deg) }
+/*//turn 2*/
+  50% { background: none; left: 40%; top: 80%;transform: rotate(180deg)}
+  52% { background: none; transform: rotate(270deg) }
+/*turn 3*/
+  75% { background: none; left:0%; top:80%;transform: rotate(270deg);}
+  77% { background: none; transform: rotate(360deg)}
+/*starting turn 1*/
+  100% {opacity: 1; background: none; left:0px; top:0px;transform: rotate(360deg) }
 }
 
+#planeFigureEight2 {
+  width: 30px;
+  height: 40px;
+  position: relative;
+  top: 0;
+  left: 0;
+  opacity: 0;
+    /*---------animation*/
+    animation-name: figureEightPath2;
+    animation-timing-function: ease-in 4s;
+    animation-fill-mode: forwards;
+    animation-delay:19s;
+    animation-duration: 16s;
+    animation-iteration-count: infinite;
+    transition-timing-function: linear;
+}
 
-@keyframes blinkingLoss {
-  0% {background-color: #C3272B;}
-  50% {background-color: #F22613;}
-  100% {background-color: #C3272B;}
+@keyframes figureEightPath2 {
+  0% {opacity: 1; background: none; left:0%; top:0%;}
+  2% { background: none; transform: rotate(90deg)}
+  /*turn1*/
+  25% { background: none; left: 40%; top:0px;transform: rotate(90deg)}
+  27% { background: none; transform: rotate(180deg) }
+/*//turn 2*/
+  50% { background: none; left: 40%; top: 80%;transform: rotate(180deg)}
+  52% { background: none; transform: rotate(270deg) }
+/*turn 3*/
+  75% { background: none; left:0%; top:80%;transform: rotate(270deg);}
+  77% { background: none; transform: rotate(360deg)}
+/*starting turn 1*/
+  100% {opacity: 1; background: none; left:0px; top:0px;transform: rotate(360deg) }
+}
+
+#planeFigureEight3 {
+  width: 30px;
+  height: 40px;
+  position: relative;
+  top: 0;
+  left: 0;
+  opacity: 0;
+    /*---------animation*/
+    animation-name: reverseFigureEightPath;
+    animation-timing-function: ease-in 4s;
+    animation-fill-mode: forwards;
+    animation-delay:25s;
+    animation-duration: 14s;
+    animation-iteration-count: infinite;
+    transition-timing-function: linear;
+}
+
+#planeFigureEight4 {
+  width: 30px;
+  height: 40px;
+  position: relative;
+  top: 0;
+  left: 0;
+  opacity: 0;
+    /*---------animation*/
+    animation-name: reverseFigureEightPath;
+    animation-timing-function: ease-in 4s;
+    animation-fill-mode: forwards;
+    animation-delay:29s;
+    animation-duration: 12s;
+    animation-iteration-count: infinite;
+    transition-timing-function: linear;
+}
+
+@keyframes reverseFigureEightPath {
+  0% {opacity: 1; background: none; left:0%; top:0%; transform: rotate(270deg)}
+  2% { background: none; transform: rotate(180deg)}
+  /*turn1*/
+  25% { background: none; left:0%; top:80%;transform: rotate(180deg)}
+  27% { background: none; transform: rotate(90deg) }
+/*//turn 2*/
+  50% { background: none; left: 40%; top: 80%;transform: rotate(90deg)}
+  52% { background: none; transform: rotate(0deg) }
+/*turn 3*/
+  75% { background: none; left:40%; top:0%;transform: rotate(0deg);}
+  77% { background: none; transform: rotate(-90deg)}
+/*starting turn 1*/
+  100% {opacity: 1; background: none; left:0px; top:0px;transform: rotate(-90deg) }
 }

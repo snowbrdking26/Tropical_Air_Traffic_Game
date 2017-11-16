@@ -5,11 +5,11 @@ $(() => {
 //global variables-----------------//
 
   let cloudArray = [];
+  // let obstaclePlaneArray = [];
   let planeSlowArray = [];
   let planeFastArray = [];
   let score = 0;
   let arrowKeys = {};
-
 
   //gameboard coordiantes
   let $gameBoardRect = $('#board')[0].getBoundingClientRect();
@@ -23,13 +23,13 @@ $(() => {
   let $plane1Height = $plane1.height;
   let $planeBorderRight = $planeBorder.left + $planeBorder.width;
   let $planeBorderBottom = $planeBorder.top + $planeBorder.height;
-
-  //planeFast coordinates
-  let $planeFastBorder = $('#planeFast')[0].getBoundingClientRect();
-
-  //planeSlow coordinates
-  let $planeSlowBorder = $('#planeSlow')[0].getBoundingClientRect();
-
+  //
+  // //planeFast coordinates
+  // let $planeFastBorder = $('#planeFast')[0].getBoundingClientRect();
+  //
+  // //planeSlow coordinates
+  // let $planeSlowBorder = $('#planeSlow')[0].getBoundingClientRect();
+  //
 
 //end global variables-------------//
 
@@ -120,8 +120,7 @@ const createClouds = () => {
   for(var i = 0;i<=9;i++){
 		cloudArray.push(new cloud(i));
 	}
-  cloudInterval =
-    setInterval(function() {
+  cloudInterval = setInterval(function() {
       if (cloudArray.length <= 10) {
       cloudArray.push(new cloud(i));
       }
@@ -143,12 +142,13 @@ function cloud(id){
 
 
 
-
-
-
 createClouds();
 console.log(cloudArray);
 
+
+////////////////////////////////////////////////////////////////////
+//Announce win and loss
+////////////////////////////////////////////////////////////////////
 
 const announceWin = () => {
   $('#winRow').append($("<div>").addClass('win').css({
@@ -213,9 +213,25 @@ const collisionDetection = () => {
 
 
    //planeFast coordinates
-   let $planeFastBorder = $('#planeFast')[0].getBoundingClientRect();
-   //planeSlow coordinates
-   let $planeSlowBorder = $('#planeSlow')[0].getBoundingClientRect();
+     let $planeFastBorder = $('#planeFast')[0].getBoundingClientRect();
+     //planeSlow coordinates
+     let $planeSlowBorder = $('#planeSlow')[0].getBoundingClientRect();
+
+      //planeMedium1 coordinates
+     let $planeMedium1 = $('#planeMedium1')[0].getBoundingClientRect();
+
+     //planeMedium2 coordinates
+     let $planeMedium2 = $('#planeMedium2')[0].getBoundingClientRect();
+
+     //planeFigureEight1 coordinates
+     let $planeFigureEight1 = $('#planeFigureEight1')[0].getBoundingClientRect();
+
+     //planeFigureEight2 coordinates
+     let $planeFigureEight2 = $('#planeFigureEight2')[0].getBoundingClientRect();
+
+     let $planeFigureEight3 = $('#planeFigureEight3')[0].getBoundingClientRect();
+
+     let $planeFigureEight4 = $('#planeFigureEight4')[0].getBoundingClientRect();
 
    // collision for points
    for(var i = 0; i < cloudArray.length; i++){
@@ -257,9 +273,9 @@ const collisionDetection = () => {
               $('#planeSlow').removeClass("scoredRed");
           }, 1000);
 
-                  if (numberOfCollisionsForLoss === 1) {
-                  announceLoss();
-                  }
+          if (numberOfCollisionsForLoss === 1) {
+          announceLoss();
+          }
    }
 
 
@@ -274,14 +290,132 @@ const collisionDetection = () => {
 
     numberOfCollisionsForLoss ++
 
-    setTimeout(function() {
+          setTimeout(function() {
               $('#planeFast').removeClass("scoredRed");
           }, 1000);
 
-                  if (numberOfCollisionsForLoss === 1) {
-                  announceLoss();
-                  }
+          if (numberOfCollisionsForLoss === 1) {
+          announceLoss();
+          }
    }
+
+//planeMedium1
+   if ($planeBorder.x < $planeMedium1.x + $planeMedium1.width &&
+      $planeBorder.x + $planeBorder.width > $planeMedium1.x &&
+      $planeBorder.y < $planeMedium1.y + $planeMedium1.height &&
+      $planeBorder.height + $planeBorder.y > $planeMedium1.y) {
+    // console.log('planeFast collision detected!');
+    $('#planeMedium1').addClass('scoredRed');
+
+    numberOfCollisionsForLoss ++
+
+          setTimeout(function() {
+              $('#planeMedium1').removeClass("scoredRed");
+          }, 1000);
+
+          if (numberOfCollisionsForLoss === 1) {
+          announceLoss();
+          }
+   }
+
+//planeMedium2
+   if ($planeBorder.x < $planeMedium2.x + $planeMedium2.width &&
+      $planeBorder.x + $planeBorder.width > $planeMedium2.x &&
+      $planeBorder.y < $planeMedium2.y + $planeMedium2.height &&
+      $planeBorder.height + $planeBorder.y > $planeMedium2.y) {
+    // console.log('planeFast collision detected!');
+    $('#planeMedium2').addClass('scoredRed');
+
+    numberOfCollisionsForLoss ++
+
+          setTimeout(function() {
+              $('#planeMedium2').removeClass("scoredRed");
+          }, 1000);
+
+          if (numberOfCollisionsForLoss === 1) {
+          announceLoss();
+          }
+   }
+
+// planeFigureEight1
+if ($planeBorder.x < $planeFigureEight1.x + $planeFigureEight1.width &&
+   $planeBorder.x + $planeBorder.width > $planeFigureEight1.x &&
+   $planeBorder.y < $planeFigureEight1.y + $planeFigureEight1.height &&
+   $planeBorder.height + $planeBorder.y > $planeFigureEight1.y) {
+ // console.log('planeFast collision detected!');
+ $('#planeFigureEight1').addClass('scoredRed');
+
+ numberOfCollisionsForLoss ++
+
+       setTimeout(function() {
+           $('#planeFigureEight1').removeClass("scoredRed");
+       }, 1000);
+
+       if (numberOfCollisionsForLoss === 1) {
+       announceLoss();
+       }
+}
+
+
+
+// planeFigureEight2
+if ($planeBorder.x < $planeFigureEight2.x + $planeFigureEight2.width &&
+   $planeBorder.x + $planeBorder.width > $planeFigureEight2.x &&
+   $planeBorder.y < $planeFigureEight2.y + $planeFigureEight2.height &&
+   $planeBorder.height + $planeBorder.y > $planeFigureEight2.y) {
+ // console.log('planeFast collision detected!');
+ $('#planeFigureEight2').addClass('scoredRed');
+
+ numberOfCollisionsForLoss ++
+
+       setTimeout(function() {
+           $('#planeFigureEight2').removeClass("scoredRed");
+       }, 1000);
+
+       if (numberOfCollisionsForLoss === 1) {
+       announceLoss();
+       }
+}
+
+// planeFigureEight3
+if ($planeBorder.x < $planeFigureEight3.x + $planeFigureEight3.width &&
+   $planeBorder.x + $planeBorder.width > $planeFigureEight3.x &&
+   $planeBorder.y < $planeFigureEight3.y + $planeFigureEight3.height &&
+   $planeBorder.height + $planeBorder.y > $planeFigureEight3.y) {
+ // console.log('planeFast collision detected!');
+ $('#planeFigureEight3').addClass('scoredRed');
+
+ numberOfCollisionsForLoss ++
+
+       setTimeout(function() {
+           $('#planeFigureEight3').removeClass("scoredRed");
+       }, 1000);
+
+       if (numberOfCollisionsForLoss === 1) {
+       announceLoss();
+       }
+}
+
+// planeFigureEight4
+if ($planeBorder.x < $planeFigureEight4.x + $planeFigureEight4.width &&
+   $planeBorder.x + $planeBorder.width > $planeFigureEight4.x &&
+   $planeBorder.y < $planeFigureEight4.y + $planeFigureEight4.height &&
+   $planeBorder.height + $planeBorder.y > $planeFigureEight4.y) {
+ // console.log('planeFast collision detected!');
+ $('#planeFigureEight4').addClass('scoredRed');
+
+ numberOfCollisionsForLoss ++
+
+       setTimeout(function() {
+           $('#planeFigureEight4').removeClass("scoredRed");
+       }, 1000);
+
+       if (numberOfCollisionsForLoss === 1) {
+       announceLoss();
+       }
+}
+
+
 } //end of collisionDetection() function
 
 
@@ -333,7 +467,30 @@ const stayInGameBoard = () => {
 
 }    // end of function stayInGameBoard()
 
+///////////////////////////////////////////////////////////////
+// Increases difficulty
+///////////////////////////////////////////////////////////////
 
+
+// $(function() {
+//
+//   var timer = setInterval( showDiv, 5000);
+//   var counter = 0;
+//
+//   function showDiv() {
+//     if (counter ==0) { counter++; return; }
+//
+//     $('#planeMedium1','#planeMedium2','#planeFigureEight1','#planeFigureEight2')
+//       .stop()
+//       .hide()
+//       .filter(
+//         function() { return this.id.match('#planeMedium1' + counter); })
+//       .show('fast');
+//     counter == 3? counter = 0 : counter++;
+//
+//   }
+//
+// });
 
 
 
@@ -377,11 +534,11 @@ $('board').append($('#plane1').css({
   Transform: 'rotate(0deg)'}));
 
 //these don't work
-$('board').append($('#planeFast').stop(true).css({
+$('board').append($('#planeFast').css({
     top: '0%',
     left: '0%'}));
 //these don't work
-$('board').append($('#planeSlow').stop(true).css({
+$('board').append($('#planeSlow').css({
     top: '0%',
     left: '0%'}));
 
