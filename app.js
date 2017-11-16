@@ -214,23 +214,12 @@ const collisionDetection = () => {
 
    //planeFast coordinates
      let $planeFastBorder = $('#planeFast')[0].getBoundingClientRect();
-     //planeSlow coordinates
      let $planeSlowBorder = $('#planeSlow')[0].getBoundingClientRect();
-
-      //planeMedium1 coordinates
      let $planeMedium1 = $('#planeMedium1')[0].getBoundingClientRect();
-
-     //planeMedium2 coordinates
      let $planeMedium2 = $('#planeMedium2')[0].getBoundingClientRect();
-
-     //planeFigureEight1 coordinates
      let $planeFigureEight1 = $('#planeFigureEight1')[0].getBoundingClientRect();
-
-     //planeFigureEight2 coordinates
      let $planeFigureEight2 = $('#planeFigureEight2')[0].getBoundingClientRect();
-
      let $planeFigureEight3 = $('#planeFigureEight3')[0].getBoundingClientRect();
-
      let $planeFigureEight4 = $('#planeFigureEight4')[0].getBoundingClientRect();
 
    // collision for points
@@ -251,6 +240,8 @@ const collisionDetection = () => {
       //winning state
       if (score === 10) {
         announceWin();
+        openWinnerModal();
+        stopAnimations();
       }
     }
   }
@@ -275,6 +266,8 @@ const collisionDetection = () => {
 
           if (numberOfCollisionsForLoss === 1) {
           announceLoss();
+          openLoserModal();
+          stopAnimations();
           }
    }
 
@@ -296,6 +289,8 @@ const collisionDetection = () => {
 
           if (numberOfCollisionsForLoss === 1) {
           announceLoss();
+          openLoserModal();
+          stopAnimations();
           }
    }
 
@@ -315,6 +310,8 @@ const collisionDetection = () => {
 
           if (numberOfCollisionsForLoss === 1) {
           announceLoss();
+          openLoserModal();
+          stopAnimations();
           }
    }
 
@@ -334,6 +331,8 @@ const collisionDetection = () => {
 
           if (numberOfCollisionsForLoss === 1) {
           announceLoss();
+          openLoserModal();
+          stopAnimations();
           }
    }
 
@@ -353,6 +352,8 @@ if ($planeBorder.x < $planeFigureEight1.x + $planeFigureEight1.width &&
 
        if (numberOfCollisionsForLoss === 1) {
        announceLoss();
+       openLoserModal();
+       stopAnimations();
        }
 }
 
@@ -374,6 +375,8 @@ if ($planeBorder.x < $planeFigureEight2.x + $planeFigureEight2.width &&
 
        if (numberOfCollisionsForLoss === 1) {
        announceLoss();
+       openLoserModal();
+       stopAnimations();
        }
 }
 
@@ -393,6 +396,8 @@ if ($planeBorder.x < $planeFigureEight3.x + $planeFigureEight3.width &&
 
        if (numberOfCollisionsForLoss === 1) {
        announceLoss();
+       openLoserModal();
+       stopAnimations();
        }
 }
 
@@ -412,6 +417,8 @@ if ($planeBorder.x < $planeFigureEight4.x + $planeFigureEight4.width &&
 
        if (numberOfCollisionsForLoss === 1) {
        announceLoss();
+       openLoserModal();
+       stopAnimations();
        }
 }
 
@@ -467,32 +474,6 @@ const stayInGameBoard = () => {
 
 }    // end of function stayInGameBoard()
 
-///////////////////////////////////////////////////////////////
-// Increases difficulty
-///////////////////////////////////////////////////////////////
-
-
-// $(function() {
-//
-//   var timer = setInterval( showDiv, 5000);
-//   var counter = 0;
-//
-//   function showDiv() {
-//     if (counter ==0) { counter++; return; }
-//
-//     $('#planeMedium1','#planeMedium2','#planeFigureEight1','#planeFigureEight2')
-//       .stop()
-//       .hide()
-//       .filter(
-//         function() { return this.id.match('#planeMedium1' + counter); })
-//       .show('fast');
-//     counter == 3? counter = 0 : counter++;
-//
-//   }
-//
-// });
-
-
 
 ///////////////////////////////////////////////////////////////
 //btnReset//
@@ -520,7 +501,7 @@ const reset = () => {
           console.log("reset button pressed. Score is: " + score);
   $('.cloudy').remove();
   createClouds();
-
+  startPlaneAnimations();
 
   $('.win').remove();
   $('.loss').remove();
@@ -562,33 +543,71 @@ const $cloudPointsTotal = $('<div>').attr('class','pointsBoard')
   width: '50%'});
 $('#row').append($cloudPointsTotal.text('Collect Cloud Points: ' + score));
 
+////////////////////////////////////////////////////////////////
+//modal for win and lose scenario
+////////////////////////////////////////////////////////////////
+
+//reference to divs
+const $openWinnerModal = $('.modalWinner');
+const $openLoserModal = $('.modalLoser');
+const $playAgainWinnerBtn = $('#playAgainWinnerBtn');
+const $playAgainLoserBtn = $('#playAgainLoserBtn');
 
 
-  ///////////////////////////////////////////////////////////////
-  // creates 20 planes
-  ///////////////////////////////////////////////////////////////
-              // const createAlotOfPlanes = (num) => {
-              //     let planes = [];
-              //     for (let i = 0; i < num; i++) {
-              //           // planes[i] = [];
-              //         //   for(j=0; j< planes; j++) {
-              //         //       planes[i][j] = { x: 0, y: 0 };
-              //         // }
-              //
-              //     $alotOfPlanes = $('<alotofPlanes>').empty().append('<img src="img/fastplaneemptybackground.png" height="40px" width="30px"/>').attr('id','planeFast');
-              //
-              //     $('#board').append($alotOfPlanes);
-              //
-              //     }
-              // }
-              // //
-              // createAlotOfPlanes(10);
+//event Handlers
+const openWinnerModal = () => {
+  $openWinnerModal.css('display','block');
+}
 
-              // //randomize the planes
-              // function getRandomInt (min, max) {
-              //     return Math.floor(Math.random() * (max - min + 1)) + min;
-              // }
-              //
+const openLoserModal = () => {
+  $openLoserModal.css('display','block');
+}
+
+const closeWinnerModal = () => {
+  $openWinnerModal.css('display', 'none');
+  reset();
+}
+const closeLoserModal = () => {
+  $openLoserModal.css('display', 'none');
+  reset();
+}
+
+//event listeners
+$playAgainWinnerBtn.on('click', closeWinnerModal);
+$playAgainLoserBtn.on('click', closeLoserModal);
+// $playAgainBtn.on('click', reset);
+
+const stopAnimations = () => {
+
+
+  $('#board').addClass('off');
+  $('#planeFast').addClass('off');
+  $('#planeSlow').addClass('off');
+  $('#planeMedium1').addClass('off');
+  $('#planeMedium2').addClass('off');
+  $('#planeFigureEight1').addClass('off');
+  $('#planeFigureEight2').addClass('off');
+  $('#planeFigureEight3').addClass('off');
+  $('#planeFigureEight4').addClass('off');
+
+
+};
+
+const startPlaneAnimations = () => {
+
+  $('#board').removeClass('off');
+  $('#planeFast').removeClass('off');
+  $('#planeSlow').removeClass('off');
+  $('#planeMedium1').removeClass('off');
+  $('#planeMedium2').removeClass('off');
+  $('#planeFigureEight1').removeClass('off');
+  $('#planeFigureEight2').removeClass('off');
+  $('#planeFigureEight3').removeClass('off');
+  $('#planeFigureEight4').removeClass('off');
+
+}
+
+
 
 }); // End of the game
 

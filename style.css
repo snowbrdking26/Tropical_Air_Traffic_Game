@@ -88,7 +88,97 @@ h2 {
   /*overflow: hidden;*/
 }
 
+/*modal*/
+
+.modalWinner {
+	background-color: rgba(0,0,0,.2);
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+	overflow: auto;
+	display: none;
+}
+
+.modalLoser {
+	background-color: rgba(0,0,0,.2);
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+	overflow: auto;
+	display: none;
+}
+
+.modal-text-boxWinner {
+  text-align: center;
+	background-color: white;
+	height: 50%;
+	width: 50%;
+	border-radius: 2px;
+	margin: 150px auto;
+	box-shadow: 0 2px 2px rgba(0,0,0,.2);
+}
+
+.modal-text-boxLoser {
+  text-align: center;
+	background-color: white;
+	height: 50%;
+	width: 50%;
+	border-radius: 2px;
+	margin: 150px auto;
+	box-shadow: 0 2px 2px rgba(0,0,0,.2);
+}
+
+
+p {
+  padding: 0 10px;
+}
+
+#openLoserModal h2 {
+  padding-top: 25%;
+}
+
+#openWinnerModal h2 {
+  padding-top: 25%;
+}
+
+
+
+#playAgainWinnerBtn {
+  text-decoration: none;
+  color: black;
+  padding: 5px 5px;
+  margin: 5px 5px;
+  border: 1px solid gray;
+}
+
+#playAgainLoserBtn {
+  text-decoration: none;
+  color: black;
+  padding: 5px 5px;
+  margin: 5px 5px;
+  border: 1px solid gray;
+}
+#playAgainWinnerBtn:hover {
+  background-color: #44AFCD;
+  color:white;
+}
+
+#playAgainLoserBtn:hover {
+  background-color: #44AFCD;
+  color:white;
+}
+
+
+
+/*plane movement*/
 #plane1 {
+  border: 2px solid #56e5f1;
   width: 50px;
   height: 46px;
   position: relative;
@@ -124,19 +214,19 @@ h2 {
 }
 
 @keyframes firstPlanePath {
-  0% {background: none; left:0%; top:0%;}
-  2% {background: none; transform: rotate(90deg)}
+  0% {opacity: 1;background: none; left:-40%; top:0%;transform: rotate(270deg)}
+  2% { background: none; transform: rotate(180deg)}
   /*turn1*/
-  25% {background: none; left: 35%; top:0px;transform: rotate(90deg)}
-  27% {background: none; transform: rotate(180deg) }
+  25% {background: none; left: -40%; top:70%;transform: rotate(180deg)}
+  27% {background: none; transform: rotate(90deg) }
 /*//turn 2*/
-  50% {background: none; left: 35%; top: 80%;transform: rotate(180deg)}
-  52% {background: none; transform: rotate(270deg) }
+  50% {background: none; left: 25%; top: 70%;transform: rotate(90deg)}
+  52% {background: none; transform: rotate(0deg) }
 /*turn 3*/
-  75% {background: none; left:-20%; top:80%;transform: rotate(270deg);}
-  77% {background: none; transform: rotate(360deg)}
-/*starting turn 1*/
-  100% {background: none; left:0px; top:0px;transform: rotate(360deg) }
+  75% {background: none; left:25%; top:0%;transform: rotate(0deg);}
+  77% {background: none; transform: rotate(-90deg)}
+/*starting turn 4*/
+  100% {opacity: 1;background: none; left:-40%; top:0%;transform: rotate(-90deg) }
 }
 
 #planeMedium1 {
@@ -168,7 +258,6 @@ h2 {
   animation-name: mediumPlanePath;
   animation-timing-function: ease-in 4s;
   animation-fill-mode: forwards;
-
   animation-delay:14s;
   animation-duration: 18s;
   animation-iteration-count: infinite;
@@ -177,19 +266,19 @@ h2 {
 
 
 @keyframes mediumPlanePath {
-  0% {opacity: 1;background: none; left:0%; top:0%;}
-  2% { background: none; transform: rotate(90deg)}
+  0% {opacity: 1;background: none; left:0%; top:0%;transform: rotate(270deg)}
+  2% { background: none; transform: rotate(180deg)}
   /*turn1*/
-  25% {background: none; left: 40%; top:0px;transform: rotate(90deg)}
-  27% {background: none; transform: rotate(180deg) }
+  25% {background: none; left: 0%; top:70%;transform: rotate(180deg)}
+  27% {background: none; transform: rotate(90deg) }
 /*//turn 2*/
-  50% {background: none; left: 50%; top: 80%;transform: rotate(180deg)}
-  52% {background: none; transform: rotate(270deg) }
+  50% {background: none; left: 55%; top: 70%;transform: rotate(90deg)}
+  52% {background: none; transform: rotate(0deg) }
 /*turn 3*/
-  75% {background: none; left:0%; top:80%;transform: rotate(270deg);}
-  77% {background: none; transform: rotate(360deg)}
-/*starting turn 1*/
-  100% {opacity: 1;background: none; left:0px; top:0px;transform: rotate(360deg) }
+  75% {background: none; left:55%; top:0%;transform: rotate(0deg);}
+  77% {background: none; transform: rotate(-90deg)}
+/*starting turn 4*/
+  100% {opacity: 1;background: none; left:0%; top:0%;transform: rotate(-90deg) }
 }
 
 
@@ -205,25 +294,25 @@ h2 {
   animation-timing-function: ease-in 4s;
   animation-fill-mode: forwards;
   animation-delay:17s;
-  animation-duration: 18s;
+  animation-duration: 14s;
   animation-iteration-count: infinite;
   transition-timing-function: linear;
 }
 
 @keyframes figureEightPath1 {
-  0% {opacity: 1; background: none; left:0%; top:0%;}
+  0% {opacity: 1; background: none; left:10%; top:0%;transform: rotate(0deg)}
   2% { background: none; transform: rotate(90deg)}
   /*turn1*/
-  25% { background: none; left: 40%; top:0px;transform: rotate(90deg)}
+  25% { background: none; left: 45%; top:0%;transform: rotate(90deg)}
   27% { background: none; transform: rotate(180deg) }
 /*//turn 2*/
-  50% { background: none; left: 40%; top: 80%;transform: rotate(180deg)}
+  50% { background: none; left: 45%; top: 60%;transform: rotate(180deg)}
   52% { background: none; transform: rotate(270deg) }
 /*turn 3*/
-  75% { background: none; left:0%; top:80%;transform: rotate(270deg);}
+  75% { background: none; left:10%; top:60%;transform: rotate(270deg);}
   77% { background: none; transform: rotate(360deg)}
 /*starting turn 1*/
-  100% {opacity: 1; background: none; left:0px; top:0px;transform: rotate(360deg) }
+  100% {opacity: 1; background: none; left:10%; top:0%;transform: rotate(360deg) }
 }
 
 #planeFigureEight2 {
@@ -237,26 +326,26 @@ h2 {
     animation-name: figureEightPath2;
     animation-timing-function: ease-in 4s;
     animation-fill-mode: forwards;
-    animation-delay:19s;
-    animation-duration: 16s;
+    animation-delay:25s;
+    animation-duration: 14s;
     animation-iteration-count: infinite;
     transition-timing-function: linear;
 }
 
 @keyframes figureEightPath2 {
-  0% {opacity: 1; background: none; left:0%; top:0%;}
+  0% {opacity: 1; background: none; left:0%; top:0%;transform: rotate(315deg)}
   2% { background: none; transform: rotate(90deg)}
   /*turn1*/
-  25% { background: none; left: 40%; top:0px;transform: rotate(90deg)}
-  27% { background: none; transform: rotate(180deg) }
+  25% { background: none; left: 50%; top:0%;transform: rotate(90deg)}
+  27% { background: none; transform: rotate(225deg) }
 /*//turn 2*/
-  50% { background: none; left: 40%; top: 80%;transform: rotate(180deg)}
-  52% { background: none; transform: rotate(270deg) }
+  50% { background: none; left: 0%; top: 50%;transform: rotate(225deg)}
+  52% { background: none; transform: rotate(90deg) }
 /*turn 3*/
-  75% { background: none; left:0%; top:80%;transform: rotate(270deg);}
-  77% { background: none; transform: rotate(360deg)}
+  75% { background: none; left:50%; top:50%;transform: rotate(90deg);}
+  77% { background: none; transform: rotate(-45deg)}
 /*starting turn 1*/
-  100% {opacity: 1; background: none; left:0px; top:0px;transform: rotate(360deg) }
+  100% {opacity: 1; background: none; left:0px; top:0px;transform: rotate(-45deg) }
 }
 
 #planeFigureEight3 {
@@ -271,7 +360,7 @@ h2 {
     animation-timing-function: ease-in 4s;
     animation-fill-mode: forwards;
     animation-delay:25s;
-    animation-duration: 14s;
+    animation-duration: 12s;
     animation-iteration-count: infinite;
     transition-timing-function: linear;
 }
@@ -287,7 +376,7 @@ h2 {
     animation-name: reverseFigureEightPath;
     animation-timing-function: ease-in 4s;
     animation-fill-mode: forwards;
-    animation-delay:29s;
+    animation-delay:32s;
     animation-duration: 12s;
     animation-iteration-count: infinite;
     transition-timing-function: linear;
@@ -297,14 +386,39 @@ h2 {
   0% {opacity: 1; background: none; left:0%; top:0%; transform: rotate(270deg)}
   2% { background: none; transform: rotate(180deg)}
   /*turn1*/
-  25% { background: none; left:0%; top:80%;transform: rotate(180deg)}
-  27% { background: none; transform: rotate(90deg) }
+  25% { background: none; left:0%; top:70%;transform: rotate(180deg)}
+  27% { background: none; transform: rotate(45deg) }
 /*//turn 2*/
-  50% { background: none; left: 40%; top: 80%;transform: rotate(90deg)}
-  52% { background: none; transform: rotate(0deg) }
+  50% { background: none; left: 55%; top: 0%;transform: rotate(45deg)}
+  52% { background: none; transform: rotate(180deg) }
 /*turn 3*/
-  75% { background: none; left:40%; top:0%;transform: rotate(0deg);}
-  77% { background: none; transform: rotate(-90deg)}
+  75% { background: none; left:55%; top:70%;transform: rotate(180deg);}
+  77% { background: none; transform: rotate(315deg)}
 /*starting turn 1*/
-  100% {opacity: 1; background: none; left:0px; top:0px;transform: rotate(-90deg) }
+  100% {opacity: 1; background: none; left:0px; top:0px;transform: rotate(315deg) }
+}
+
+#planeFast.off {
+animation-name: none;
+}
+#planeSlow.off {
+animation-name: none;
+}
+#planeMedium1.off {
+animation-name: none;
+}
+#planeMedium2.off {
+animation-name: none;
+}
+#planeFigureEight1.off {
+animation-name: none;
+}
+#planeFigureEight2.off {
+animation-name: none;
+}
+#planeFigureEight3.off {
+animation-name: none;
+}
+#planeFigureEight4.off {
+animation-name: none;
 }
