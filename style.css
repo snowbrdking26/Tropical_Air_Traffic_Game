@@ -75,11 +75,11 @@ h2 {
   width: 90px;
 }
 
-#btnReset:hover {
+/*#btnReset:hover {
   color:orange;
   background-color: #44AFCD;
   border: 1px solid orange;
-}
+}*/
 
 #board {
   width: 100%;
@@ -178,12 +178,12 @@ p {
 
 /*plane movement*/
 #plane1 {
-  border: 2px solid #56e5f1;
+  border: 2px solid #3CA6C6;
   width: 50px;
   height: 46px;
   position: relative;
   top:89%;
-  left:42%;
+  left:6%;
   -webkit-user-drag:element;
 }
 

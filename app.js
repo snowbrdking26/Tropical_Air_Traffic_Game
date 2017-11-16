@@ -511,7 +511,7 @@ const reset = () => {
 $('board').append($('#plane1').css({
   position: 'relative',
   top:'89%',
-  left:'42%',
+  left:'6%',
   Transform: 'rotate(0deg)'}));
 
 //these don't work
@@ -577,9 +577,8 @@ $playAgainWinnerBtn.on('click', closeWinnerModal);
 $playAgainLoserBtn.on('click', closeLoserModal);
 // $playAgainBtn.on('click', reset);
 
+//stop animations when player wins addClass off which changes animation name to none
 const stopAnimations = () => {
-
-
   $('#board').addClass('off');
   $('#planeFast').addClass('off');
   $('#planeSlow').addClass('off');
@@ -589,12 +588,10 @@ const stopAnimations = () => {
   $('#planeFigureEight2').addClass('off');
   $('#planeFigureEight3').addClass('off');
   $('#planeFigureEight4').addClass('off');
-
-
 };
 
+//starts animation again after player choses to play again.
 const startPlaneAnimations = () => {
-
   $('#board').removeClass('off');
   $('#planeFast').removeClass('off');
   $('#planeSlow').removeClass('off');
@@ -614,13 +611,13 @@ const startPlaneAnimations = () => {
 
 ////////////////////////////////////////////////////////////////
 //------------------------references---------------------------
-//"Mouse move" on line 85-101 for game to be mobile friendly
+//"Mouse move" on line 85-101 for game be used with the mouse.
 // http://jsfiddle.net/pu2kK/
 
-// //Collision detection// 2D from MDN with IF statement works perfect!
+//Collision detection// 2D from MDN with IF statement works perfect!
 // https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
 
-//calculating score with splice and .push.apply
+//Calculating score with splice and .push.apply
 //https://stackoverflow.com/questions/42970768/removing-item-from-array-and-add-it-to-another-array
 
 // Game dev Tutorial //https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Finishing_up
