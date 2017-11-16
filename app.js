@@ -1,4 +1,5 @@
 // console.log('testing');
+//Title: Tropical Air Traffic Game
 
 $(() => {
 
@@ -222,7 +223,7 @@ const collisionDetection = () => {
      let $planeFigureEight3 = $('#planeFigureEight3')[0].getBoundingClientRect();
      let $planeFigureEight4 = $('#planeFigureEight4')[0].getBoundingClientRect();
 
-   // collision for points
+   // Collision detections
    for(var i = 0; i < cloudArray.length; i++){
      if ($planeBorder.left < cloudArray[i].left + cloudArray[i].width &&
         $planeBorder.left + $planeBorder.width > cloudArray[i].left &&
