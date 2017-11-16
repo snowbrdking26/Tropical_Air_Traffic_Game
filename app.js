@@ -108,6 +108,9 @@ $('#plane1').on('mousedown', function (e) {
 });
 
 
+// touch screen function
+$('#plane1').draggable();
+
 ///////////////////////////////////////////////////////////////
 //Create clouds//
 ///////////////////////////////////////////////////////////////
@@ -272,7 +275,6 @@ const collisionDetection = () => {
           }
    }
 
-
 // for(let i = 0; i < obstacles.length; i++){
    //plane1 and planeSlow collisionDetection
    if ($planeBorder.x < $planeFastBorder.x + $planeFastBorder.width &&
@@ -317,7 +319,7 @@ const collisionDetection = () => {
    }
 
 //planeMedium2
-   if ($planeBorder.x < $planeMedium2.x + $planeMedium2.width &&
+  if ($planeBorder.x < $planeMedium2.x + $planeMedium2.width &&
       $planeBorder.x + $planeBorder.width > $planeMedium2.x &&
       $planeBorder.y < $planeMedium2.y + $planeMedium2.height &&
       $planeBorder.height + $planeBorder.y > $planeMedium2.y) {
@@ -423,7 +425,6 @@ if ($planeBorder.x < $planeFigureEight4.x + $planeFigureEight4.width &&
        }
 }
 
-
 } //end of collisionDetection() function
 
 
@@ -519,7 +520,6 @@ const reset = () => {
   $('.cloudy').remove();
   createClouds();
   startPlaneAnimations();
-
   $('.win').remove();
   $('.loss').remove();
   $('.winBoard').css({"border":'1px solid white'});
@@ -559,16 +559,13 @@ const $openLoserModal = $('.modalLoser');
 const $playAgainWinnerBtn = $('#playAgainWinnerBtn');
 const $playAgainLoserBtn = $('#playAgainLoserBtn');
 
-
 //event Handlers
 const openWinnerModal = () => {
   $openWinnerModal.css('display','block');
 }
-
 const openLoserModal = () => {
   $openLoserModal.css('display','block');
 }
-
 const closeWinnerModal = () => {
   $openWinnerModal.css('display', 'none');
   reset();
