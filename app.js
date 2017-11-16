@@ -238,7 +238,7 @@ const collisionDetection = () => {
               cloudArray.splice(i, 1);
 
       //winning state
-      if (score === 10) {
+      if (score === 50) {
         announceWin();
         openWinnerModal();
         stopAnimations();
