@@ -163,38 +163,38 @@ function movePlane() {
 //"mouse move" function - from jsfiddle link below in references
 ///////////////////////////////////////////////////////////////
 
-// $('#plane1').on('mousedown', function (e) {
-//
-//     $(this).addClass('active');
-//
-//     var oTop = e.pageY - $('.active').offset().top;
-//     var oLeft = e.pageX - $('.active').offset().left;
-//
-//     $(this).parents().on('mousemove', function (e) {
-//         $('.active').offset({
-//             top: e.pageY - oTop,
-//             left: e.pageX - oLeft
-//         }).on('mouseup', function () {
-//             $(this).removeClass('active');
-//         });
-//     });
-//     return false;
-// });
-
-
-
-$('#plane1').on('touchmove', function (e) {
+$('#plane1').on('mousedown', function (e) {
 
     $(this).addClass('active');
 
     var oTop = e.pageY - $('.active').offset().top;
     var oLeft = e.pageX - $('.active').offset().left;
 
-    $(this).parents().on('touchmove', function (e) {
+    $(this).parents().on('mousemove', function (e) {
         $('.active').offset({
             top: e.pageY - oTop,
             left: e.pageX - oLeft
-        }).on('touchmove', function () {
+        }).on('mouseup', function () {
+            $(this).removeClass('active');
+        });
+    });
+    return false;
+});
+
+
+
+$('#plane1').bind('touchmove', function (e) {
+
+    $(this).addClass('active');
+
+    var oTop = e.pageY - $('.active').offset().top;
+    var oLeft = e.pageX - $('.active').offset().left;
+
+    $(this).parents().bind('touchmove', function (e) {
+        $('.active').offset({
+            top: e.pageY - oTop,
+            left: e.pageX - oLeft
+        }).bind('touchmove', function () {
             $(this).removeClass('active');
         });
     });
