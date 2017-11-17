@@ -108,7 +108,7 @@ function movePlane() {
 // });
 //
 // touch screen function
-$('#plane1').draggable();
+$('#plane1').draggable({ containment: "#containment-wrapper", scroll: false });
 // $('#board').append('<h1>').text('hello world').draggable("enable");
 
 ///////////////////////////////////////////////////////////////
