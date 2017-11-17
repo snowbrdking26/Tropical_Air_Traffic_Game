@@ -196,7 +196,7 @@ p {
 
 /*
 buttons for mobile*/
-.leftright {
+/*.leftright {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -208,7 +208,7 @@ buttons for mobile*/
 .buttons {
   text-align: center;
 }
-
+*/
 
 /*plane movement*/
 #plane1 {
