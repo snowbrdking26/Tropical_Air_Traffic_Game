@@ -71,6 +71,7 @@ function movePlane() {
     if (direction == 40) {$("#plane1").animate({top: "+=5"}, 0);
       $("#plane1").css({Transform: 'rotate(180deg)'}, 0);
     }
+
   }
   stayInGameBoard();
   collisionDetection();
@@ -83,8 +84,79 @@ function movePlane() {
 //"iPhone android draggable" function.. will revisit this later
 ///////////////////////////////////////////////////////////////
 
-
 // $('#plane1').draggable();
+
+//
+// $('.upBtn').css({ color:'white',
+//   // '-webkit-text-stroke': '.01em white',
+//   'background-color': '#44AFCD',
+//   border: '1px solid white',
+//   'font-size': '20px',
+//   margin: '20px auto 5px',
+//   padding: '5px 0px 5px 5px',
+//   width: '50%'});
+//
+//
+// $('.rightBtn').css({ color:'white',
+//   // '-webkit-text-stroke': '.01em white',
+//   'background-color': '#44AFCD',
+//   border: '1px solid white',
+//   'font-size': '20px',
+//   margin: '0px 5px 5px 0px',
+//   padding: '5px 0px 5px 5px',
+//   width: '50%'});
+//
+//
+// $('.leftBtn').css({ color:'white',
+//   // '-webkit-text-stroke': '.01em white',
+//   'background-color': '#44AFCD',
+//   border: '1px solid white',
+//   'font-size': '20px',
+//   margin: '0px 0px 5px 0px',
+//   padding: '5px 0px 5px 5px',
+//   width: '50%'});
+//
+//
+// $('.downBtn').css({ color:'white',
+//   // '-webkit-text-stroke': '.01em white',
+//   'background-color': '#44AFCD',
+//   border: '1px solid white',
+//   'font-size': '20px',
+//   margin: '0px auto 5px',
+//   padding: '5px 0px 5px 5px',
+//   width: '50%'});
+//
+//
+//
+//
+// const $upBtn = $('.upBtn');
+// const $rightBtn = $('.rightBtn');
+// const $leftBtn = $('.leftBtn');
+// const $downBtn = $('.downBtn');
+//
+//
+//
+//
+// const up = () => {$("#plane1").animate({top: "-=35"}, 0);
+//   $("#plane1").css({Transform: 'rotate(0deg)'}, 0);
+// }
+//
+// const right = () => {$("#plane1").animate({left: "+=35"}, 0);
+//   $("#plane1").css({Transform: 'rotate(90deg)'}, 0);
+// }
+// const left = () => {$("#plane1").animate({left: "-=35"}, 0);
+// $("#plane1").css({Transform: 'rotate(-90deg)'}, 0);
+// }
+// const down = () => {
+//   $("#plane1").animate({top: "+=35"}, 0);
+//     $("#plane1").css({Transform: 'rotate(180deg)'}, 0);
+//   }
+//
+//   $upBtn.on('click', up);
+//   $rightBtn.on('click', right);
+//   $leftBtn.on('click', left);
+//   $downBtn.on('click', down);
+//
 
 
 ///////////////////////////////////////////////////////////////
@@ -110,6 +182,29 @@ $('#plane1').on('mousedown', function (e) {
 });
 
 
+
+$('#plane1').bind('touchmove', function (e) {
+
+    $(this).addClass('active');
+
+    var oTop = e.pageY - $('.active').offset().top;
+    var oLeft = e.pageX - $('.active').offset().left;
+
+    $(this).parents().bind('touchmove', function (e) {
+        $('.active').offset({
+            top: e.pageY - oTop,
+            left: e.pageX - oLeft
+        }).bind('touchmove', function () {
+            $(this).removeClass('active');
+        });
+    });
+    return false;
+});
+
+
+
+
+// .bind('touchmove',
 
 ///////////////////////////////////////////////////////////////
 //Create clouds//

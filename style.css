@@ -194,6 +194,20 @@ p {
   color:white;
 }
 
+/*
+buttons for mobile*/
+.leftright {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-left: 147px;
+  padding-right:147px;
+
+}
+
+.buttons {
+  text-align: center;
+}
 
 
 /*plane movement*/
