@@ -108,7 +108,8 @@ $('#plane1').on('mousedown', function (e) {
 });
 //
 // touch screen function
-// $('#plane1').draggable();
+$('#plane1').draggable();
+// $('#board').append('<h1>').text('hello world').draggable("enable");
 
 ///////////////////////////////////////////////////////////////
 //Create clouds//
