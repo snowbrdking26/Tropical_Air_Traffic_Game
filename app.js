@@ -83,9 +83,9 @@ function movePlane() {
 //"iPhone android draggable" function.. will revisit this later
 ///////////////////////////////////////////////////////////////
 
-// touch screen function
-$('#plane1').draggable();
-// $('#board').append('<h1>').text('hello world').draggable("enable");
+
+// $('#plane1').draggable();
+
 
 ///////////////////////////////////////////////////////////////
 //"mouse move" function - from jsfiddle link below in references
