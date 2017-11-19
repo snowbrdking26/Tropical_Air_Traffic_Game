@@ -747,12 +747,8 @@ const startPlaneAnimations = () => {
 
 //MDN info on getBoundingClientRect() https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
 
+//  Example of Collisoin detection "if statement"
 // https://codepen.io/anon/pen/qVRMbQ
-// if ((game.player.x + game.player.w > x
-//   && game.player.x < x + w)
-//   && (game.player.y + game.player.h > y
-//   && game.player.y < y + h)) {
-//       return true;
 
 //free open source pictogram airplane pictures
 //https://www.freepik.com/free-vector/silhouette-top-views-of-different-airplanes_1250479.htm#term=airplane&page=1&position=20
