@@ -220,7 +220,7 @@ const createClouds = () => {
       if (cloudArray.length <= 10) {
       cloudArray.push(new cloud(i));
       }
-    }, 1000)
+    }, 500)
 
 function cloud(id){
       this.left = getRandomInt(50, $gameBoardRect.width);
