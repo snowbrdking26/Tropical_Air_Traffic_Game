@@ -1,3 +1,7 @@
+/** {
+  border: 1px solid red;
+}*/
+
 body {
   /*background-image: url(img/149817.jpg);*/
   background-image: url(img/029-hog_cay_broshuretaxi_to_runway1.jpg);
@@ -14,7 +18,7 @@ body {
 }
 
 .gameframe {
-  margin: 40px 40px 0px;
+  margin: 0px 40px 0px;
   width: 600px;
 }
 
@@ -55,15 +59,15 @@ h2 {
 }
 
 @keyframes blinkingWin {
-  0% {background-color: #26A65B;}
-  50% {background-color: #98e698;}
-  100% {background-color: #26A65B;}
+  0% {background-color: #98e698;}
+  50% {background-color: #26A65B;}
+  100% {background-color: #98e698;}
 }
 
 @keyframes blinkingLoss {
-  0% {background-color: #C3272B;}
-  50% {background-color: #ff8080;}
-  100% {background-color: #C3272B;}
+  0% {background-color: #ff8080;}
+  50% {background-color: #C3272B;}
+  100% {background-color: #ff8080;}
 }
 
 #startGame {
@@ -97,7 +101,7 @@ h2 {
 	left: 0;
 	height: 100%;
 	width: 100%;
-	z-index: 1;
+	z-index: 2;
 	overflow: auto;
 	display: none;
 }
@@ -109,7 +113,7 @@ h2 {
 	left: 0;
 	height: 100%;
 	width: 100%;
-	z-index: 1;
+	z-index: 2;
 	overflow: auto;
 	display: none;
 }
@@ -118,26 +122,50 @@ h2 {
   position:fixed;
   text-align: center;
 	background-color: white;
-  top: 100px;
+  top: 120px;
   left:50px;
-	height: 570px;
+	height: 498px;
 	width: 598px;
 	border-radius: 2px;
 	/*margin: 150px auto;*/
 	box-shadow: 0 2px 2px rgba(0,0,0,.2);
+  /*animation-name: blinkingWin;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  transition-timing-function: linear;*/
+
 }
 
 .modal-text-boxLoser {
   position:fixed;
   text-align: center;
 	background-color: white;
-  top: 100px;
+  top: 120px;
   left:50px;
-	height: 570px;
+	height: 498px;
 	width: 598px;
 	border-radius: 2px;
 	/*margin: 0 auto;*/
 	box-shadow: 0 2px 2px rgba(0,0,0,.2);
+  /*animation-name: blinkingLoss;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  transition-timing-function: linear;*/
+
+}
+
+.restrictedAirSpace {
+  background-color: white;
+  padding: 10px 5px 5px 5px;
+  margin: 5px 5px;
+  border: 1px solid red;
+  z-index: 1;
+  top: 120px;
+  left:50px;
+  width: 250px;
+  height: 25px;
+  position:relative;
+
 }
 
 

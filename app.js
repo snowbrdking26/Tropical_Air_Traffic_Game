@@ -40,7 +40,7 @@ $(() => {
 //Moving plane1 img left right up and down;
 ///////////////////////////////////////////////////////////////
 
-setInterval(movePlane, 25);
+movePlaneInterval = setInterval(movePlane, 25);
 
 
 $(document).keydown(function(event) {
@@ -224,7 +224,7 @@ const createClouds = () => {
 
 function cloud(id){
       this.left = getRandomInt(50, $gameBoardRect.width);
-      this.top = getRandomInt(100, $gameBoardRect.height - 30);
+      this.top = getRandomInt(150, $gameBoardRect.height - 30);
       this.height = 25;
       this.width = 30;
       this.id = cloudId;
@@ -261,7 +261,7 @@ const announceWin = () => {
     'padding': '5px 5px',
     "width":'100%',
     "margin": '0 0 5px 0'})
-    .text('You have Won the game! Press Reset to Play again.'));
+    .text('You have Won the game!'));
 
   $('#board').addClass('winBoard').css({border: '1px solid #39FF14'})
 
@@ -632,6 +632,7 @@ $('board').append($('#planeSlow').css({
     top: '0%',
     left: '0%'}));
 
+movePlaneInterval = setInterval(movePlane, 25);
 
 }; //end of reset()
 
@@ -652,12 +653,16 @@ const $playAgainWinnerBtn = $('#playAgainWinnerBtn');
 const $playAgainLoserBtn = $('#playAgainLoserBtn');
 
 //event Handlers
+
 const openWinnerModal = () => {
-  $openWinnerModal.css('display','block');
-}
+  setTimeout(function(){$openWinnerModal.css('display','block')}, 1000);
+};
+
+
 const openLoserModal = () => {
-  $openLoserModal.css('display','block');
-}
+  setTimeout(function(){$openLoserModal.css('display','block')}, 1000);
+};
+
 const closeWinnerModal = () => {
   $openWinnerModal.css('display', 'none');
   reset();
@@ -673,7 +678,13 @@ $playAgainLoserBtn.on('click', closeLoserModal);
 // $playAgainBtn.on('click', reset);
 
 //stop animations when player wins addClass off which changes animation name to none
+
+function clearMoveInterval() {
+  clearInterval(movePlaneInterval);
+};
+
 const stopAnimations = () => {
+  setTimeout(function(){
   $('#board').addClass('off');
   $('#planeFast').addClass('off');
   $('#planeSlow').addClass('off');
@@ -683,6 +694,8 @@ const stopAnimations = () => {
   $('#planeFigureEight2').addClass('off');
   $('#planeFigureEight3').addClass('off');
   $('#planeFigureEight4').addClass('off');
+}, 1000);
+  clearMoveInterval();
 };
 
 //starts animation again after player choses to play again.
