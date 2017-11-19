@@ -6,15 +6,16 @@ body {
   /*background-image: url(img/149817.jpg);*/
   background-image: url(img/029-hog_cay_broshuretaxi_to_runway1.jpg);
   background-size: cover;
-  /*background-size: auto 120%;*/
+  /*background-size: auto 100%;*/
   /*background-size: 160% auto;*/
   /*background-size: auto 140%;*/
   /*margin: 0 auto;*/
   background-repeat: no-repeat;
   /*max-width: 100%;*/
-  /*width: auto;*/
+  width: auto;
   /*height: 650px;*/
   font-family: arial;
+  margin: 0 0;
 }
 
 .gameframe {
@@ -122,8 +123,8 @@ h2 {
   position:fixed;
   text-align: center;
 	background-color: white;
-  top: 120px;
-  left:50px;
+  top: 117px;
+  left:42px;
 	height: 498px;
 	width: 598px;
 	border-radius: 2px;
@@ -140,8 +141,8 @@ h2 {
   position:fixed;
   text-align: center;
 	background-color: white;
-  top: 120px;
-  left:50px;
+  top: 117px;
+  left:42px;
 	height: 498px;
 	width: 598px;
 	border-radius: 2px;
@@ -171,6 +172,24 @@ h2 {
 
 p {
   padding: 0 10px;
+}
+
+footer {
+  background-color: black;
+  margin: 0 auto;
+  margin: 20px 0px 20px -1px;
+  position: relative;
+  top:150px;
+  left:0;
+  padding: 50px 0;
+  width: 100%;
+  height: 300px;
+  color: white;
+  z-index: 1;
+}
+.footertext {
+  margin: -20px 0 0 0 ;
+  padding: 0 0 0 20px ;
 }
 
 .directions {
