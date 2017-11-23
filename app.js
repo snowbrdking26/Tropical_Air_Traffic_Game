@@ -12,6 +12,7 @@ $(() => {
   let score = 0;
   let arrowKeys = {};
 
+
   //gameboard coordiantes
   let $gameBoardRect = $('#board')[0].getBoundingClientRect();
   let $gameBoardRectRight = $gameBoardRect.left + $gameBoardRect.width-5;
